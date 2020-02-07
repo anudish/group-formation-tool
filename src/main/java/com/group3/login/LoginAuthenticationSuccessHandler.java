@@ -79,10 +79,8 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 		} 
 		
-		// Todo- change template for admin
 		else if (isAdmin) {
 			return "AdminMainPage";
-//			return "hello";
 		} else {
 			throw new IllegalStateException();
 		}
