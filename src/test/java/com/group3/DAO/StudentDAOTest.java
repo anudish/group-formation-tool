@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import com.group3.BusinessModels.Student;
 import com.group3.course.InsertTestDataIntoDB;
 import com.group3.course.RemoveTestDataFromDB;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
 
 class StudentDAOTest {
 
