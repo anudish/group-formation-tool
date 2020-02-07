@@ -6,6 +6,7 @@ variables:
 
 #this gets executed before the script
 before_script:
+  - chmod +x ./gradlew
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build:
