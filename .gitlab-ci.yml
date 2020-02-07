@@ -42,7 +42,7 @@ test:
 deploy:
     stage: deploy
     tags:
-    - dalfcs_gitlab_docker_ci
+    - groupthreerunner
     image: ruby:2.3
     script:
     - apt-get update -qy
