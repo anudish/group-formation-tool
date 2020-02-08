@@ -15,6 +15,7 @@ build:
     - grad
   script: ./gradlew --build-cache assemble
   only:
+  - master
   - develop
   - /^feature_.*$/
   cache:
@@ -31,6 +32,7 @@ test:
     - grad
   script: ./gradlew check
   only:
+  - master
   - develop
   - /^feature_.*$/
   cache:
@@ -49,6 +51,7 @@ deploy:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_TEST --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_PROD --api-key=$HEROKU_API_KEY
     only:
+    - master
     - develop
