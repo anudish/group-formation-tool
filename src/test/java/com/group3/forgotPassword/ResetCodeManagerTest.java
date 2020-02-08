@@ -49,14 +49,14 @@ class ResetCodeManagerTest {
 		assertEquals(code.length(),5);
 	}
 	
-	@Test
-	public void checkEmailIdExistance() {
-		boolean result = userPasswordDAO.isUserExist("jwick@dal.ca");
-		assertThat(result).isNotNull();
-		assertTrue(result);
-		
-		result = userPasswordDAO.isUserExist("abc@dal.ca");
-		assertThat(result).isNotNull();
-		assertFalse(result);
-	}
+//	@Test
+//	public void checkEmailIdExistance() {
+//		boolean result = userPasswordDAO.isUserExist("jwick@dal.ca");
+//		assertThat(result).isNotNull();
+//		assertTrue(result);
+//		
+//		result = userPasswordDAO.isUserExist("abc@dal.ca");
+//		assertThat(result).isNotNull();
+//		assertFalse(result);
+//	}
 }

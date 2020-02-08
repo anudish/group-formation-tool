@@ -48,5 +48,12 @@ public class CourseManager implements ICourseManager {
 		courseInfo = instructorDAO.getCoursesByInstructorMailId(instructorMailId);
 		return courseInfo;
 	}
+	
+	@Override
+	public ArrayList<CourseModel> getCoursesForGuest() {
+		courseInfo = new ArrayList<CourseModel>();	
+		courseInfo = courseDAO.getCoursesForGuest();
+		return courseInfo;
+	}
 
 }

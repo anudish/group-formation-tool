@@ -15,10 +15,12 @@ public class CourseDAOMock implements ICourseDAO {
 	ArrayList<CourseModel> courses = new ArrayList<CourseModel>();
 
 	HashMap<String,ArrayList<CourseModel>> courseList = new HashMap<String,ArrayList<CourseModel>>();
+	CourseModel course;
 	
 	public CourseDAOMock() {
-		
-		CourseModel course = new CourseModel();
+
+		course = new CourseModel();
+
 		course.setCourseId("1");
 		course.setCourseName("CSCI 1: Learn to build robots");
 		courses.add(course);
@@ -84,6 +86,13 @@ public class CourseDAOMock implements ICourseDAO {
 		ArrayList<CourseModel> courseTaken = new ArrayList<CourseModel>(courseList.get(studentDetails.getEmail()));
 		courseTaken.add(courseTwo);
 		courseList.put(studentDetails.getEmail(),courseTaken);
+	}
+
+	@Override
+	public ArrayList<CourseModel> getCoursesForGuest() {
+		ArrayList<CourseModel> courseTaken = new ArrayList<CourseModel>();
+		courseTaken.add(course);
+		return courseTaken;
 	}
 
 }

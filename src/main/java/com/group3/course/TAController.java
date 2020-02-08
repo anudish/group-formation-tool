@@ -16,13 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.group3.BusinessModels.Student;
 import com.group3.DAO.DAOInjector;
 import com.group3.DAO.IDAOInjector;
+import com.group3.DAO.ILoginDAO;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
+import com.group3.login.LoginAuthenticationSuccessHandler;
 
 @Controller
 public class TAController {
 
 	IDAOInjector daoInjector;
 	ITAManager taManager;
+	ICourseManager courseManager;
+	ILoginDAO loginDAO;
 	CourseModel courseModel;
 	
 	Connection conn;
@@ -35,6 +39,8 @@ public class TAController {
 		daoInjector = new DAOInjector();
 		taManager = new TAManager(daoInjector);
 		courseModel = new CourseModel();
+		courseManager = new CourseManager(daoInjector);
+		loginDAO = daoInjector.createLoginDAO();
 	}
 	
 	///////////////////////////////////////////TA ASSIGNMENT//////////////////////////////////////////////
@@ -80,12 +86,28 @@ public class TAController {
 		
 		logger.info("TAship assigned");
 		
+		String email = LoginAuthenticationSuccessHandler.email;
+
+		String role = loginDAO.getRoleByEmail(email);
+
+		ArrayList<CourseModel> rows = new ArrayList<CourseModel>();
 		ModelAndView mv = new ModelAndView();
-		courseModel = new CourseModel();
-		courseModel.setCourseId("Test");
-		courseModel.setCourseName("Test");
-	    mv.addObject("courseInfo",courseModel);
-		mv.setViewName("course.html");
+		if(role.equals("Guest")) {
+			rows = courseManager.getCoursesForGuest();
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCoursesGuest.html");
+		}else if(role.equals("Instructor")){
+			rows = courseManager.getCoursesByInstructorMailId(email);
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCourses.html");
+		}
+		else if(role.equals("TA") || role.equals("Student")){
+			rows = courseManager.getCoursesByTAMailId(email);
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCourses.html");
+		}
+		
 		return mv;
+
 	};
 }

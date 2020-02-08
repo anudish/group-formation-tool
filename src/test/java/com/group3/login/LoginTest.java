@@ -53,7 +53,7 @@ public class LoginTest {
 	    mockMvc
 	            .perform(formLogin().userParameter("email").user("admin@dal.ca").password("admin"))
 	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("AdminMainPage"))
+	            .andExpect(redirectedUrl("adminMainPageRequest"))
 	            .andExpect(authenticated().withUsername("admin@dal.ca"));
 
 	    mockMvc

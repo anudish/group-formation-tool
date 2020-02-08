@@ -52,10 +52,10 @@ public class CourseController {
 	}
 	
 	///////////////////////////////////////COURSE SELECTION//////////////////////////////////////////////
-	
+		
 	//show courses to instructors and TAs
 	@RequestMapping("/courseAdmin") //show students with same course
-	public ModelAndView getCoursesByEmailId(@RequestParam String emailId) {
+	public ModelAndView getCoursesByEmailId() {
 		//get and show courses for TA from database
 		
 		logger.info("COURSE");
@@ -67,31 +67,26 @@ public class CourseController {
 		role = loginDAO.getRoleByEmail(email);
 
 		ArrayList<CourseModel> rows = new ArrayList<CourseModel>();
-		
+		ModelAndView mv = new ModelAndView();
 		if(role.equals("Guest")) {
-			
+			rows = courseManager.getCoursesForGuest();
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCoursesGuest.html");
 		}else if(role.equals("Instructor")){
-			rows = courseManager.getCoursesByInstructorMailId(emailId);
-
+			rows = courseManager.getCoursesByInstructorMailId(email);
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCourses.html");
 		}
 		else if(role.equals("TA") || role.equals("Student")){
-			rows = courseManager.getCoursesByTAMailId(emailId);
-
+			rows = courseManager.getCoursesByTAMailId(email);
+			mv.addObject("courseInfo",rows);
+			mv.setViewName("showCourses.html");
 		}
 		
-		ModelAndView mv = new ModelAndView();
-		//mv.addObject("courseList",rows);
-		mv.addObject("courseInfo",rows);
-		mv.setViewName("showCourses.html");
 		return mv;
+
 		
 	};
-
-	@RequestMapping("/showCoursesGuest") //show students with same course
-	public String showGuestCourse() {
-		
-		return "showCoursesGuest.html";
-	}
 	
 	@RequestMapping("/selectCourse") //show students with same course
 	public ModelAndView getSelectedCourse(@RequestParam String courseId, @RequestParam String courseName) {
@@ -118,8 +113,7 @@ public class CourseController {
 	        
 		}
 
-		
-        return mv;
+	  return mv;
 	}
 	
 
@@ -135,6 +129,21 @@ public class CourseController {
 		courseModel.setCourseName(this.courseName);
 	    mv.addObject("courseInfo",courseModel);
 		mv.setViewName("course.html");
+		return mv;
+	}
+	
+	//show course to the students
+	@RequestMapping("/showGuestcourse")
+	public ModelAndView displayGuestCoursePage() {
+
+		logger.info("COURSE");
+		
+		ModelAndView mv = new ModelAndView();
+		courseModel = new CourseModel();
+		courseModel.setCourseId(this.courseId);
+		courseModel.setCourseName(this.courseName);
+	    mv.addObject("courseInfo",courseModel);
+		mv.setViewName("showCoursesGuest.html");
 		return mv;
 	}
 	
