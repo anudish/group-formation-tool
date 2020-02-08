@@ -19,20 +19,12 @@
 //@AutoConfigureMockMvc
 //class AdminDashBoardMainPageControllerTest {
 //    
-//	@Autowired
-//	  private WebApplicationContext context;
 //	
+//	
+//	@Autowired
 //	private MockMvc mockMvc;
 //	
-//	
-//	@Before
-//	  public void setup() {
-//	    mockMvc = MockMvcBuilders
-//	            .webAppContextSetup(context)
-//	            .apply(springSecurity())
-//	            .alwaysDo(print())
-//	            .build();
-//	  }
+//
 //	
 //	@Test
 //	final void testReturnAdminDashBoardPage() throws Exception {
