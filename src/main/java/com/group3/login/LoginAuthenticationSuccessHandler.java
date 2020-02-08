@@ -80,7 +80,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		} 
 		
 		else if (isAdmin) {
-			return "AdminMainPage";
+			return "adminMainPageRequest";
 		} else {
 			throw new IllegalStateException();
 		}

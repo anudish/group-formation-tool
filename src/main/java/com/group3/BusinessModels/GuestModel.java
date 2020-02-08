@@ -1,8 +1,5 @@
 package com.group3.BusinessModels;
 
-import org.springframework.context.annotation.ComponentScan;
-
-@ComponentScan("singleton")
 public class GuestModel {
 	private String firstName;
 	private String lastName;

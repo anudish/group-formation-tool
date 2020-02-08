@@ -17,11 +17,10 @@ public class UserDAO implements IUserDAO {
 	PreparedStatement statement;
 
 	public boolean getSignUpDetailsofUser(GuestModel guestModel) {
-		
+
 		Boolean checkUser = false;
-		
+
 		try {
-			logger.info("CHECK IF USER ALREADY EXISTS");
 			conn = ObtainDataBaseConnection.obtainDatabaseConnection();
 
 			String sql = "SELECT count(MAIL_ID) FROM USER_DATABASE WHERE MAIL_ID = '" + guestModel.getEmail() + "';";
@@ -55,7 +54,7 @@ public class UserDAO implements IUserDAO {
 				statement.setString(2, guestModel.getEncryptedPassword());
 				statement.execute();
 				logger.info("Inserted into Authentication Database");
-				
+
 			}
 			statement.close();
 			conn.close();

@@ -11,18 +11,18 @@ import com.group3.DAO.LoginDao;
 @Controller
 public class LoginController {
 	
-		@PostMapping(path = "/login")
-	    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
-	        String email = loginForm.getEmail();
-	        String password = loginForm.getPassword();
-	       
-	        LoginDao ld = new LoginDao();
-	        System.out.println("in login controller");
-
-	
-	        model.addAttribute("invalidCredentials",true);
-	        return "login";       
-	    }
+//		@PostMapping(path = "/login")
+//	    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
+//	        String email = loginForm.getEmail();
+//	        String password = loginForm.getPassword();
+//	       
+//	        LoginDao ld = new LoginDao();
+//	        System.out.println("in login controller");
+//
+//	
+//	        model.addAttribute("invalidCredentials",true);
+//	        return "login";       
+//	    }
 
 
 }

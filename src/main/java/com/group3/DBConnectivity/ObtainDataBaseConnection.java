@@ -22,7 +22,7 @@ public class ObtainDataBaseConnection {
 			return databaseConnection;
 	}
 	
-	public boolean terminateConnection() {
+	public static boolean terminateConnection() {
 		     try {
 		    	 
 		    	 if(databaseConnection.isClosed()==false) {
