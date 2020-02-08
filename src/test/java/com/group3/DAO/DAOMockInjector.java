@@ -38,17 +38,6 @@ public class DAOMockInjector implements IDAOInjector {
 		return new UserRoleHandlerDAOMock();
 	}
 
-	@Override
-	public ICourseDAO createCourseDAO() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IStudentDAO createStudentDAO() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public IUserDAO createUserDAO() {
@@ -62,4 +51,24 @@ public class DAOMockInjector implements IDAOInjector {
 		return null;
 	}
 
+	@Override
+	public ICourseDAO createCourseDAO() {
+		return new CourseDAOMock();
+	}
+	
+	@Override
+	public IStudentDAO createStudentDAO() {
+		return new StudentDAOMock();
+	}
+
+	@Override
+	public ITADAO createTADAO() {
+		return new TADAOMock();
+	}
+
+	@Override
+	public IInstructorDAO createInstructorDAO() {
+		return new InstructorDAOMock();
+	}
+	
 }

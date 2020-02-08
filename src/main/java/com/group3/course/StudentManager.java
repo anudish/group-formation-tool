@@ -66,7 +66,7 @@ public class StudentManager implements IStudentManager{
 		
 		ArrayList<List<String>> students = studentList;
 		courseId=CourseController.courseId;
-		ArrayList<String> current_students = courseDAO.getEnrolledStudents(courseId);
+		ArrayList<String> current_students = courseDAO.getEnrolledStudentsByCourseId(courseId);
 		
 		//check if students from csv file are already enrolled or not
 		try {
@@ -89,7 +89,7 @@ public class StudentManager implements IStudentManager{
 					studentDetails.setEncryptedPassword(pass);
 			        courseDAO.enrollStudentToCourse(studentDetails, courseId);
 			        gmailService.setSMTPClient();
-			        gmailService.prepareMail("Enrollment in course:" + courseId, "Dear student,\nYou have been enollred in the course: "+courseId
+			        gmailService.prepareMail("[University Portal] Enrollment in course:" + courseId, "Dear student,\nYou have been enrolled in the course: "+courseId
 			        							+".\nPlease contact the instructor if this is a mistake.\nYour credentials are: \n"
 			        							+"Mail: "+mail+"\nPassword: "+pass, mail);
 			        gmailService.sendEmail();

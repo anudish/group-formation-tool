@@ -57,7 +57,7 @@ public class StudentDAO implements IStudentDAO {
 		ArrayList<Student> rows = new ArrayList<Student>();		
 		try {
 			conn = ObtainDataBaseConnection.obtainDatabaseConnection();
-			sql = "SELECT * FROM USER_DATABASE where ROLE = 'Student' and MAIL_ID LIKE '%"+studentMailId+"%'";
+			sql = "SELECT * FROM USER_DATABASE where (ROLE = 'Student' OR ROLE = 'TA') and MAIL_ID LIKE '%"+studentMailId+"%'";
 	        statement = conn.prepareStatement(sql);
 	
 	        ResultSet result = statement.executeQuery();
@@ -70,6 +70,7 @@ public class StudentDAO implements IStudentDAO {
 	            studentDetails.setLastName(result.getObject("LAST_NAME").toString());
 	            studentDetails.setFirstName(result.getObject("FIRST_NAME").toString());
 	            studentDetails.setEmail(result.getObject("MAIL_ID").toString());
+	            studentDetails.setUserRole(result.getObject("ROLE").toString());
 	            rows.add(studentDetails);
 	        }
 	        conn.close();
