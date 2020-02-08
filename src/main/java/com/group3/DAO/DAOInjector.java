@@ -70,6 +70,12 @@ public class DAOInjector implements IDAOInjector {
 	public IInstructorDAO createInstructorDAO() {
 		return new InstructorDAO();
 	}
+	
+	public IUserPasswordDAO getUserDAOObj()
+	{
+		return new UserPasswordDAO();
+	}
 }
 	
 		
+	

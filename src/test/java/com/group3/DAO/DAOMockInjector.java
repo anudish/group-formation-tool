@@ -70,5 +70,10 @@ public class DAOMockInjector implements IDAOInjector {
 	public IInstructorDAO createInstructorDAO() {
 		return new InstructorDAOMock();
 	}
+
+	@Override
+	public IUserPasswordDAO getUserDAOObj() {
+		return new UserPasswordDAO();
+	}
 	
 }

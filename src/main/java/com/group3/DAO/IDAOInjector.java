@@ -24,5 +24,7 @@ public interface IDAOInjector {
 	public ITADAO createTADAO();
 
 	public IInstructorDAO createInstructorDAO();
+	
+	public IUserPasswordDAO getUserDAOObj();
 
 }
