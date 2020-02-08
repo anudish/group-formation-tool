@@ -33,12 +33,6 @@ class CourseControllerTest {
 		this.mockMvc.perform(get("/selectCourse").param("courseId", "csci6406").param("courseName", "Visualisation")).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseInfo"));
 	}
-	
-	@Test
-	public void displayCoursePageTest() throws Exception {
-		this.mockMvc.perform(get("/course")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().string(containsString("")));		
-	}
 
 
 }

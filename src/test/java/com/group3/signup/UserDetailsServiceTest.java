@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.DAO.DAOInjectorMocks;
+import com.group3.DAO.DAOMockInjector;
 import com.group3.DAO.IDAOInjector;
 import com.group3.DAO.IUserDAO;
 import com.group3.DAO.UserDAOMock;
@@ -29,7 +29,7 @@ class UserDetailsServiceTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		injector = new DAOInjectorMocks();
+		injector = new DAOMockInjector();
 		iUserDAO = injector.createUserDAO();
 		MockitoAnnotations.initMocks(this);
 		mockUserModel = new GuestModel("lastname", "User", "User@gmail.com", "Guest", "Password@1234");

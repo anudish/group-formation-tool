@@ -23,6 +23,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
+	public static String email = null;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
@@ -61,21 +62,23 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		}
 		
 		String emailLoggedInUser = authentication.getName();
+		email = emailLoggedInUser;
 		if (isUser) {
 			LoginDao ld = new LoginDao();
 			String role = ld.getRoleByEmail(emailLoggedInUser);
 			
-			if(role.equals("Instructor") || role.equals("TA")  || role.equals("Student")) {
-				return "showCourses";
-			}
+//			if(role.equals("Instructor") || role.equals("TA")  || role.equals("Student")) {
+//				return "selectCourse";
+//			}
+//			
+//			else if(role.equals("Guest")) {
+//				return "showCoursesGuest";
+//			}
+			return "courseAdmin?emailId=" + emailLoggedInUser;
 			
-			else if(role.equals("Guest")) {
-				return "showCoursesGuest";
-			}
-			
-			else  {
-				return "hello";
-			}
+//			else  {
+//				return "hello";
+//			}
 
 		} 
 		

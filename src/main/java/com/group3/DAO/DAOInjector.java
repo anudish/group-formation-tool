@@ -60,13 +60,16 @@ public class DAOInjector implements IDAOInjector {
 		return new LoginDao();
 	}
     
-}
+
 
 	@Override
 	public ITADAO createTADAO() {
-	}
 		return new TADAO();
+	}
 	@Override
 	public IInstructorDAO createInstructorDAO() {
-	}
 		return new InstructorDAO();
+	}
+}
+	
+		
