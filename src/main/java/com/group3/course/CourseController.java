@@ -44,7 +44,7 @@ public class CourseController {
 	}
 	
 	///////////////////////////////////////COURSE SELECTION//////////////////////////////////////////////
-	
+		
 	//show courses to instructors and TAs
 	@RequestMapping("/courseAdmin") //show students with same course
 	public ModelAndView getCoursesByEmailId(@RequestParam String emailId) {
@@ -72,8 +72,6 @@ public class CourseController {
 		logger.info("SELECT COURSE: "+courseId);
 		
 		ModelAndView mv = new ModelAndView();
-//        mv.addObject("courseId",courseId);
-//        mv.addObject("courseName",courseName);
         mv.addObject("courseInfo",courseModel);
         mv.setViewName("courseAction.html");
         return mv;
@@ -92,6 +90,21 @@ public class CourseController {
 		courseModel.setCourseName(this.courseName);
 	    mv.addObject("courseInfo",courseModel);
 		mv.setViewName("course.html");
+		return mv;
+	}
+	
+	//show course to the students
+	@RequestMapping("/showGuestcourse")
+	public ModelAndView displayGuestCoursePage() {
+
+		logger.info("COURSE");
+		
+		ModelAndView mv = new ModelAndView();
+		courseModel = new CourseModel();
+		courseModel.setCourseId(this.courseId);
+		courseModel.setCourseName(this.courseName);
+	    mv.addObject("courseInfo",courseModel);
+		mv.setViewName("showCoursesGuest.html");
 		return mv;
 	}
 	

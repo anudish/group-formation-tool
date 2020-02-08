@@ -76,4 +76,33 @@ public class CourseDAO implements ICourseDAO{
 			logger.info("Error adding students to database!"+e);
 		}
 	}
+	
+	@Override
+	public ArrayList<CourseModel> getCoursesForGuest() {
+		courseInfo = new ArrayList<CourseModel>();
+		
+		try {
+			conn = ObtainDataBaseConnection.obtainDatabaseConnection();
+			String sql = "SELECT C.COURSE_ID, C.COURSE_NAME FROM COURSES C";
+			logger.info(sql);
+	        statement = conn.prepareStatement(sql);
+	
+	        ResultSet result = statement.executeQuery();
+	        courseInfo = new ArrayList<CourseModel>();
+	        
+	        while (result.next()) {
+	            
+	        	logger.info(result.getObject("COURSE_ID") + ": "+ result.getObject("COURSE_NAME"));
+	        	courseModel = new CourseModel();
+	        	courseModel.setCourseId(result.getObject("COURSE_ID").toString());
+	            courseModel.setCourseName(result.getObject("COURSE_NAME").toString());
+	            courseInfo.add(courseModel);
+	        }
+	        conn.close();
+		}catch (Exception e) {
+			logger.info(e);
+		}
+		
+		return courseInfo;
+	}
 }

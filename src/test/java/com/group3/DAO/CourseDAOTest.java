@@ -61,8 +61,17 @@ class CourseDAOTest {
 		assertThat(enrolledStudentMailIds).isNotEmpty();
 		assertEquals(enrolledStudentMailIds.size(),1);
 
-		remove = new RemoveTestDataFromDB();
 		remove.CourseEnrollmentsDAOTest_removeEnrollment(student, "CSCI01");
+		
+	}
+	
+	@Test
+	public void getCoursesForGuest() throws Exception {
+		
+		ArrayList<CourseModel> enrolledStudentMailIds = courseDAO.getCoursesForGuest();
+		assertNotNull(enrolledStudentMailIds);
+		assertThat(enrolledStudentMailIds).isNotEmpty();
+		assertTrue(enrolledStudentMailIds.size()>0);
 		
 	}
 	

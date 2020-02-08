@@ -10,6 +10,6 @@ public interface ICourseDAO {
 
 	public ArrayList<String> getEnrolledStudentsByCourseId(String courseId);
 	public void enrollStudentToCourse(Student studentDetails, String courseId);
-//	public ArrayList<CourseModel> getCoursesByTAMailId(String studentMailId);
-//	public ArrayList<CourseModel> getCoursesByInstructorMailId(String instructorMailId);
+	public ArrayList<CourseModel> getCoursesForGuest();
+
 }
