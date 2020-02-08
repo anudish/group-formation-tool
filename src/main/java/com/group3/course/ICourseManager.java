@@ -6,4 +6,5 @@ public interface ICourseManager {
 
 	public ArrayList<CourseModel> getCoursesByTAMailId(String studentMailId);
 	public ArrayList<CourseModel> getCoursesByInstructorMailId(String instructorMailId);
+	public ArrayList<CourseModel> getCoursesForGuest();
 }
