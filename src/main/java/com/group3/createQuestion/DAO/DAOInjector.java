@@ -4,7 +4,11 @@ import com.group3.createQuestion.DAO.DAOInjector;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
 public class DAOInjector implements IDAOInjector {
-    private static IDAOInjector idaoInjector;
+
+	IRetrieveQuestionsDAO retrieveQuestionsDAO;
+	IRemoveQuestionDAO removeQuestionDAO;	
+	
+	private static IDAOInjector idaoInjector;
     public static IDAOInjector getInstance(){
         if (null == idaoInjector){
             idaoInjector = new DAOInjector();
@@ -25,4 +29,23 @@ public class DAOInjector implements IDAOInjector {
     public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
         return new ValidationRulesLoaderDAO();
     }
+    
+
+	@Override
+	public IRetrieveQuestionsDAO createRetrieveQuestionsDAO() {
+		
+		if(retrieveQuestionsDAO == null) {
+			retrieveQuestionsDAO = new RetrieveQuestionsDAO();
+		}
+		return retrieveQuestionsDAO;
+	}
+
+	@Override
+	public IRemoveQuestionDAO createRemoveQuestionDAO() {
+		
+		if(removeQuestionDAO == null) {
+			removeQuestionDAO = new RemoveQuestionDAO();
+		}
+		return removeQuestionDAO;
+	}
 }

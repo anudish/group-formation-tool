@@ -30,17 +30,17 @@ class InstructorDAOTest {
 	@Test
 	public void getCoursesByInstructorMailId() throws Exception{
 
-		insert.InstructorDAOTest_insertEnrollment("testinstructor@dal.ca", "CSCI03");
+		insert.InstructorDAOTest_insertEnrollment("testinstructor@dal.ca", "TestCSCI03");
 		
 		ArrayList<CourseModel> courses = new ArrayList<CourseModel>();
 		courses = instructorDAO.getCoursesByInstructorMailId("testinstructor@dal.ca");
 		assertNotNull(courses);
 		assertThat(courses).isNotEmpty();
-		assertEquals(courses.get(0).getCourseId(),"CSCI03");
+		assertEquals(courses.get(0).getCourseId(),"TestCSCI03");
 		assertEquals(courses.get(0).getCourseName(),"TEST");
 		assertEquals(courses.size(),1);
 		
-		remove.InstructorDAOTest_removeEnrollment("testinstructor@dal.ca", "CSCI03");
+		remove.InstructorDAOTest_removeEnrollment("testinstructor@dal.ca", "TestCSCI03");
 	}
 
 }

@@ -1,10 +1,16 @@
 package com.group3.createQuestion.Services;
 
+import com.group3.createQuestion.DAO.IRemoveQuestionDAO;
 import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
+import com.group3.createQuestion.DAO.IRetrieveQuestionsDAO;
 import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 
 public class ServiceAbstractFactory implements IServiceAbstractFactory {
-    @Override
+    
+	IObtainQuestionsService obtainQuestionsService;
+	IDeleteQuestionService deleteQuestionService;
+	
+	@Override
     public IObtainAllQuestionTypesService createObtainAllQuestionTypesService(IRetrieveQuestionTypesDAO iRetrieveQuestionTypesDAO) {
         return new ObtainAllQuestionTypesService(iRetrieveQuestionTypesDAO);
     }
@@ -34,5 +40,20 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
         return new freeTextQuestionGenerationService();
     }
 
+    @Override
+    public IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO) {
+		if(obtainQuestionsService == null) {
+			obtainQuestionsService = new ObtainQuestionsService(retrieveQuestionDAO); 
+		}
+		return obtainQuestionsService;
+    }
+
+	@Override
+	public IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO) {
+		if(deleteQuestionService == null) {
+			deleteQuestionService = new DeleteQuestionService(removeQuestionDAO); 
+		}
+		return deleteQuestionService;
+	}
 
 }

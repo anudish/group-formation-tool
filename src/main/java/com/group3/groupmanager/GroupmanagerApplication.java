@@ -1,8 +1,12 @@
 package com.group3.groupmanager;
 
 import com.group3.AdminAndAuthorization.*;
+import com.group3.createQuestion.DeleteQuestionController;
 import com.group3.createQuestion.QuestionManagerActionController;
+import com.group3.createQuestion.RetrieveQuestionController;
 import com.group3.createQuestion.createQuestionController;
+import com.group3.createQuestion.Services.DeleteQuestionService;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -15,7 +19,7 @@ import com.group3.login.LoginController;
 import com.group3.signup.UserDetailsController;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@ComponentScan(basePackageClasses={QuestionManagerActionController.class, forgetPasswordController.class,CourseController.class,LoginController.class,UserDetailsController.class,CreateCourseController.class, AdminDashBoardMainPageController.class, AdminLogOutController.class, DeleteCourseController.class, GrantInstructorAccessController.class,LogoutAdminController.class,ViewCourseController.class, createQuestionController.class})
+@ComponentScan(basePackageClasses={DeleteQuestionController.class, RetrieveQuestionController.class, QuestionManagerActionController.class, createQuestionController.class, forgetPasswordController.class,CourseController.class,LoginController.class,UserDetailsController.class,CreateCourseController.class, AdminDashBoardMainPageController.class, AdminLogOutController.class, DeleteCourseController.class, GrantInstructorAccessController.class,LogoutAdminController.class,ViewCourseController.class, createQuestionController.class})
 public class GroupmanagerApplication {
 
 	public static void main(String[] args) {

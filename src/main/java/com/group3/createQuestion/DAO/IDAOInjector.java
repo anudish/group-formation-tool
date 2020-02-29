@@ -6,4 +6,6 @@ public interface IDAOInjector {
     IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO();
     ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService);
     IValidationRulesLoaderDAO createValidationRulesLoaderDAO();
+	IRetrieveQuestionsDAO createRetrieveQuestionsDAO();
+	IRemoveQuestionDAO createRemoveQuestionDAO();
 }
