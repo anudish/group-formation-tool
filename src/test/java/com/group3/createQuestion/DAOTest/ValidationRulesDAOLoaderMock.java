@@ -1,6 +1,8 @@
-package com.group3.createQuestion.DAO;
+package com.group3.createQuestion.DAOTest;
 
 import java.util.ArrayList;
+
+import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 
 public class ValidationRulesDAOLoaderMock implements IValidationRulesLoaderDAO {
     private ArrayList<String> validationRulesList;

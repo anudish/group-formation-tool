@@ -71,15 +71,18 @@ public class CourseController {
 		if(role.equals("Guest")) {
 			rows = courseManager.getCoursesForGuest();
 			mv.addObject("courseInfo",rows);
+			mv.addObject("questionManager","hidden");
 			mv.setViewName("showCoursesGuest.html");
 		}else if(role.equals("Instructor")){
 			rows = courseManager.getCoursesByInstructorMailId(email);
 			mv.addObject("courseInfo",rows);
+			mv.addObject("questionManager","visible");
 			mv.setViewName("showCourses.html");
 		}
 		else if(role.equals("TA") || role.equals("Student")){
 			rows = courseManager.getCoursesByTAMailId(email);
 			mv.addObject("courseInfo",rows);
+			mv.addObject("questionManager","hidden");
 			mv.setViewName("showCourses.html");
 		}
 		
