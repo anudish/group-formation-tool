@@ -3,9 +3,9 @@ package com.group3.createQuestion.BusinessModels;
 import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 
 public abstract class Question {
-    private static String questionTitle;
-    private static String questionText;
-    private static String questionType;
+    private String questionTitle;
+    private String questionText;
+    private String questionType;
 
     public String getQuestionType() {
         return questionType;
@@ -23,6 +23,14 @@ public abstract class Question {
         this.questionTitle = questionTitle;
     }
 
+	public String getQuestionText() {
+		return questionText;
+	}
+
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
+	}
+	
     public static String saveBasicInformationIntoDatabase(ISaveBasicQuestionInformationDAO iSaveBasicQuestionInformationDAO,String questionTitle,String questionText,String questionType){
         String id = iSaveBasicQuestionInformationDAO.saveDetailsAndReturnId(questionTitle,questionText,questionType);
         String feedBackMessage = new String();
