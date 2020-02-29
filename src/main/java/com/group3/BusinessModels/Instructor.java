@@ -1,6 +1,6 @@
 package com.group3.BusinessModels;
 
-public class Instructor extends GuestModel{
+public class Instructor extends Person{
 	
 	String instructorId;
 

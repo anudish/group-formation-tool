@@ -17,8 +17,6 @@ public class CourseInputValidation implements ICourseInputValidation {
 		 String courseIdPattern =  "[A-za-z]{4}[0-9]{4}";
 		 String courseNamePattern = "[A-Za-z{\\s}*]+[0-9]*";
 		 ErrorarrayList = new ArrayList<>();
-		// TODO Auto-generated method stub
-		//Checking input Course Pattern
 		String CourseId = course.getCourseID();
 		
 		if(!Pattern.matches(courseIdPattern,CourseId)) {

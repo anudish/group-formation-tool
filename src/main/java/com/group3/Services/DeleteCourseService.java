@@ -13,7 +13,7 @@ public class DeleteCourseService implements IDeleteCourseService {
 	}
 	@Override
 	public String deleteCourse() {
-		// TODO Auto-generated method stub
+
 		String message = iDeleteCourseDAO.deleteCourse(course);
 		
 		

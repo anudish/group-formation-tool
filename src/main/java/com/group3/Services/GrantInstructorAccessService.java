@@ -15,7 +15,7 @@ public class GrantInstructorAccessService implements IGrantInstructorAccessServi
 	}
 	@Override
 	public ArrayList<GuestModel> returnUserList() {
-		// TODO Auto-generated method stub
+
 		userList = this.iGrantInstructorAccessDAO.returnEligibleUsersList();
 		
 		return userList;

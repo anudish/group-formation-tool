@@ -1,6 +1,6 @@
 package com.group3.BusinessModels;
 
-public class Student extends GuestModel{
+public class Student extends Person{
 	String bannerId;
 
 	public String getBannerId() {

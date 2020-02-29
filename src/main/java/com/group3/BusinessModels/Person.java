@@ -1,16 +1,16 @@
 package com.group3.BusinessModels;
 
-public class GuestModel {
+public abstract class Person {
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String role;
 	private String psw;
 
-	public GuestModel() {
+	public Person() {
 		super();
 	}
-	public GuestModel(String lastName, String firstName, String email,String role, String psw) {
+	public Person(String lastName, String firstName, String email,String role, String psw) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;

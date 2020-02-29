@@ -25,7 +25,7 @@ class RetrieveQuestionTypesDAOTest {
     @BeforeEach
     void setUp() {
         logger = LogManager.getLogger(RetrieveQuestionTypesDAOTest.class);
-        IDAOInjector idaoInjector = DAOInjectorAbstractFactory.getInstance();
+        IDAOInjector idaoInjector = DAOInjector.getInstance();
         iRetrieveQuestionTypesDAO = idaoInjector.createRetrieveQuestionTypesDAO();
         connection = ObtainDataBaseConnection.obtainDatabaseConnection();
         queryString = "INSERT INTO QUESTION_TYPE(TYPES) VALUES(?)";

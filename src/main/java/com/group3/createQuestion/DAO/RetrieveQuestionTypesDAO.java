@@ -35,7 +35,7 @@ public class RetrieveQuestionTypesDAO implements IRetrieveQuestionTypesDAO {
                 questionType.add(questTypeInstance);
             }
         }catch (SQLException e){
-            logger.info("facing database server connectivity error");
+            logger.error("facing database server connectivity error");
         }
         return questionType;
 

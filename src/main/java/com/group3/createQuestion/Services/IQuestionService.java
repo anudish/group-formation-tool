@@ -1,7 +1,8 @@
 package com.group3.createQuestion.Services;
 
-public interface IQuestionService {
-    void setQuestionText(String questionText);
-    void setQuestionTitle(String questionTitle);
+import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 
+public interface IQuestionService {
+    String saveBasicQuestionInformation(String questionTitle, String questionText,String questionType, ISaveBasicQuestionInformationDAO iSaveBasicQuestionInformationDAO);
+    QuestionGenerationServicesEnum getQuestionType();
 }

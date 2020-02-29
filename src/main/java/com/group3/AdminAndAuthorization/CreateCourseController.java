@@ -30,7 +30,7 @@ public class CreateCourseController {
     	  IServiceInjector serviceinjector = new ServiceInjector();
     	  DAOInjector daoinjector = new DAOInjector();
     	 
-    	  //Injecting AddCourseDAO dependency
+
     	  IAddCourseService addCourseService = serviceinjector.createaddCourseService(daoinjector.createAddCourseDAO());
     	  ICourseInputValidation icourseInputValidation = serviceinjector.createCourseInputValidation(); 
     	  ArrayList<String> operationFeedback = addCourseService.insertCourseDetails(course,icourseInputValidation);

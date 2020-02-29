@@ -11,7 +11,7 @@ public class AddCourseDAO implements IAddCourseDAO {
 
 	@Override
 	public String addCourse(Course course)  {
-		// TODO Auto-generated method stub
+
 	
 		String insertCourseNameQuery ="INSERT "+" INTO "+"COURSES"+ " (COURSE_ID,COURSE_NAME) "+" values(?,?); ";
 		java.sql.Connection connect =    ObtainDataBaseConnection.obtainDatabaseConnection();
@@ -65,7 +65,7 @@ public class AddCourseDAO implements IAddCourseDAO {
 			}
 			
 	    } catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}finally {
 			ObtainDataBaseConnection.terminateConnection();
