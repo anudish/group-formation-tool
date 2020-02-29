@@ -77,24 +77,22 @@ public class LoginTest {
 	            .andExpect(content().string(containsString("Invalid username or password.")));
 	  }
 	  
-//	  @Test
-//	  public void afterLoginRedirectingToCourseListForGuest() throws Exception {
-//		String loginGuestUrl = "showCoursesGuest";
-//	    mockMvc
-//	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-//	            .andExpect(status().isFound())
-//	            .andExpect(redirectedUrl(loginGuestUrl))
-//	            .andExpect(authenticated());
-//	  }
-//	  
-//	  @Test
-//	  public void afterLoginRedirectingToAnotherCourseListForOtherUsers() throws Exception {
-//		String loginGuestUrl = "showCourses";
-//	    mockMvc
-//	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-//	            .andExpect(status().isFound())
-//	            .andExpect(redirectedUrl(loginGuestUrl))
-//	            .andExpect(authenticated());
-//	  }
+	  @Test
+	  public void afterLoginRedirectingToCourseListForGuest() throws Exception {
+	    mockMvc
+	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
+	            .andExpect(status().isFound())
+	            .andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
+	            .andExpect(authenticated());
+	  }
+	  
+	  @Test
+	  public void afterLoginRedirectingToAnotherCourseListForOtherUsers() throws Exception {
+	    mockMvc
+	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
+	            .andExpect(status().isFound())
+	            .andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
+	            .andExpect(authenticated());
+	  }
 
 }

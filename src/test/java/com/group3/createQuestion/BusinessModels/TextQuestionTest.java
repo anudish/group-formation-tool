@@ -1,4 +1,4 @@
-package com.group3.BusinessModels;
+package com.group3.createQuestion.BusinessModels;
 
 import static org.junit.jupiter.api.Assertions.*;
 

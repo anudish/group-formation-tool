@@ -91,7 +91,7 @@ public class CourseController {
 		
 	};
 	
-	@RequestMapping("/selectCourse") //show students with same course
+	@RequestMapping("/selectCourse") 
 	public ModelAndView getSelectedCourse(@RequestParam String courseId, @RequestParam String courseName) {
 		courseModel = new CourseModel();
 		courseModel.setCourseId(courseId);
@@ -101,9 +101,8 @@ public class CourseController {
 		logger.info("SELECT COURSE: "+courseId);
 
 		ModelAndView mv = new ModelAndView();
-
 		if(role.equals("Student")) {
-			
+			logger.info("Student Logged In");
 			courseModel = new CourseModel();
 			courseModel.setCourseId(this.courseId);
 			courseModel.setCourseName(this.courseName);
@@ -111,11 +110,11 @@ public class CourseController {
 			mv.setViewName("course.html");
 			
 		}else if(role.equals("Instructor") || role.equals("TA")) {
-	        mv.addObject("courseInfo",courseModel);
-	        mv.setViewName("courseAction.html");
-	        
+			logger.info("Instrucotr/TA Logged In!");
+			mv.addObject("courseInfo",courseModel);
+	        mv.setViewName("courseAction.html");    
 		}
-
+		
 	  return mv;
 	}
 	

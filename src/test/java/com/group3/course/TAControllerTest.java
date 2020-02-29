@@ -22,7 +22,7 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {TAController.class,GroupmanagerApplication.class})
 class TAControllerTest {
 
 	@Autowired
@@ -40,10 +40,10 @@ class TAControllerTest {
 		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
 	}
 	
-////	@Test
-//	public void addStudentAsTA() throws Exception {
+	@Test
+	public void addStudentAsTA() throws Exception {
 //		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
 //		.andExpect(model().attributeExists("courseInfo"));
-//	}
+	}
 
 }

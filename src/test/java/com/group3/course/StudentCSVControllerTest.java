@@ -32,19 +32,11 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {StudentCSVController.class,GroupmanagerApplication.class})
 class StudentCSVControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
-//	@Test
-//	public void showImportXMLPageTest() throws Exception {
-//		
-//		this.mockMvc.perform(post("/importCSV")).andDo(print()).andExpect(status().isOk())
-//		.andExpect(model().attributeExists("courseInfo"));
-//	
-//	}
 	
 	@Test
 	public void uploadCSVFileTest() throws Exception{
