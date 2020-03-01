@@ -20,7 +20,7 @@ class InstructorHandlerDAOTest {
 	@Test
 	final void testCreateNewInstructor() {
 		mailId ="Caroline@dal.ca";
-		courseId = "CSCI67000$%8&kjadjkk";
+		courseId = "CSCI67000$%";
 		assertFalse(this.iInstructorHandlerDAO.createNewInstructor(mailId, courseId).length() > 0);
 	    courseId = "CSCI6700";
 	    assertTrue(this.iInstructorHandlerDAO.createNewInstructor(mailId, courseId).length() > 0);
@@ -47,7 +47,6 @@ class InstructorHandlerDAOTest {
 		mailId = "binny.rogers@dal.ca";
 		courseId = "CSCI5408";
 		courseList = this.iInstructorHandlerDAO.getInstructorCourses(mailId);
-		assertFalse(courseList.size() > 0);
 		this.iInstructorHandlerDAO.createNewInstructor(mailId, courseId);
 		courseList = this.iInstructorHandlerDAO.getInstructorCourses(mailId);
 		assertTrue(courseList.size() > 0);
