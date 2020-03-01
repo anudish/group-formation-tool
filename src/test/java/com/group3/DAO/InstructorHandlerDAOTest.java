@@ -44,6 +44,7 @@ class InstructorHandlerDAOTest {
 
 	@Test
 	final void testGetInstructorCourses() {
+		
 		mailId = "binny.rogers@dal.ca";
 		courseId = "CSCI5408";
 		courseList = this.iInstructorHandlerDAO.getInstructorCourses(mailId);
