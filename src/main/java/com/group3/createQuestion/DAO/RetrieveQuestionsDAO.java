@@ -44,6 +44,7 @@ public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO{
 	        	String title = String.valueOf(result.getObject("TITLE"));
 	            String text = String.valueOf(result.getObject("TEXT"));
 	            String type = String.valueOf(result.getObject("TYPE"));
+	            String timestamp = String.valueOf(result.getObject("TIMESTAMP"));
 	            
 	        	logger.info("Question fetched: "+id);
 	    
@@ -51,6 +52,8 @@ public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO{
 	        	questionInfo.add(id);
 	        	questionInfo.add(title);
 	        	questionInfo.add(text);
+	        	questionInfo.add(type);
+	        	questionInfo.add(timestamp);
 	        	
 	        	instructorQuestions.add(questionInfo);
 	        }

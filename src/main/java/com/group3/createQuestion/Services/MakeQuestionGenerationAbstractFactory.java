@@ -15,6 +15,9 @@ public class MakeQuestionGenerationAbstractFactory implements IMakeQuestionGener
             case "Free Text":
                 iQuestionService =  new freeTextQuestionGenerationService();
             break;
+            case "Numeric":
+                iQuestionService =  new NumericQuestionGenerationService();
+            break;
 
         }
 

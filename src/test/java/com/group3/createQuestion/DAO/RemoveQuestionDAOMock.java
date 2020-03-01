@@ -27,14 +27,13 @@ public class RemoveQuestionDAOMock implements IRemoveQuestionDAO{
 
 	@Override
 	public boolean removeQuestionFromDatabase(String questionID) {
-		boolean result = false;
+		
 		for(int i=0;i<questionList.size();i++) {
 			if(questionList.get(i).get(0).equals(questionID)) {
 				questionList.remove(i);
-				result=true;
-				break;
+				return true;
 			}
 		}	
-		return result;
+		return false;
 	}
 }

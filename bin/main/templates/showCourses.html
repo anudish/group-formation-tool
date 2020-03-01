@@ -8,12 +8,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<style>
+button.questionLink {
+  visibility: "@${questionManager}";
+}
+</style>
 </head>
 <body>
 <div class="jumbotron text-center">
   <h1>Welcome to the portal</h1>
   <p>List of Courses</p> 
-  <button class="questionLink btn btn-primary active" onclick="window.location.href='QuestionManager'">Question Manager</button>
+  <button th:style="'visibility:'+@{${questionManager}}" class="btn btn-primary active" onclick="window.location.href='QuestionManager'">Question Manager</button>
 </div>
 <center>
 	<table class="table" border="1">

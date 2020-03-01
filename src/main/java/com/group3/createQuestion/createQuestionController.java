@@ -78,6 +78,17 @@ public class createQuestionController {
         logger.log(Level.INFO,"Question id returned from database "+id);
         return "mainQuestionPage.html";
     }
+    @RequestMapping("/invokeNumeric")
+    public String renderNumericQuestion(){
+        logger.log(Level.INFO,"REQUEST FORWARDED TO INVOKE NUMERIC QUESTION GENERATION CONTROLLER !! ");
+        IQuestionService iQuestionService = iServiceAbstractFactory.createNumericQuestionGenerationService();
+
+        iSaveBasicQuestionInformationDAO = idaoInjector.createSaveBasicQuestionInformationDAO(iCurrentTimeStampGenerationService);
+        //iQuestionService.saveBasicQuestionInformation(title,question,type,iCurrentTimeStampGenerationService);
+        String id = iQuestionService.saveBasicQuestionInformation(title,question,type,iSaveBasicQuestionInformationDAO);
+        logger.log(Level.INFO,"Question id returned from database "+id);
+        return "mainQuestionPage.html";
+    }
 }
 
 

@@ -28,10 +28,7 @@ public class ObtainDataBaseConnection {
 		    	 if(databaseConnection.isClosed()==false) {
 					 
 					 databaseConnection.close();
-				
-				 
-				 
-			 }
+	 }
 		    	 
 		     }catch(SQLException e ) {System.out.println("Error terminating connection with server "+e);}
 			 

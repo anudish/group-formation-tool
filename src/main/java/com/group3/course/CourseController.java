@@ -84,11 +84,9 @@ public class CourseController {
 			mv.addObject("courseInfo",rows);
 			mv.addObject("questionManager","hidden");
 			mv.setViewName("showCourses.html");
-		}
-		
+		}		
 		return mv;
 
-		
 	};
 	
 	@RequestMapping("/selectCourse") 

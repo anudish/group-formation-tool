@@ -12,6 +12,7 @@ public interface IServiceAbstractFactory {
      IMakeQuestionGenerationAbstractFactory createMakeQuestionGenerationAbstractFactory();
      IReturnControllerPathService createReturnControllerPathService();
      IQuestionService createfreeTextQuestionGenerationService();
+     IQuestionService createNumericQuestionGenerationService();
      IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO);
      IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO);
 }

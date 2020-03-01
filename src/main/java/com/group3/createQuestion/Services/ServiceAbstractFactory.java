@@ -39,6 +39,11 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
     public IQuestionService createfreeTextQuestionGenerationService() {
         return new freeTextQuestionGenerationService();
     }
+    
+    @Override
+    public IQuestionService createNumericQuestionGenerationService() {
+        return new NumericQuestionGenerationService();
+    }
 
     @Override
     public IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO) {

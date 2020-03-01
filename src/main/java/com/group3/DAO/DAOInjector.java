@@ -2,78 +2,120 @@ package com.group3.DAO;
 
 public class DAOInjector implements IDAOInjector {
 
+	static IAddCourseDAO addCourseDAO;
+	static IViewCoursesDAO viewCoursesDAO;
+	static IDeleteCourseDAO deleteCourseDAO;
+	static IGrantInstructorAccessDAO grantInstructorAccessDAO;
+	static IInstructorHandlerDAO instructorHandlerDAO;
+	static IUserRoleHandlerDAO userRoleHandlerDAO;
+	static ICourseDAO courseDAO;
+	static IStudentDAO studentDAO;
+	static IUserDAO userDAO;
+	static ILoginDAO loginDAO;
+	static ITADAO taDAO;
+	static IInstructorDAO instructorDAO;
+	static IUserPasswordDAO userPasswordDAO;
+	
 	@Override
 	public IAddCourseDAO createAddCourseDAO() {
-		// TODO Auto-generated method stub
-		return new AddCourseDAO();
+		if(addCourseDAO == null) {
+			addCourseDAO = new AddCourseDAO();
+		}
+		return addCourseDAO;
 	}
 
 	@Override
 	public IViewCoursesDAO createViewCourseDAO() {
-		// TODO Auto-generated method stub
-		return new ViewCoursesDAO();
+		if(viewCoursesDAO == null) {
+			viewCoursesDAO = new ViewCoursesDAO();
+		}
+		return viewCoursesDAO;
 	}
 
 	@Override
 	public IDeleteCourseDAO createDeleteCourseDAO() {
-		// TODO Auto-generated method stub
-		
-		return new DeleteCourseDAO();
+		if(deleteCourseDAO == null) {
+			deleteCourseDAO = new DeleteCourseDAO();
+		}
+		return deleteCourseDAO;
 	}
 
 	@Override
 	public IGrantInstructorAccessDAO createGrantInstructorAccessDAO() {
-		// TODO Auto-generated method stub
-		return new GrantInstructorAccessDAO();
+		if(grantInstructorAccessDAO == null) {
+			grantInstructorAccessDAO = new GrantInstructorAccessDAO();;
+		}
+		return grantInstructorAccessDAO;
 	}
 
 	@Override
 	public IInstructorHandlerDAO createInstructorHandlerDAO() {
-		// TODO Auto-generated method stub
-		return new InstructorHandlerDAO();
+		if(instructorHandlerDAO == null) {
+			instructorHandlerDAO = new InstructorHandlerDAO(); 
+		}
+		return instructorHandlerDAO;
 	}
 
 	@Override
 	public IUserRoleHandlerDAO createUserRoleHandlerDAO() {
-		// TODO Auto-generated method stub
-		return new UserRoleHandlerDAO();
+		if(userRoleHandlerDAO == null) {
+			userRoleHandlerDAO = new UserRoleHandlerDAO();
+		}
+		return userRoleHandlerDAO;
 	}
 
 	@Override
 	public ICourseDAO createCourseDAO() {
-		// TODO Auto-generated method stub
-		return new CourseDAO();
+		if(courseDAO == null) {
+			courseDAO = new CourseDAO();
+		}
+		return courseDAO;
 	}
 
 	@Override
 	public IStudentDAO createStudentDAO() {
-		return new StudentDAO();
+		if(studentDAO == null) {
+			studentDAO = new StudentDAO();
+		}
+		return studentDAO;
 	}
 
 	@Override
 	public IUserDAO createUserDAO() {
-		return new UserDAO();
+		if(userDAO == null) {
+			userDAO = new UserDAO();
+		}
+		return userDAO;
 	}
 
 	@Override
 	public LoginDao createLoginDAO() {
+		if(loginDAO == null) {
+			loginDAO = new LoginDao();
+		}
 		return new LoginDao();
 	}
     
-
-
 	@Override
 	public ITADAO createTADAO() {
-		return new TADAO();
+		if(taDAO == null) {
+			taDAO = new TADAO();
+		}
+		return taDAO;
 	}
 	@Override
 	public IInstructorDAO createInstructorDAO() {
-		return new InstructorDAO();
+		if(instructorDAO == null) {
+			instructorDAO = new InstructorDAO();
+		}
+		return instructorDAO;
 	}
 	
-	public IUserPasswordDAO getUserDAOObj()
-	{
-		return new UserPasswordDAO();
+	public IUserPasswordDAO getUserDAOObj(){
+		if(userPasswordDAO == null) {
+			userPasswordDAO = new UserPasswordDAO();
+		}
+		return userPasswordDAO;
 	}
 }
 	

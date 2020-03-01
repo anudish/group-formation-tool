@@ -8,10 +8,8 @@ public class RetrieveQuestionsDAOMock implements IRetrieveQuestionsDAO {
 	List<List<String>> questionList;
 	List<String> questionInfo;
 	
-	@Override
-	public List<List<String>> getQuestionsByInstructorID(String instructorId) {
+	public RetrieveQuestionsDAOMock() {
 		questionList = new ArrayList<List<String>>();
-		
 		questionInfo = new ArrayList<String>();
 		questionInfo.add("1");
 		questionInfo.add("Test Title 1");
@@ -22,6 +20,11 @@ public class RetrieveQuestionsDAOMock implements IRetrieveQuestionsDAO {
 		questionInfo.add("Test Title 2");
 		questionInfo.add("Test Text 2");
 		questionList.add(questionInfo);
+	
+	}
+	
+	@Override
+	public List<List<String>> getQuestionsByInstructorID(String instructorId) {
 		return questionList;
 	}
 
