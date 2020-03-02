@@ -52,36 +52,25 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		boolean isAdmin = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-				isUser = true;
-				break;
-			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				isAdmin = true;
+				break;
+			} else {
+				isUser = true;
 				break;
 			}
 		}
-		
+
 		String emailLoggedInUser = authentication.getName();
 		email = emailLoggedInUser;
 		if (isUser) {
 			LoginDao ld = new LoginDao();
 			String role = ld.getRoleByEmail(emailLoggedInUser);
-			
-//			if(role.equals("Instructor") || role.equals("TA")  || role.equals("Student")) {
-//				return "selectCourse";
-//			}
-//			
-//			else if(role.equals("Guest")) {
-//				return "showCoursesGuest";
-//			}
-			return "courseAdmin?emailId=" + emailLoggedInUser;
-			
-//			else  {
-//				return "hello";
-//			}
 
-		} 
-		
+			return "courseAdmin?emailId=" + emailLoggedInUser;
+
+		}
+
 		else if (isAdmin) {
 			return "adminMainPageRequest";
 		} else {

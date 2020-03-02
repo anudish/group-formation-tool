@@ -1,14 +1,15 @@
 package com.group3.login;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.group3.security.CustomAccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -19,9 +20,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.cors();
 		
-		http.anonymous().and().authorizeRequests()
-		.antMatchers("/", "/home","/formSubmit","/**").permitAll()
-//		.anyRequest().authenticated()
+		http.authorizeRequests()
+		.antMatchers("/adminMainPageRequest",
+					"/adminLogout","/addCoursePageRequest",
+					"/addCourse","/DeleteCoursePage",
+					"/deleteCourse","/grantInstructorPage",
+					"/GrantRoleRequest","/ViewCoursesPage").hasRole("ADMIN")
+		
+		.antMatchers("/selectCourse").hasAnyRole("TA","INSTRUCTOR","STUDENT")
+		.antMatchers("/importCSV","/upload-csv-file",
+					"/showAllStudents","/searchStudent","/addTA").hasAnyRole("TA","INSTRUCTOR")
+		
+		
+		.antMatchers("/","/formSubmit").permitAll()
 		.and()
 		.formLogin()
 			.loginPage("/login")
@@ -30,14 +41,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.and()
 		.logout()
-			.permitAll();
+			.permitAll()
+		.and()
+		.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 		}
+		
 
 	  @Override
 	  public void configure(AuthenticationManagerBuilder builder)
 	          throws Exception {
 	      builder.userDetailsService(new UserService());
 	  }
+	  
+	  @Bean
+	  public AccessDeniedHandler accessDeniedHandler(){
+	      return new CustomAccessDeniedHandler();
+	  }
+	  
 	 
 	  @Bean
 	  public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
