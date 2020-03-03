@@ -1,35 +1,23 @@
 package com.group3.course;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.group3.BusinessModels.LoginForm;
 import com.group3.DAO.DAOInjector;
 import com.group3.DAO.IDAOInjector;
 import com.group3.DAO.ILoginDAO;
-import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.login.LoginAuthenticationSuccessHandler;
 
 @Controller
 public class CourseController {
@@ -59,12 +47,21 @@ public class CourseController {
 		//get and show courses for TA from database
 		
 		logger.info("COURSE");
-		String email;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		email = LoginAuthenticationSuccessHandler.email;
+		String email = authentication.getName();
+		
+		String formattedRole = null;
+		
+		@SuppressWarnings("unchecked")
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+		for (GrantedAuthority authority : authorities) {
+		     String role = authority.getAuthority().replace("ROLE_","").toLowerCase();
+		     System.out.println("Role formatted: " + role.substring(0, 1).toUpperCase() + role.substring(1));
+		     formattedRole = role.substring(0, 1).toUpperCase() + role.substring(1);
+		 }
 
-		role = loginDAO.getRoleByEmail(email);
+		role = formattedRole;
 
 		ArrayList<CourseModel> rows = new ArrayList<CourseModel>();
 		ModelAndView mv = new ModelAndView();
@@ -77,7 +74,7 @@ public class CourseController {
 			mv.addObject("courseInfo",rows);
 			mv.setViewName("showCourses.html");
 		}
-		else if(role.equals("TA") || role.equals("Student")){
+		else if(role.equals("Ta") || role.equals("Student")){
 			rows = courseManager.getCoursesByTAMailId(email);
 			mv.addObject("courseInfo",rows);
 			mv.setViewName("showCourses.html");
@@ -107,7 +104,7 @@ public class CourseController {
 		    mv.addObject("courseInfo",courseModel);
 			mv.setViewName("course.html");
 			
-		}else if(role.equals("Instructor") || role.equals("TA")) {
+		}else if(role.equals("Instructor") || role.equals("Ta")) {
 	        mv.addObject("courseInfo",courseModel);
 	        mv.setViewName("courseAction.html");
 	        

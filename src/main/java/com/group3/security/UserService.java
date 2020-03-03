@@ -1,4 +1,4 @@
-package com.group3.login;
+package com.group3.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.group3.BusinessModels.LoginForm;
 import com.group3.DAO.LoginDao;
-import com.group3.security.SecurityUser;
 
 @Service
 public class UserService implements UserDetailsService {

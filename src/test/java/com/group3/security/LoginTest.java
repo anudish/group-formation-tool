@@ -1,4 +1,4 @@
-package com.group3.login;
+package com.group3.security;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.group3.groupmanager.GroupmanagerApplication;
+import com.group3.security.SecurityUser;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
@@ -77,24 +78,4 @@ public class LoginTest {
 	            .andExpect(content().string(containsString("Invalid username or password.")));
 	  }
 	  
-//	  @Test
-//	  public void afterLoginRedirectingToCourseListForGuest() throws Exception {
-//		String loginGuestUrl = "showCoursesGuest";
-//	    mockMvc
-//	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-//	            .andExpect(status().isFound())
-//	            .andExpect(redirectedUrl(loginGuestUrl))
-//	            .andExpect(authenticated());
-//	  }
-//	  
-//	  @Test
-//	  public void afterLoginRedirectingToAnotherCourseListForOtherUsers() throws Exception {
-//		String loginGuestUrl = "showCourses";
-//	    mockMvc
-//	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-//	            .andExpect(status().isFound())
-//	            .andExpect(redirectedUrl(loginGuestUrl))
-//	            .andExpect(authenticated());
-//	  }
-
 }

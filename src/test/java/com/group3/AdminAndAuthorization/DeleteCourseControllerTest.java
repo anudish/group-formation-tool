@@ -1,6 +1,7 @@
 package com.group3.AdminAndAuthorization;
 
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -48,7 +49,8 @@ class DeleteCourseControllerTest {
 	@Test
 	final void testDeleteCoursePage() throws Exception {
 		
-		this.mockMvc.perform(get("/DeleteCoursePage")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/DeleteCoursePage")
+				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"));
 		
 		
@@ -62,7 +64,8 @@ class DeleteCourseControllerTest {
 		String CourseName = course.getCourseName();
 		
 		String expectedMessage = course.getCourseName()+" ("+course.getCourseID()+") "+" is deleted sucessfully ";
-		this.mockMvc.perform(post("/deleteCourse").param("CourseID", CourseId).param("CourseName", CourseName)).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/deleteCourse").param("CourseID", CourseId).param("CourseName", CourseName)
+				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList")).andExpect(model().attribute("feedBackMessage", expectedMessage));
 		
 		 iAddcourseDAO.addCourse(course);

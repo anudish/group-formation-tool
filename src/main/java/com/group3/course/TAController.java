@@ -18,7 +18,7 @@ import com.group3.DAO.DAOInjector;
 import com.group3.DAO.IDAOInjector;
 import com.group3.DAO.ILoginDAO;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.login.LoginAuthenticationSuccessHandler;
+import com.group3.security.LoginAuthenticationSuccessHandler;
 
 @Controller
 public class TAController {

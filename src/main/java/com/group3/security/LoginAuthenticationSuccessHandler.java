@@ -1,4 +1,4 @@
-package com.group3.login;
+package com.group3.security;
 
 import java.io.IOException;
 import java.util.Collection;

@@ -1,6 +1,7 @@
 package com.group3.course;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,13 +31,15 @@ class TAControllerTest {
 	
 	@Test
 	public void getAllStudents() throws Exception {		
-		this.mockMvc.perform(post("/showAllStudents")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/showAllStudents")
+				.with(user("user").password("password").roles("INSTRUCTOR","TA"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
 	}
 	
 	@Test
 	public void searchStudent() throws Exception {		
-		this.mockMvc.perform(post("/searchStudent").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/searchStudent").param("studentMailId","a@dal.ca")
+				.with(user("user").password("password").roles("INSTRUCTOR","TA"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
 	}
 	

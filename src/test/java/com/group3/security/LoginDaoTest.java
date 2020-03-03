@@ -1,4 +1,4 @@
-package com.group3.login;
+package com.group3.security;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,27 +41,27 @@ public class LoginDaoTest {
 	}
 
 	@Test
-	public void findByCorrectEmail_returnCorrectUser() {
+	public void findByCorrectEmailReturnCorrectUser() {
 		user = loginDao.getUserByEmail(TEST_EMAIL_1);
 		assertThat(user).isNotNull();
 		assertThat(user.getEmail()).isEqualTo(TEST_EMAIL_1);
 	}
 
 	@Test
-	public void findByIncorrectEmail_returnNull() {
+	public void findByIncorrectEmailReturnNull() {
 		user = loginDao.getUserByEmail(TEST_EMAIL_2);
 		assertThat(user).isNull();
 	}
 
 	@Test
-	public void findByCorrectEmail_returnCorrectRole() {
+	public void findByCorrectEmailReturnCorrectRole() {
 		role = loginDao.getRoleByEmail(TEST_EMAIL_1);
 		assertThat(role).isNotNull().isNotEmpty();
 		assertThat(role).isEqualTo(TEST_ROLE);
 	}
 
 	@Test
-	public void findByInCorrectEmail_returnNull() {
+	public void findByInCorrectEmailReturnNull() {
 		role = loginDao.getRoleByEmail(TEST_EMAIL_2);
 		assertThat(role).isNullOrEmpty();
 	}

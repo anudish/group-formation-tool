@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -57,7 +58,8 @@ class StudentCSVControllerTest {
 	              "text/plain", "hello world".getBytes());
 	      MockHttpServletRequestBuilder builder =
 	              MockMvcRequestBuilders.fileUpload("/upload-csv-file")
-	                                    .file(mockMultipartFile);
+	                                    .file(mockMultipartFile)
+	                                    .with(user("user").password("password").roles("INSTRUCTOR","TA"));
 	      
 		this.mockMvc.perform(builder).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("studentList"));

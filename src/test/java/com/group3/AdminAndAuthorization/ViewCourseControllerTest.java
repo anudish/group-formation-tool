@@ -1,6 +1,7 @@
 package com.group3.AdminAndAuthorization;
 
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -30,7 +31,8 @@ class ViewCourseControllerTest {
 
 	@Test
 	final void testViewCoursePage() throws Exception {
-		this.mockMvc.perform(get("/ViewCoursesPage")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/ViewCoursesPage")
+				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"));
 		
 	}

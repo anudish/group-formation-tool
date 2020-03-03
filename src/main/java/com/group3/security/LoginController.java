@@ -1,4 +1,4 @@
-package com.group3.login;
+package com.group3.security;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
