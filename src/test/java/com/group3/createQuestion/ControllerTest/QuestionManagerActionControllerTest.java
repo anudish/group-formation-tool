@@ -17,13 +17,17 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {QuestionManagerActionController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+	QuestionManagerActionController.class, GroupmanagerApplication.class
+})
 class QuestionManagerActionControllerTest {
+
 	@Autowired
 	private MockMvc mockMvc;
-		
+
 	@Test
 	public void getCoursesByEmailIdTest() throws Exception {
+
 		this.mockMvc.perform(get("/QuestionManager")).andDo(print()).andExpect(status().isOk());
-	}		
+	}
 }

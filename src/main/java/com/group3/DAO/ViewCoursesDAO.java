@@ -14,13 +14,9 @@ public class ViewCoursesDAO implements IViewCoursesDAO {
 	Course course;
 	public  ViewCoursesDAO() {
 		allCourses = new ArrayList<>();
-		
-		
 	}
 	@Override
-	public ArrayList<Course> getAllCourses() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Course> getAllCourses() {		
 		String SQLQueryForAllCourses = "Select * from COURSES";
 		
 		Connection connect =  ObtainDataBaseConnection.obtainDatabaseConnection();
@@ -36,7 +32,7 @@ public class ViewCoursesDAO implements IViewCoursesDAO {
 		    		String courseId = allCoursesSet.getString("COURSE_ID");
 		    		String courseName = allCoursesSet.getString("COURSE_NAME");
 		    		course = new Course();
-		            course.setCourseID(courseId);
+		            course.setCourseId(courseId);
 		            course.setCourseName(courseName);
 		            allCourses.add(course);
 		    	}

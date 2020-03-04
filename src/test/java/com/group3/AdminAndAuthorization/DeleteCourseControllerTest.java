@@ -58,11 +58,11 @@ class DeleteCourseControllerTest {
 	final void testDeleteCourseRequest() throws Exception {
 		
 		course = courseList.get(0); 
-		String CourseId = course.getCourseID();
+		String CourseId = course.getCourseId();
 		String CourseName = course.getCourseName();
 		
-		String expectedMessage = course.getCourseName()+" ("+course.getCourseID()+") "+" is deleted sucessfully ";
-		this.mockMvc.perform(post("/deleteCourse").param("CourseID", CourseId).param("CourseName", CourseName)).andDo(print()).andExpect(status().isOk())
+		String expectedMessage = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
+		this.mockMvc.perform(post("/deleteCourse").param("CourseId", CourseId).param("CourseName", CourseName)).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList")).andExpect(model().attribute("feedBackMessage", expectedMessage));
 		
 		 iAddcourseDAO.addCourse(course);

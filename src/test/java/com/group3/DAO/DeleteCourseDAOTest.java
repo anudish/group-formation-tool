@@ -17,7 +17,7 @@ class DeleteCourseDAOTest {
 		course = new Course();
 		 CourseName = "Penentration Testing(Cyber)";
 	     CourseId = "CSCI6786";
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
  	    DAOInjector daoinjector = new DAOInjector();
  	    iaddCourseDAO  = daoinjector.createAddCourseDAO();
@@ -26,7 +26,7 @@ class DeleteCourseDAOTest {
 
 	@Test
 	final void testDeleteCourse() {
-		String expectedOutCome = course.getCourseName()+" ("+course.getCourseID()+") "+" is deleted sucessfully ";
+		String expectedOutCome = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
 		assertFalse(this.iDeleteCourseDAO.deleteCourse(course).equals(expectedOutCome));
 		
 		this.iaddCourseDAO.addCourse(course);

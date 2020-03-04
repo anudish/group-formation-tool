@@ -22,28 +22,31 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {TAController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+	TAController.class, GroupmanagerApplication.class
+})
 class TAControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@Test
-	public void getAllStudents() throws Exception {		
+	public void getAllStudents() throws Exception {
 		this.mockMvc.perform(post("/showAllStudents")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
-	}
-	
-	@Test
-	public void searchStudent() throws Exception {		
-		this.mockMvc.perform(post("/searchStudent").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
-	}
-	
-	@Test
-	public void addStudentAsTA() throws Exception {
-//		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
-//		.andExpect(model().attributeExists("courseInfo"));
+			.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
 	}
 
+	@Test
+	public void searchStudent() throws Exception {
+		this.mockMvc.perform(post("/searchStudent").param("studentMailId", "a@dal.ca")).andDo(print()).andExpect(status().isOk())
+			.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
+	}
+
+	@Test
+	public void addStudentAsTA() throws Exception {
+		//		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
+		//		.andExpect(model().attributeExists("courseInfo"));
+		//		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
+		//		.andExpect(model().attributeExists("courseInfo"));
+	}
 }

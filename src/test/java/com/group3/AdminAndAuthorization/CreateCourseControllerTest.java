@@ -55,17 +55,16 @@ class CreateCourseControllerTest {
 		
 		ArrayList<String> operationFeedback = new ArrayList<>();
 		operationFeedback.add("Solid Mechanics with CSCI5608 created successfully");
-		this.mockMvc.perform(post("/addCourse").param("CourseID", "CSCI5608").param("CourseName", "Solid Mechanics")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attribute("operationFeedback",operationFeedback));
-		
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")).andDo(print()).andExpect(status().isOk())
+		.andExpect(model().attribute(("operationFeedback"),operationFeedback));
 		
 		operationFeedback.clear();
 		operationFeedback.add("Course Name  Visual Processing with Course ID csci7000 already exists !! ");
-		this.mockMvc.perform(post("/addCourse").param("CourseID", "csci7000").param("CourseName", "Visual Processing")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attribute("operationFeedback",operationFeedback));
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")).andDo(print()).andExpect(status().isOk())
+		.andExpect(model().attribute(("operationFeedback"),operationFeedback));
 	    
 		Course course = new Course();
-		course.setCourseID("csci5608");
+		course.setCourseId("csci5608");
 		course.setCourseName("Solid Mechanics");
 		iDeleteCourseDAO.deleteCourse(course);
 	}

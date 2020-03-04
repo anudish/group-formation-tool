@@ -7,45 +7,60 @@ import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
 public class DAOMockInjector implements IDAOInjector {
-    private static DAOMockInjector daoMockInjector;
-    IRetrieveQuestionsDAO retrieveQuestionsDAOMock;
-	IRemoveQuestionDAO removeQuestionDAOMock;
-	
-    public static IDAOInjector getInstance() {
-        if (null == daoMockInjector) {
-            daoMockInjector = new DAOMockInjector();
-        }
-        return daoMockInjector;
-    }
-    @Override
-    public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
-        return new RetrieveQuestionTypesDAOMock();
-    }
 
-    @Override
-    public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService) {
-        return new SaveBasicQuestionInformationDAOMock(iCurrentTimeStampGenerationService);
-    }
+	public static IDAOInjector idaoInjector;
+	public static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
+	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
+	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
+	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
+	public static IRemoveQuestionDAO removeQuestionDAO;
 
-    @Override
-    public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
-        return new ValidationRulesDAOLoaderMock();
-    }
-	
+	public static IDAOInjector instance() {
+		if (null == idaoInjector) {
+			idaoInjector = new DAOMockInjector();
+		}
+		return idaoInjector;
+	}
+
+	@Override
+	public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
+		if (null == retrieveQuestionTypesDAO) {
+			retrieveQuestionTypesDAO = new RetrieveQuestionTypesDAOMock();
+		}
+		return retrieveQuestionTypesDAO;
+	}
+
+	@Override
+	public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
+		if (null == saveBasicQuestionInformationDAO) {
+			saveBasicQuestionInformationDAO = new SaveBasicQuestionInformationDAOMock(currentTimeStampGenerationService);
+		}
+		return saveBasicQuestionInformationDAO;
+	}
+
+	@Override
+	public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
+		if (null == validationRulesLoaderDAO) {
+			validationRulesLoaderDAO = new ValidationRulesDAOLoaderMock();
+		}
+		return validationRulesLoaderDAO;
+	}
+
 	@Override
 	public IRetrieveQuestionsDAO createRetrieveQuestionsDAO() {
-		if(retrieveQuestionsDAOMock == null) {
-        	retrieveQuestionsDAOMock = new RetrieveQuestionsDAOMock();
-        }
-        return retrieveQuestionsDAOMock;
+
+		if (null == retrieveQuestionsDAO) {
+			retrieveQuestionsDAO = new RetrieveQuestionsDAOMock();
+		}
+		return retrieveQuestionsDAO;
 	}
 
 	@Override
 	public IRemoveQuestionDAO createRemoveQuestionDAO() {
-		if(removeQuestionDAOMock == null) {
-			removeQuestionDAOMock = new RemoveQuestionDAOMock();
-		}
-		return removeQuestionDAOMock;
-	}
 
+		if (null == removeQuestionDAO) {
+			removeQuestionDAO = new RemoveQuestionDAOMock();
+		}
+		return removeQuestionDAO;
+	}
 }

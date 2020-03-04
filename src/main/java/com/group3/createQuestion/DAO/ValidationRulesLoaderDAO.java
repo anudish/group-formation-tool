@@ -11,31 +11,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ValidationRulesLoaderDAO implements IValidationRulesLoaderDAO {
-    private ArrayList<String> validationRulesList;
-    private String queryString;
-    private Connection databaseConnection;
-    private String rule;
-    private static Logger logger = LogManager.getLogger(ValidationRulesLoaderDAO.class);
-    @Override
-    public ArrayList<String> getValidationRules() {
 
-        validationRulesList= new ArrayList<>();
-        queryString = "select RULE from VALIDATION_RULES WHERE PACKAGE_NAME=? AND ENABLED=?";
+	private ArrayList<String> validationRulesList;
+	private String query;
+	private Connection connection;
+	private PreparedStatement statement; 
+	private String rule;
+	private static Logger logger = LogManager.getLogger(ValidationRulesLoaderDAO.class);
 
-        try {
-            databaseConnection = ObtainDataBaseConnection.obtainDatabaseConnection();
-            PreparedStatement preparedStatement = databaseConnection.prepareStatement(queryString);
-            preparedStatement.setString(1,"QUESTION_MANAGER");
-            preparedStatement.setInt(2,1);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                logger.info(resultSet.getObject("RULE"));
-                rule = resultSet.getObject("RULE").toString();
-                validationRulesList.add(rule);
-            }
-        }catch (SQLException e){
-            logger.error("facing database server connectivity error");
-        }
-        return validationRulesList;
-    }
+	@Override
+	public ArrayList<String> getValidationRules() {
+		
+		ResultSet resultSet;
+		validationRulesList = new ArrayList<>();
+		query = "select RULE from VALIDATION_RULES WHERE PACKAGE_NAME=? AND ENABLED=?";
+
+		try {
+			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+			statement = connection.prepareStatement(query);
+			statement.setString(1, "QUESTION_MANAGER");
+			statement.setInt(2, 1);
+
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				logger.info(resultSet.getObject("RULE"));
+				rule = resultSet.getObject("RULE").toString();
+				validationRulesList.add(rule);
+			}
+			
+		} catch (SQLException e) {
+			logger.error("facing database server connectivity error");
+		}
+		return validationRulesList;
+	}
 }

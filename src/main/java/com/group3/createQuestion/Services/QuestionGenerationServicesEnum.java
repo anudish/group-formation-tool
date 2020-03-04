@@ -5,5 +5,4 @@ public enum QuestionGenerationServicesEnum {
     NUMERIC,
     MCQS_ONE,
     MCQS_MULTIPLE;
-
 }

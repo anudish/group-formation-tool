@@ -16,14 +16,18 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {DeleteQuestionController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+	DeleteQuestionController.class, GroupmanagerApplication.class
+})
 class DeleteQuestionControllerTest {
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@Test
 	public void deleteQuestionTest() throws Exception {
+
 		this.mockMvc.perform(get("/deleteQuestion").param("questionId", "0"))
-		.andDo(print()).andExpect(status().isOk());
+			.andDo(print()).andExpect(status().isOk());
 	}
 }

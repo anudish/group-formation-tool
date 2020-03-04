@@ -1,26 +1,20 @@
 package com.group3.createQuestion.Services;
 
-
-
 public class MakeQuestionGenerationAbstractFactory implements IMakeQuestionGenerationAbstractFactory {
-    public MakeQuestionGenerationAbstractFactory(){
 
-    }
-    @Override
-    public  IQuestionService makeQuestion(String questionType) {
+	@Override
+	public IQuestionService makeQuestion(String questionType) {
 
+		IQuestionService questionService = null;
 
-        IQuestionService iQuestionService = null;
-        switch (questionType){
-            case "Free Text":
-                iQuestionService =  new freeTextQuestionGenerationService();
-            break;
-            case "Numeric":
-                iQuestionService =  new NumericQuestionGenerationService();
-            break;
-
-        }
-
-        return iQuestionService;
-    }
+		switch (questionType) {
+			case "Free Text":
+				questionService = new freeTextQuestionGenerationService();
+				break;
+			case "Numeric":
+				questionService = new NumericQuestionGenerationService();
+				break;
+		}
+		return questionService;
+	}
 }

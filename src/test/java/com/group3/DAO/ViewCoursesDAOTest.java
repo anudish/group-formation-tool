@@ -26,7 +26,7 @@ class ViewCoursesDAOTest {
 		iDeleteCoursesDAO = dAOInjector.createDeleteCourseDAO();
 		iViewCoursesDAO = dAOInjector.createViewCourseDAO();
 		testCourse = new Course();
-		testCourse.setCourseID("CSCI7777");
+		testCourse.setCourseId("CSCI7777");
 		testCourse.setCourseName("Computational Biotechnology II");
 	}
 
@@ -34,13 +34,13 @@ class ViewCoursesDAOTest {
 	final void testGetAllCourses() {
 		courseList = this.iViewCoursesDAO.getAllCourses();
 		for(Course course:courseList) {
-			assertNotEquals(course.getCourseID(),testCourse.getCourseID());
+			assertNotEquals(course.getCourseId(),testCourse.getCourseId());
 		}
 		this.iAddCourseDAO.addCourse(testCourse);
 		courseList = this.iViewCoursesDAO.getAllCourses();
 		for(Course course:courseList) {
 			if(course.getCourseName().equals(testCourse.getCourseName())) {
-				assertEquals(testCourse.getCourseID(), course.getCourseID());
+				assertEquals(testCourse.getCourseId(), course.getCourseId());
 			}
 			
 		}

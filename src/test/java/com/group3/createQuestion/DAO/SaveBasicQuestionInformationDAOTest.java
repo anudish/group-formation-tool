@@ -1,13 +1,10 @@
 package com.group3.createQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.createQuestion.DAO.DAOInjector;
-import com.group3.createQuestion.DAO.IDAOInjector;
-import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
-import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
-import com.group3.createQuestion.Services.IServiceAbstractFactory;
-import com.group3.createQuestion.Services.ObtainServiceFactoryInstance;
-import com.group3.createQuestion.Services.ServiceAbstractFactory;
+
+import com.group3.createQuestion.DAO.*;
+import com.group3.createQuestion.Services.*;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -21,39 +18,47 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SaveBasicQuestionInformationDAOTest {
-    ISaveBasicQuestionInformationDAO iSaveBasicQuestionInformationDAO;
-    String returnMessageFromDataBase,queryString;
-    Connection connection;
-    public static Logger logger = LogManager.getLogger(SaveBasicQuestionInformationDAOTest.class);
-    @BeforeEach
-    void setUp() {
-        IDAOInjector idaoInjector = DAOInjectorAbstractFactory.getInstance();
-        returnMessageFromDataBase = null;
-        IServiceAbstractFactory iServiceAbstractFactory = ObtainServiceFactoryInstance.getInstance();
-        ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService = iServiceAbstractFactory.createCurrentTimeStampGenerationService();
-        iSaveBasicQuestionInformationDAO = idaoInjector.createSaveBasicQuestionInformationDAO(iCurrentTimeStampGenerationService);
-        
-    }
 
-    @AfterEach
-    void tearDown() {
-        //resource deallocation
-        queryString = "DELETE FROM QUESTION WHERE QUESTION_ID=?";
-        if (returnMessageFromDataBase!=null){
-            try {
-                connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(queryString);
-                preparedStatement.setString(1,returnMessageFromDataBase);
-            } catch (SQLException e) {
-                logger.info("server connectivity problem !! (Check Internet connectivity)");
-            }
-        }
+	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
+	String returnMessageFromDataBase, queryString;
+	Connection connection;
 
-    }
+	private static Logger logger = LogManager.getLogger(SaveBasicQuestionInformationDAOTest.class);
 
-    @Test
-    void saveDetails() {
-        returnMessageFromDataBase = iSaveBasicQuestionInformationDAO.saveDetailsAndReturnId("Programming Capacity","How many hours you can spent on programming per week ?","Free text");
-        assertNotNull(returnMessageFromDataBase);
-    }
+	@BeforeEach
+	void setUp() {
+
+		IDAOInjector idaoInjector = DAOInjector.instance();
+		IServiceAbstractFactory serviceAbstractFactory;
+		ICurrentTimeStampGenerationService currentTimeStampGenerationService;
+
+		returnMessageFromDataBase = null;
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();
+		saveBasicQuestionInformationDAO = idaoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
+
+	}
+
+	@AfterEach
+	void tearDown() {
+
+		PreparedStatement statement;
+		queryString = "DELETE FROM QUESTION WHERE QUESTION_ID=?";
+		if (returnMessageFromDataBase != null) {
+			try {
+				connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+				statement = connection.prepareStatement(queryString);
+				statement.setString(1, returnMessageFromDataBase);
+			} catch (SQLException e) {
+				logger.error("Server connectivity problem ! (Check Internet connectivity)");
+			}
+		}
+	}
+
+	@Test
+	void saveDetails() {
+
+		returnMessageFromDataBase = saveBasicQuestionInformationDAO.saveDetailsAndReturnId("Programming Capacity", "How many hours you can spent on programming per week ?", "Free text");
+		assertNotNull(returnMessageFromDataBase);
+	}
 }

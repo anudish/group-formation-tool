@@ -1,8 +1,7 @@
 package com.group3.createQuestion.DAO;
 
-
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.createQuestion.BusinessModels.questionTypes;
+import com.group3.createQuestion.BusinessModels.QuestionTypes;
 import com.group3.createQuestion.DAO.DAOInjector;
 import com.group3.createQuestion.DAO.IDAOInjector;
 import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
@@ -21,46 +20,51 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RetrieveQuestionTypesDAOTest {
-    IRetrieveQuestionTypesDAO iRetrieveQuestionTypesDAO;
-    ArrayList<questionTypes> possibleQuestionType;
-    Connection connection;
-    String queryString,testDatabaseEntry;
-    public static Logger logger;
-    @BeforeEach
-    void setUp() {
-        logger = LogManager.getLogger(RetrieveQuestionTypesDAOTest.class);
-        IDAOInjector idaoInjector = DAOInjectorAbstractFactory.getInstance();
-        iRetrieveQuestionTypesDAO = idaoInjector.createRetrieveQuestionTypesDAO();
-        connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-        queryString = "INSERT INTO QUESTION_TYPE(TYPES) VALUES(?)";
-        testDatabaseEntry = "EntryQuestionTypeCheck";
-        try {
-            //allocate testable resource
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
-            preparedStatement.setString(1,testDatabaseEntry);
 
-        } catch (SQLException e) {
-            logger.info("server connectivity problem !! (Check Internet connectivity)");
-        }
+	IDAOInjector idaoInjector;
+	IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
+	ArrayList<QuestionTypes> possibleQuestionType;
 
+	Connection connection;
+	PreparedStatement statement;
+	String queryString, testDatabaseEntry;
 
-    }
+	public static Logger logger = LogManager.getLogger(RetrieveQuestionTypesDAOTest.class);;
 
-    @AfterEach
-    void tearDown() {
-        //Deallocate testable resource
-        queryString = "DELETE FROM QUESTION_TYPE WHERE TYPES=?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
-            preparedStatement.setString(1,testDatabaseEntry);
-        } catch (SQLException e) {
-            logger.info("server connectivity problem !! (Check Internet connectivity)");
-        }
-    }
+	@BeforeEach
+	void setUp() {
 
-    @Test
-    void getQuestionTypes() {
-        possibleQuestionType = this.iRetrieveQuestionTypesDAO.getQuestionTypes();
-        assertNotNull(possibleQuestionType.size() > 0);
-    }
+		idaoInjector = DAOInjector.instance();
+		retrieveQuestionTypesDAO = idaoInjector.createRetrieveQuestionTypesDAO();
+		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+		queryString = "INSERT INTO QUESTION_TYPE(TYPES) VALUES(?)";
+		testDatabaseEntry = "EntryQuestionTypeCheck";
+
+		try {
+			statement = connection.prepareStatement(queryString);
+			statement.setString(1, testDatabaseEntry);
+
+		} catch (SQLException e) {
+			logger.error("Server connectivity problem! (Check Internet connectivity)");
+		}
+	}
+
+	@AfterEach
+	void tearDown() {
+
+		queryString = "DELETE FROM QUESTION_TYPE WHERE TYPES=?";
+		try {
+			statement = connection.prepareStatement(queryString);
+			statement.setString(1, testDatabaseEntry);
+		} catch (SQLException e) {
+			logger.error("Server connectivity problem! (Check Internet connectivity)");
+		}
+	}
+
+	@Test
+	void getQuestionTypes() {
+
+		possibleQuestionType = this.retrieveQuestionTypesDAO.getQuestionTypes();
+		assertNotNull(possibleQuestionType.size() > 0);
+	}
 }

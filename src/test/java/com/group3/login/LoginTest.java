@@ -24,75 +24,73 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GroupmanagerApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {LoginTest.class, GroupmanagerApplication.class})
 public class LoginTest {
-	
-	  @Autowired
-	  private WebApplicationContext context;
 
-	  private MockMvc mockMvc;
+	@Autowired
+	private WebApplicationContext context;
 
-	  @Before
-	  public void setup() {
-	    mockMvc = MockMvcBuilders
-	            .webAppContextSetup(context)
-	            .apply(springSecurity())
-	            .alwaysDo(print())
-	            .build();
-	  }
+	private MockMvc mockMvc;
 
-	  @Test
-	  public void loginPageShowingForAllUser() throws Exception {
-	    mockMvc
-	            .perform(get("/login"))
-	            .andExpect(status().isOk());
-	  }
+	@Before
+	public void setup() {
+		mockMvc = MockMvcBuilders
+			.webAppContextSetup(context)
+			.apply(springSecurity())
+			.alwaysDo(print())
+			.build();
+	}
 
-	  @Test
-	  public void adminCanLoginandLogout() throws Exception {
-	    mockMvc
-	            .perform(formLogin().userParameter("email").user("admin@dal.ca").password("admin"))
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("adminMainPageRequest"))
-	            .andExpect(authenticated().withUsername("admin@dal.ca"));
+	@Test
+	public void loginPageShowingForAllUser() throws Exception {
+		mockMvc
+			.perform(get("/login"))
+			.andExpect(status().isOk());
+	}
 
-	    mockMvc
-	            .perform(logout())
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("/login?logout"));
-	  }
+	@Test
+	public void adminCanLoginandLogout() throws Exception {
+		mockMvc
+			.perform(formLogin().userParameter("email").user("admin@dal.ca").password("admin"))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("adminMainPageRequest"))
+			.andExpect(authenticated().withUsername("admin@dal.ca"));
 
+		mockMvc
+			.perform(logout())
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("/login?logout"));
+	}
 
-	  @Test
-	  public void invalidCredentialsShowingError() throws Exception {
-	    String loginErrorUrl = "/login?error";
-	    mockMvc
-	            .perform(formLogin().password("invalid"))
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl(loginErrorUrl))
-	            .andExpect(unauthenticated());
+	@Test
+	public void invalidCredentialsShowingError() throws Exception {
+		String loginErrorUrl = "/login?error";
+		mockMvc
+			.perform(formLogin().password("invalid"))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl(loginErrorUrl))
+			.andExpect(unauthenticated());
 
-	    mockMvc
-	            .perform(get(loginErrorUrl))
-	            .andExpect(content().string(containsString("Invalid username or password.")));
-	  }
-	  
-	  @Test
-	  public void afterLoginRedirectingToCourseListForGuest() throws Exception {
-	    mockMvc
-	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
-	            .andExpect(authenticated());
-	  }
-	  
-	  @Test
-	  public void afterLoginRedirectingToAnotherCourseListForOtherUsers() throws Exception {
-	    mockMvc
-	            .perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
-	            .andExpect(authenticated());
-	  }
+		mockMvc
+			.perform(get(loginErrorUrl))
+			.andExpect(content().string(containsString("Invalid username or password.")));
+	}
 
+	@Test
+	public void afterLoginRedirectingToCourseListForGuest() throws Exception {
+		mockMvc
+			.perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
+			.andExpect(authenticated());
+	}
+
+	@Test
+	public void afterLoginRedirectingToAnotherCourseListForOtherUsers() throws Exception {
+		mockMvc
+			.perform(formLogin().userParameter("email").user("sg@dal.ca").password("stevengerrard"))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("courseAdmin?emailId=sg@dal.ca"))
+			.andExpect(authenticated());
+	}
 }

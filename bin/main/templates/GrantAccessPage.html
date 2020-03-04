@@ -44,7 +44,7 @@
     <select name="CourseID" >
     <option>Select courses</option>
     <div th:each="course : ${courseList}">
-    <div><option th:text = "${course.getCourseID()}+'-'+|${course.getCourseName()}|"></option></div>
+    <div><option th:text = "${course.getCourseId()}+'-'+|${course.getCourseName()}|"></option></div>
    
     
     </div>

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDAOInjector;
+import com.group3.forgotPassword.DAO.*;
+import com.group3.forgotPassword.Services.*;
 
 @Controller
 public class forgetPasswordController {
@@ -13,24 +13,27 @@ public class forgetPasswordController {
 	String generated_code;
 	String email;
 	
+	IDAOInjector daoInjector;
+	IEmailInjector emailInjector;
+	IServiceAbstractFactory serviceAbstractFactory;
+	IVerificationCode verificationCodeGenerator;
 	IResetCodeManager resetCodeManager;
 	IUpdatePasswordManager updatePasswordManager;
-	IDAOInjector daoInjector;
-	IVerificationCode verificationCodeGenerator;
-	IEmailInjector emailInjector;
-	
 	
 	public forgetPasswordController() {
-		daoInjector = new DAOInjector();
-		emailInjector = new EmailInjector();
-		verificationCodeGenerator = new VerificationCode();
+		
+		daoInjector = DAOInjector.instance();
+		emailInjector = EmailInjector.instance();
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		verificationCodeGenerator = serviceAbstractFactory.createVerificationCodeGenerator();
+		resetCodeManager = serviceAbstractFactory.createResetCodeManager(daoInjector, emailInjector, verificationCodeGenerator);
+		updatePasswordManager = serviceAbstractFactory.createUpdatePasswordManager(daoInjector);
 	}
 
 
 	@RequestMapping("/enterEmail")
 	public String enterEmail()
 	{
-		//call EnterEmail.html
 		return "EnterEmail";
 	}
 	
@@ -39,17 +42,10 @@ public class forgetPasswordController {
 	{
 		final int code_length = 8;
 		this.email = email;
-
-		ModelAndView mv;
-		resetCodeManager = new ResetCodeManager(daoInjector,emailInjector, verificationCodeGenerator); 
-		
-		//check if user exist or not
+		ModelAndView mv;		
 		mv = resetCodeManager.checkEmailIdExistance(email);
-		
-		//generate random length code and email id to user
 		generated_code = resetCodeManager.generateCode(code_length);
 		resetCodeManager.sendCodeEmail(email);
-		
 		return mv;
 	}
 	
@@ -57,13 +53,8 @@ public class forgetPasswordController {
 	public ModelAndView checkCode(String code_input)
 	{
 		ModelAndView mv;
-		
 		System.out.println("UserCode: "+code_input);
 		System.out.println("GeneratedCode: "+generated_code);
-		
-		updatePasswordManager = new UpdatePasswordManager(daoInjector);
-		
-		//match the code enter by user with system generated code
 		mv = updatePasswordManager.compareCode(code_input, generated_code);
 		return mv;
 	}
@@ -73,7 +64,6 @@ public class forgetPasswordController {
 	{
 		System.out.println("Password: "+password);
 		System.out.println("email for Password to update: "+email);
-		updatePasswordManager = new UpdatePasswordManager(daoInjector);
 		updatePasswordManager.updatePassword(email, password);
 		return "login";
 	}

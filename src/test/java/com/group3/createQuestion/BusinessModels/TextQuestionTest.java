@@ -10,14 +10,15 @@ import com.group3.createQuestion.BusinessModels.TextQuestion;
 class TextQuestionTest {
 
 	TextQuestion text;
-	
+
 	@BeforeEach
 	public void init() {
 		text = new TextQuestion();
 	}
-	
+
 	@Test
 	void addQuestionTest() {
+
 		text.addQuestion("Test Title", "Test Text", "Test Type");
 		assertTrue(text.getQuestionTitle().equals("Test Title"));
 		assertTrue(text.getQuestionText().equals("Test Text"));

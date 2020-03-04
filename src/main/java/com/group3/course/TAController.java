@@ -2,9 +2,7 @@ package com.group3.course;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,101 +11,99 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Student;
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDAOInjector;
-import com.group3.DAO.ILoginDAO;
-import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.login.LoginAuthenticationSuccessHandler;
+import com.group3.login.DAO.ILoginDAO;
+import com.group3.login.Services.LoginAuthenticationSuccessHandler;
+
+import com.group3.course.DAO.DAOAbstractFactory;
+import com.group3.course.DAO.IDAOAbstractFactory;
+import com.group3.course.Services.*;
 
 @Controller
 public class TAController {
 
-	IDAOInjector daoInjector;
+	IServiceAbstractFactory serviceAbstractFactory;
+	IDAOAbstractFactory daoInjector;
+	com.group3.login.DAO.IDAOInjector loginDAOInjector;
 	ITAManager taManager;
 	ICourseManager courseManager;
 	ILoginDAO loginDAO;
-	CourseModel courseModel;
-	
+	Course courseModel;
 	Connection conn;
 	String sql;
+	PreparedStatement statement;
 
 	private static Logger logger = LogManager.getLogger(TAController.class);
-	PreparedStatement statement;
-	
+
 	public TAController() {
-		daoInjector = new DAOInjector();
-		taManager = new TAManager(daoInjector);
-		courseModel = new CourseModel();
-		courseManager = new CourseManager(daoInjector);
-		loginDAO = daoInjector.createLoginDAO();
+		
+		daoInjector = DAOAbstractFactory.instance();
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		loginDAOInjector = com.group3.login.DAO.DAOInjector.instance();
+		loginDAO = loginDAOInjector.createLoginDAO();
+		taManager = serviceAbstractFactory.createTAManager(daoInjector);
+		courseManager = serviceAbstractFactory.createCourseManager(daoInjector);
+		courseModel = new Course();
 	}
-	
-	///////////////////////////////////////////TA ASSIGNMENT//////////////////////////////////////////////
-	
-	//show all the students
+
 	@RequestMapping("/showAllStudents")
 	public ModelAndView getAllStudents() {
+
 		courseModel.setCourseId(CourseController.courseId);
 		courseModel.setCourseName(CourseController.courseName);
 		logger.info("SHOW ALL STUDENTS");
 
 		ArrayList<Student> rows = taManager.getAllStudents();
-				
+
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("studentList",rows);
-		mv.addObject("courseInfo",courseModel);
+		mv.addObject("studentList", rows);
+		mv.addObject("courseInfo", courseModel);
 		mv.setViewName("studentList.html");
 		return mv;
-	};
-	
-	//search for a student
-		@RequestMapping("/searchStudent")
-		public ModelAndView searchStudent(@RequestParam String studentMailId) {
-			
-			logger.info("SEARCH STUDENT: "+studentMailId);
-			
-			ArrayList<Student> rows = taManager.getStudentByMailId(studentMailId);
-			logger.info(rows);
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("studentList",rows);
-			mv.addObject("courseInfo",courseModel);
-			mv.setViewName("studentList.html");
-			return mv;
-		};
-	
-	//assign TAship
+	}
+
+	@RequestMapping("/searchStudent")
+	public ModelAndView searchStudent(@RequestParam String studentMailId) {
+
+		logger.info("SEARCH STUDENT: " + studentMailId);
+
+		ArrayList<Student> rows = taManager.getStudentByMailId(studentMailId);
+		logger.info(rows);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("studentList", rows);
+		mv.addObject("courseInfo", courseModel);
+		mv.setViewName("studentList.html");
+		return mv;
+	}
+
 	@RequestMapping("/addTA")
 	public ModelAndView addStudentAsTA(@RequestParam String studentMailId) {
-		
-		logger.info("ADD TA: "+studentMailId);
-		
+
+		logger.info("ADD TA: " + studentMailId);
+
 		taManager.addTA(studentMailId);
-		
+
 		logger.info("TAship assigned");
-		
+
 		String email = LoginAuthenticationSuccessHandler.email;
-
 		String role = loginDAO.getRoleByEmail(email);
+		ArrayList<Course> rows = new ArrayList<Course> ();
 
-		ArrayList<CourseModel> rows = new ArrayList<CourseModel>();
 		ModelAndView mv = new ModelAndView();
-		if(role.equals("Guest")) {
+		if (role.equals("Guest")) {
 			rows = courseManager.getCoursesForGuest();
-			mv.addObject("courseInfo",rows);
+			mv.addObject("courseInfo", rows);
 			mv.setViewName("showCoursesGuest.html");
-		}else if(role.equals("Instructor")){
+		} else if (role.equals("Instructor")) {
 			rows = courseManager.getCoursesByInstructorMailId(email);
-			mv.addObject("courseInfo",rows);
+			mv.addObject("courseInfo", rows);
 			mv.setViewName("showCourses.html");
-		}
-		else if(role.equals("TA") || role.equals("Student")){
+		} else if (role.equals("TA") || role.equals("Student")) {
 			rows = courseManager.getCoursesByTAMailId(email);
-			mv.addObject("courseInfo",rows);
+			mv.addObject("courseInfo", rows);
 			mv.setViewName("showCourses.html");
 		}
-		
 		return mv;
-
-	};
+	}
 }

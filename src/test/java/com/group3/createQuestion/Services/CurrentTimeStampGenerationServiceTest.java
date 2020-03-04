@@ -3,6 +3,7 @@ package com.group3.createQuestion.Services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,24 +13,24 @@ import java.sql.Timestamp;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CurrentTimeStampGenerationServiceTest {
-    private IServiceAbstractFactory iServiceAbstractFactory;
-    private ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService;
-    public static Logger logger = LogManager.getLogger(CurrentTimeStampGenerationServiceTest.class);
-    @BeforeEach
-    void setUp() {
-        iServiceAbstractFactory = ObtainServiceFactoryInstance.getInstance();
-        iCurrentTimeStampGenerationService = iServiceAbstractFactory.createCurrentTimeStampGenerationService();
-    }
 
-    @AfterEach
-    void tearDown() {
-    }
+	private IServiceAbstractFactory serviceAbstractFactory;
+	private ICurrentTimeStampGenerationService currentTimeStampGenerationService;
+	public static Logger logger = LogManager.getLogger(CurrentTimeStampGenerationServiceTest.class);
 
-    @Test
-    void returnCurrentTimeStamp() {
-        Timestamp timestamp = iCurrentTimeStampGenerationService.returnCurrentTimeStamp();
-        logger.info(timestamp);
-        assertFalse(timestamp==null);
-        assertTrue(timestamp!=null);
-    }
+	@BeforeEach
+	void setUp() {
+
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();
+	}
+
+	@Test
+	void returnCurrentTimeStamp() {
+
+		Timestamp timestamp = currentTimeStampGenerationService.returnCurrentTimeStamp();
+		logger.info(timestamp);
+		assertFalse(timestamp == null);
+		assertTrue(timestamp != null);
+	}
 }

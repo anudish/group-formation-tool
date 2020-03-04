@@ -25,7 +25,7 @@ class DeleteCourseServiceTest {
 		//fail("Not yet implemented"); // TODO
 		course = new Course();
 		//Failing test ()
-		course.setCourseID("CSCI7000");
+		course.setCourseId("CSCI7000");
 		course.setCourseName("Software Architecture");
 		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
 	    String feedBackString = iDeleteCourseService.deleteCourse();
@@ -34,11 +34,11 @@ class DeleteCourseServiceTest {
 	    
 	    
 	    //Passing Test 
-	    course.setCourseID("CSCI7800");   //Course exist 
+	    course.setCourseId("CSCI7800");   //Course exist 
 		course.setCourseName("Advanced Algorithms"); 
 		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
 		feedBackString = iDeleteCourseService.deleteCourse();
-	    expectedResponse = course.getCourseName()+" ("+course.getCourseID()+") "+" is deleted sucessfully ";
+	    expectedResponse = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
 	    assertTrue(expectedResponse.equals(feedBackString)==true);
 	}
 

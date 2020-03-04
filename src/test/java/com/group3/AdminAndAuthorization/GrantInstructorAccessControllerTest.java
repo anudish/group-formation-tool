@@ -63,8 +63,8 @@ class GrantInstructorAccessControllerTest {
 		String firstName = userlist.get(0).getFirstName();
 		String email = userlist.get(0).getEmail();
 		String role = "Instructor";
-		String expectedOutcome = "Instructor Assigned for "+ courseList.get(0).getCourseID();
-		String CourseId = courseList.get(0).getCourseID()+"-"+courseList.get(0).getCourseName();
+		String expectedOutcome = "Instructor Assigned for "+ courseList.get(0).getCourseId();
+		String CourseId = courseList.get(0).getCourseId()+"-"+courseList.get(0).getCourseName();
 		String previousRole = role;
 		
 		if(userlist.get(0).getUserRole().equalsIgnoreCase(role)) {
@@ -82,7 +82,7 @@ class GrantInstructorAccessControllerTest {
 		.andExpect(model().attributeExists("userlist"))
 		.andExpect(model().attribute("feedbackMessage", expectedOutcome));
 		
-		expectedOutcome = firstName+" "+lastName+" "+"is already an instructor for the course "+courseList.get(0).getCourseID();
+		expectedOutcome = firstName+" "+lastName+" "+"is already an instructor for the course "+courseList.get(0).getCourseId();
 		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseID",CourseId)).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"))
 		.andExpect(model().attributeExists("userlist"))

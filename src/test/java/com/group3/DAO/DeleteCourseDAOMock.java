@@ -12,15 +12,15 @@ public class DeleteCourseDAOMock implements IDeleteCourseDAO {
 		feedBackMessage = new String();
 		courseList = new ArrayList<>();
 		Course course = new Course();
-		course.setCourseID("CSCI7800");
+		course.setCourseId("CSCI7800");
 		course.setCourseName("Advanced Algorithms");
 		courseList.add(course);
 		course = new Course();
-		course.setCourseID("CSCI5308");
+		course.setCourseId("CSCI5308");
 		course.setCourseName("Quality Assurance");
 		courseList.add(course);
 		course = new Course();
-		course.setCourseID("CSCI8000");
+		course.setCourseId("CSCI8000");
 		course.setCourseName("Pattern Recognition");
 		courseList.add(course);
 		
@@ -30,9 +30,9 @@ public class DeleteCourseDAOMock implements IDeleteCourseDAO {
 		// TODO Auto-generated method stub
 		//System.out.println("CC" +courseList.size());
 		for (Course course1:courseList) {
-			if(course.getCourseID().equals(course1.getCourseID())) {
+			if(course.getCourseId().equals(course1.getCourseId())) {
 			    
-			     feedBackMessage = course.getCourseName()+" ("+course.getCourseID()+") "+" is deleted sucessfully ";
+			     feedBackMessage = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
 			     courseList.remove(course1);
 			     break;
 			}

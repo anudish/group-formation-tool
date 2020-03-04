@@ -29,7 +29,7 @@ class AddCourseServiceTest {
 	final void testAddCourseService() {
 		
 		Course course = new Course();
-	    course.setCourseID("CS135"); //False Pattern for course
+	    course.setCourseId("CS135"); //False Pattern for course
 	    course.setCourseName("Software Engineering");
 	    feedbackMessage =  iAddCourseService.insertCourseDetails(course, iCourseInputValidation);
 		String expectedErrorMessage = "Invalid Course Id (It Should Like : csci5308)";
@@ -37,19 +37,19 @@ class AddCourseServiceTest {
 		
 		 feedbackMessage.clear();
 		// Check for existing course
-		course.setCourseID("CSCI5308");
+		course.setCourseId("CSCI5308");
 		course.setCourseName("Quality Assurance");
 		
-		String expectedResponse = "Course Name  "+course.getCourseName()+" with "+"Course ID "+course.getCourseID()+" already exists !! ";;
+		String expectedResponse = "Course Name  "+course.getCourseName()+" with "+"Course ID "+course.getCourseId()+" already exists !! ";;
 		feedbackMessage =  iAddCourseService.insertCourseDetails(course, iCourseInputValidation);
 		
 		assertTrue(feedbackMessage.get(0).equals(expectedResponse));
 		 feedbackMessage.clear();
 		//successful entry
-		course.setCourseID("CSCI6707");
+		course.setCourseId("CSCI6707");
 		course.setCourseName("Advanced Game Development");
 		feedbackMessage =  iAddCourseService.insertCourseDetails(course, iCourseInputValidation);
-		expectedResponse   = course.getCourseName() + " with "+course.getCourseID()+" created successfully";
+		expectedResponse   = course.getCourseName() + " with "+course.getCourseId()+" created successfully";
 		System.out.println(" CC : "+feedbackMessage.get(0));
 		System.out.println(expectedResponse);
 		assertTrue(feedbackMessage.get(0).equals(expectedResponse));

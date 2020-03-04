@@ -28,7 +28,7 @@ class CourseInputValidationTest {
 		CourseId = "CSC6400";
 		CourseName = "Virtual Reality";
 		
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
 		
 		assertTrue(courseInputValidation.validateInputCourse(course).get(0).equals(CourseIdErrorMesssage),CourseIdErrorMesssage);
@@ -37,7 +37,7 @@ class CourseInputValidationTest {
 		//Passing test case for Valid CourseId 
 		CourseId = "CSCI5308";
 		CourseName = "QA";
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
 		//System.out.println("CC" +courseInputValidation.validateInputCourse(course).get(0));
 		
@@ -47,7 +47,7 @@ class CourseInputValidationTest {
 		//Failing test case for Invalid CourseName
 		CourseId = "CSCI5308";
 		CourseName = "12345QA";
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
 		assertTrue(courseInputValidation.validateInputCourse(course).get(0).equals(CourseNameErrorMesssage),CourseNameErrorMesssage);
 		
@@ -55,7 +55,7 @@ class CourseInputValidationTest {
 		//Passing Test Case for Valid CourseName
 		CourseId = "CSCI5308";
 		CourseName = "Quality Assurance";
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
 		assertTrue(courseInputValidation.validateInputCourse(course).size()==0,"No Error condition");
 		assertFalse(courseInputValidation.validateInputCourse(course).size()> 0,"No Error condition");

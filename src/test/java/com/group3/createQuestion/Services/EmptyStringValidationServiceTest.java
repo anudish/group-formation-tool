@@ -7,22 +7,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmptyStringValidationServiceTest {
-    EmptyStringValidationService emptyStringValidationService;
-    @BeforeEach
-    void setUp() {
-        emptyStringValidationService = new EmptyStringValidationService();
-    }
 
-    @AfterEach
-    void tearDown() {
-    }
+	EmptyStringValidationService emptyStringValidationService;
 
-    @Test
-    void isValid() {
-        String emptyString= new String();
-        assertFalse(emptyStringValidationService.isValid(emptyString));
+	@BeforeEach
+	void setUp() {
 
-        String nonEmptyString="Hello I am Non empty ! geeks";
-        assertTrue(emptyStringValidationService.isValid(nonEmptyString));
-    }
+		emptyStringValidationService = new EmptyStringValidationService();
+	}
+
+	@Test
+	void isValid() {
+
+		String emptyString = new String();
+		assertFalse(emptyStringValidationService.isValid(emptyString));
+		String nonEmptyString = "Hello I am Non empty ! geeks";
+		assertTrue(emptyStringValidationService.isValid(nonEmptyString));
+	}
 }

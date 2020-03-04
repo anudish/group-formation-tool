@@ -24,7 +24,7 @@ class AddCourseDAOTest {
 		course = new Course();
 		 CourseName = "Virtual Reality";
 	     CourseId = "CSCI6748";
-		course.setCourseID(CourseId);
+		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
   	    DAOInjector daoinjector = new DAOInjector();
   	    iaddCourseDAO  = daoinjector.createAddCourseDAO();
@@ -58,8 +58,8 @@ class AddCourseDAOTest {
 	@Test
 	final void testIsCourseExist() {
 		
-		String expectedOutcome = "Course Name  "+courseList.get(0).getCourseName()+" with "+"Course ID "+courseList.get(0).getCourseID()+" already exists !! ";
-	    assertTrue(this.iaddCourseDAO.isCourseExist(courseList.get(0).getCourseID()).equals(expectedOutcome));
+		String expectedOutcome = "Course Name  "+courseList.get(0).getCourseName()+" with "+"Course ID "+courseList.get(0).getCourseId()+" already exists !! ";
+	    assertTrue(this.iaddCourseDAO.isCourseExist(courseList.get(0).getCourseId()).equals(expectedOutcome));
 	}
 
 }

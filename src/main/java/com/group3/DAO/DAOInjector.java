@@ -1,5 +1,20 @@
 package com.group3.DAO;
 
+import com.group3.course.DAO.CourseDAO;
+import com.group3.course.DAO.ICourseDAO;
+import com.group3.course.DAO.IInstructorDAO;
+import com.group3.course.DAO.IStudentDAO;
+import com.group3.course.DAO.ITADAO;
+import com.group3.course.DAO.InstructorDAO;
+import com.group3.course.DAO.StudentDAO;
+import com.group3.course.DAO.TADAO;
+import com.group3.forgotPassword.DAO.IUserPasswordDAO;
+import com.group3.forgotPassword.DAO.UserPasswordDAO;
+import com.group3.login.DAO.ILoginDAO;
+import com.group3.login.DAO.LoginDao;
+import com.group3.signup.DAO.IUserDAO;
+import com.group3.signup.DAO.UserDAO;
+
 public class DAOInjector implements IDAOInjector {
 
 	static IAddCourseDAO addCourseDAO;

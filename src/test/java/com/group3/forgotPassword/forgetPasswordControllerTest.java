@@ -1,11 +1,12 @@
 package com.group3.forgotPassword;
 
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,60 +20,53 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
-
-
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {forgetPasswordController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+	forgetPasswordController.class, GroupmanagerApplication.class
+})
 class forgetPasswordControllerTest {
+
+	private static Logger logger = LogManager.getLogger(forgetPasswordController.class);
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@Test
-	public void enterEmailTest()
-	{
+	public void enterEmailTest() {
 		try {
 			this.mockMvc.perform(get("/enterEmail")).andDo(print()).andExpect(status().isOk());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
-	
-	@Test
-	public void enterCode()
-	{
-		try {
-			this.mockMvc.perform(post("/enterCode").param("email","falgun@dal.ca")).andDo(print()).andExpect(status().isOk())
-			.andExpect(model().attributeExists("status"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-	}
-	
 	@Test
-	public void checkCode()
-	{
+	public void enterCode() {
 		try {
-			this.mockMvc.perform(post("/checkCode").param("code_input","TmpCode")).andDo(print()).andExpect(status().isOk())
-			.andExpect(model().attributeExists("invalidcode"));
+			this.mockMvc.perform(post("/enterCode").param("email", "falgun@dal.ca")).andDo(print()).andExpect(status().isOk())
+				.andExpect(model().attributeExists("status"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
-	
+
 	@Test
-	public void passwordUpdator()
-	{			
+	public void checkCode() {
 		try {
-			this.mockMvc.perform(post("/checkCode").param("password","tmppassword")).andDo(print()).andExpect(status().isOk());
+			this.mockMvc.perform(post("/checkCode").param("code_input", "TmpCode")).andDo(print()).andExpect(status().isOk())
+				.andExpect(model().attributeExists("invalidcode"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
+		}
+	}
+
+	@Test
+	public void passwordUpdator() {
+		try {
+			this.mockMvc.perform(post("/checkCode").param("password", "tmppassword")).andDo(print()).andExpect(status().isOk());
+		} catch (Exception e) {
+			logger.error(e);
 		}
 	}
 }

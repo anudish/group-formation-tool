@@ -25,15 +25,15 @@ public class ViewCoursesDAOMock implements IViewCoursesDAO {
 	public void setCourses() {
 		
 		Course course = new Course();
-		course.setCourseID("CSCI7800");
+		course.setCourseId("CSCI7800");
 		course.setCourseName("Advanced Algorithms");
 		courseList.add(course);
 		course = new Course();
-		course.setCourseID("CSCI5308");
+		course.setCourseId("CSCI5308");
 		course.setCourseName("Quality Assurance");
 		courseList.add(course);
 		course = new Course();
-		course.setCourseID("CSCI8000");
+		course.setCourseId("CSCI8000");
 		course.setCourseName("Pattern Recognition");
 		courseList.add(course);
 	}

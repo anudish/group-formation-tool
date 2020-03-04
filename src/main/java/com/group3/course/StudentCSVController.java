@@ -13,61 +13,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDAOInjector;
+import com.group3.BusinessModels.Course;
+import com.group3.course.DAO.DAOAbstractFactory;
+import com.group3.course.DAO.IDAOAbstractFactory;
+import com.group3.course.Services.*;
 
 @Controller
 public class StudentCSVController {
-	
+
+	IDAOAbstractFactory daoInjector;
+	IServiceAbstractFactory serviceAbstractFactory;
 	IStudentManager studentManager;
-	IDAOInjector daoFactory;
-	IEmailInjector emailFactory;
+	IEmailInjector emailInjector;
 	IPassword passwordGenerator;
-	CourseModel courseModel;
-	
+	Course courseModel;
+	private static Logger logger = LogManager.getLogger(StudentCSVController.class);
+
 	public StudentCSVController() {
-		daoFactory = new DAOInjector();
-		emailFactory = new EmailInjector();
-		passwordGenerator = new PasswordGenerator();
-		studentManager = new StudentManager(daoFactory, emailFactory, passwordGenerator);
+		
+		daoInjector = DAOAbstractFactory.instance();
+		emailInjector = EmailInjector.instance();
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		passwordGenerator = serviceAbstractFactory.createPasswordGenerator();
+		studentManager = serviceAbstractFactory.createStudentManager(daoInjector, emailInjector, passwordGenerator);
 	}
 
-	private static Logger logger = LogManager.getLogger(StudentCSVController.class);
-	
-	/////////////////////////////////////////STUDENT ENROLLMENT//////////////////////////////////////////////
-	
-	//Display the webpage that lets the TAs and instructors upload the CSV file
 	@RequestMapping("/importCSV")
 	public ModelAndView showImportXMLPage() {
-		
-		logger.info("CSV IMPORT");
-		
+
 		ModelAndView mv = new ModelAndView();
-//		mv.addObject("courseId",CourseController.courseId);
-//		mv.addObject("courseName",CourseController.courseName);
-		courseModel = new CourseModel();
+		courseModel = new Course();
 		courseModel.setCourseId(CourseController.courseId);
 		courseModel.setCourseName(CourseController.courseName);
-		mv.addObject("courseInfo",courseModel);
+		mv.addObject("courseInfo", courseModel);
 		mv.setViewName("importCSV");
 		return mv;
 	}
-	
-	//Handle the CSV file that gets uploaded
-	@PostMapping("/upload-csv-file")
-    public ModelAndView uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
-		
-		logger.info("UPLOAD CSV");
-		
-        ArrayList<List<String>> rows = studentManager.addStudentsFromCSV(file);        
-        
-        studentManager.addStudentToCourse(rows);
-        
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("studentList",rows);
-        mv.setViewName("showImportedStudents.html");
-        return mv;
-	}
 
-	
+	@PostMapping("/upload-csv-file")
+	public ModelAndView uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
+
+		ArrayList<List<String>> rows = studentManager.addStudentsFromCSV(file);
+		studentManager.addStudentToCourse(rows);
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("studentList", rows);
+		mv.setViewName("showImportedStudents.html");
+		return mv;
+	}
 }

@@ -3,32 +3,42 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.DAO.IUserDAO;
-import com.group3.DAO.UserDAO;
-
+import com.group3.login.Services.LoginAuthenticationSuccessHandler;
+import com.group3.signup.DAO.*;
+import com.group3.signup.Services.*;
 
 @Controller
 public class UserDetailsController {
 
 	Connection conn;
 	PreparedStatement statement;
+	IDAOInjector daoInjector;
+	IServiceAbstractFactory serviceAbstractFactory;
 	IUserDAO userDAO;
-	GuestModel guestModel;
 	IUserDetailsService userService;
+	GuestModel guestModel;
 
-	public UserDetailsController() {
-		// TODO Auto-generated constructor stub
+	private static Logger logger = LogManager.getLogger(UserDetailsController.class);
 	
+	public UserDetailsController() {
+		
+		daoInjector = DAOInjector.instance();
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		userDAO = daoInjector.createUserDAO();
+		userService = serviceAbstractFactory.creatUserDetailsService(userDAO);
 	}
-	// Get User Details
+
 	@RequestMapping("/signUp")
 	public ModelAndView gotoSignUpPage() {
+		
 		return new ModelAndView(UserVerificationParameters.SIGN_UP);
 	}
 
@@ -38,13 +48,11 @@ public class UserDetailsController {
 			@RequestParam("psw-repeat") String pswRpeat) throws SQLException, NullPointerException {
 
 		ModelAndView mv = new ModelAndView();
-
-		try {
-			userDAO = new UserDAO();
-			
+		String output;
+		try {	
 			guestModel = new GuestModel(lastName, firstName, email, UserVerificationParameters.GUEST_USER, psw);
-			userService = new UserDetailsService(userDAO);
-			String output = userService.saveUser(lastName, firstName, email, psw, pswRpeat);
+			output = userService.saveUser(lastName, firstName, email, psw, pswRpeat);
+			
 			if (output.contains(UserVerificationParameters.INVALID_PASSWORD_EMAIL)) {
 				mv.addObject(UserVerificationParameters.MAIL_VALIDITY, UserVerificationParameters.VALID_EMAIL_MESSAGE);
 				mv.addObject(UserVerificationParameters.STATUS, UserVerificationParameters.VALID_PASSWORD_MESSAGE);
@@ -66,14 +74,14 @@ public class UserDetailsController {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return mv;
 	}
 	
 	@RequestMapping("/login")
 	public ModelAndView getLoginPage(ModelAndView mv) {
+		
 		return new ModelAndView(UserVerificationParameters.LOGIN);
 	}
 }

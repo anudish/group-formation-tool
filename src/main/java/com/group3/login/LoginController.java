@@ -1,12 +1,6 @@
 package com.group3.login;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import com.group3.BusinessModels.LoginForm;
-import com.group3.DAO.LoginDao;
 
 @Controller
 public class LoginController {

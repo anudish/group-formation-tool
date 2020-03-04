@@ -5,39 +5,39 @@ import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
 public class DAOInjector implements IDAOInjector {
 
-	static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
-	static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
-	static IValidationRulesLoaderDAO validationRulesLoaderDAO;
-	static IRetrieveQuestionsDAO retrieveQuestionsDAO;
-	static IRemoveQuestionDAO removeQuestionDAO;	
+	public static IDAOInjector daoInjector;
+	public static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
+	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
+	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
+	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
+	public static IRemoveQuestionDAO removeQuestionDAO;	
 	
-	private static IDAOInjector idaoInjector;
-	
-    public static IDAOInjector getInstance(){
-        if (null == idaoInjector){
-            idaoInjector = new DAOInjector();
+    public static IDAOInjector instance(){
+        if (null == daoInjector){
+            daoInjector = new DAOInjector();
         }
-        return idaoInjector;
+        return daoInjector;
     }
+    
     @Override
     public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
-    	if(retrieveQuestionTypesDAO == null) {
+    	if(null == retrieveQuestionTypesDAO) {
     		retrieveQuestionTypesDAO = new RetrieveQuestionTypesDAO();
     	}
     	return retrieveQuestionTypesDAO;
     }
 
     @Override
-    public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService) {
-    	if(saveBasicQuestionInformationDAO == null) {
-    		saveBasicQuestionInformationDAO = new SaveBasicQuestionInformationDAO(iCurrentTimeStampGenerationService);
+    public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
+    	if(null == saveBasicQuestionInformationDAO) {
+    		saveBasicQuestionInformationDAO = new SaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
     	}
     	return saveBasicQuestionInformationDAO;
     }
 
     @Override
     public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
-    	if(validationRulesLoaderDAO == null) {
+    	if(null == validationRulesLoaderDAO) {
     		validationRulesLoaderDAO = new ValidationRulesLoaderDAO();
     	}
     	return validationRulesLoaderDAO;
@@ -47,7 +47,7 @@ public class DAOInjector implements IDAOInjector {
 	@Override
 	public IRetrieveQuestionsDAO createRetrieveQuestionsDAO() {
 		
-		if(retrieveQuestionsDAO == null) {
+		if(null == retrieveQuestionsDAO) {
 			retrieveQuestionsDAO = new RetrieveQuestionsDAO();
 		}
 		return retrieveQuestionsDAO;
@@ -56,7 +56,7 @@ public class DAOInjector implements IDAOInjector {
 	@Override
 	public IRemoveQuestionDAO createRemoveQuestionDAO() {
 		
-		if(removeQuestionDAO == null) {
+		if(null == removeQuestionDAO) {
 			removeQuestionDAO = new RemoveQuestionDAO();
 		}
 		return removeQuestionDAO;

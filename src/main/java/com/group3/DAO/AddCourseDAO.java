@@ -15,7 +15,7 @@ public class AddCourseDAO implements IAddCourseDAO {
 	
 		String insertCourseNameQuery ="INSERT "+" INTO "+"COURSES"+ " (COURSE_ID,COURSE_NAME) "+" values(?,?); ";
 		java.sql.Connection connect =    ObtainDataBaseConnection.obtainDatabaseConnection();
-		String CourseId = course.getCourseID();
+		String CourseId = course.getCourseId();
 		String CourseName = course.getCourseName(); 
 		
 		String feedBackMessage = new String();

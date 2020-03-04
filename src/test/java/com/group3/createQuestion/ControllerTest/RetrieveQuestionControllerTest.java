@@ -19,14 +19,26 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {RetrieveQuestionController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+	RetrieveQuestionController.class, GroupmanagerApplication.class
+})
 class RetrieveQuestionControllerTest {
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@Test
 	public void deleteQuestionTest() throws Exception {
+
 		this.mockMvc.perform(get("/showAvailableQuestionsToDelete").param("questionId", "0"))
-		.andExpect(model().attributeExists("questionList"));
+			.andExpect(model().attributeExists("questionList"));
+	}
+
+	@Test
+	public void showQuestionSortedTest() throws Exception {
+
+		this.mockMvc.perform(get("/showAvailableQuestionsSorted").param("order", "TITLE ASC").param("mode", "visible"))
+			.andExpect(model().attributeExists("questionList"))
+			.andExpect(model().attributeExists("deleteQuery"));
 	}
 }

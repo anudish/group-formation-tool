@@ -1,25 +1,35 @@
 package com.group3.BusinessModels;
 
+import java.util.ArrayList;
+import com.group3.course.DAO.IDAOAbstractFactory;
+import com.group3.course.Services.*;
+
 public class Course {
-	 private String CourseID;
-	    private String CourseName;
 
-	    public Course() {
-	    }
+	String courseId;
+	String courseName;
 
-	    public String getCourseID() {
-	        return this.CourseID;
-	    }
+	public String getCourseId() {
 
-	    public void setCourseID(String courseID) {
-	        this.CourseID = courseID;
-	    }
+		return courseId;
+	}
+	public void setCourseId(String courseId) {
 
-	    public String getCourseName() {
-	        return this.CourseName;
-	    }
+		this.courseId = courseId;
+	}
+	public String getCourseName() {
 
-	    public void setCourseName(String courseName) {
-	        this.CourseName = courseName;
-	    }
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+
+		this.courseName = courseName;
+	}
+
+	public ArrayList<Course> getInstructorCourses(IDAOAbstractFactory daoInjector, String instructorId) {
+		ArrayList<Course> courses = new ArrayList<Course> ();
+		ICourseManager courseManager = ServiceAbstractFactory.instance().createCourseManager(daoInjector);
+		courses = courseManager.getCoursesByInstructorMailId(instructorId);
+		return courses;
+	}
 }

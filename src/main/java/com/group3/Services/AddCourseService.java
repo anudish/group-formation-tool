@@ -35,7 +35,7 @@ public class AddCourseService implements IAddCourseService {
 	        
 	        else {
 	        	
-	        	String feedBackMessage =  iAddCourseDAO.isCourseExist(course.getCourseID());
+	        	String feedBackMessage =  iAddCourseDAO.isCourseExist(course.getCourseId());
 	        	
                 if(feedBackMessage.isEmpty()) {
                 	feedBackMessage = iAddCourseDAO.addCourse(course);

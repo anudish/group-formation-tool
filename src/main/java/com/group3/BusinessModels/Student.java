@@ -1,5 +1,11 @@
 package com.group3.BusinessModels;
 
+import java.util.ArrayList;
+
+import com.group3.course.DAO.IDAOAbstractFactory;
+import com.group3.course.Services.ICourseManager;
+import com.group3.course.Services.ServiceAbstractFactory;
+
 public class Student extends Person{
 	String bannerId;
 
@@ -9,5 +15,18 @@ public class Student extends Person{
 
 	public void setBannerId(String bannerId) {
 		this.bannerId = bannerId;
+	}
+	public ArrayList<Course> getStudentCourses(IDAOAbstractFactory daoInjector) {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ICourseManager courseManager = ServiceAbstractFactory.instance().createCourseManager(daoInjector);
+		courses = courseManager.getCoursesForGuest();
+		return courses;
+	}
+	
+	public ArrayList<Course> getTACourses(IDAOAbstractFactory daoInjector, String studentId) {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ICourseManager courseManager = ServiceAbstractFactory.instance().createCourseManager(daoInjector);
+		courses = courseManager.getCoursesByTAMailId(studentId);
+		return courses;
 	}
 }

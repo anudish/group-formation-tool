@@ -7,25 +7,26 @@ import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StartWithNumberCheckValidationServiceTest {
-    StartWithNumberCheckValidationService startWithNumberCheckValidationService;
-    @BeforeEach
-    void setUp() {
-        startWithNumberCheckValidationService = new StartWithNumberCheckValidationService();
-    }
 
-    @AfterEach
-    void tearDown() {
-    }
+	StartWithNumberCheckValidationService startWithNumberCheckValidationService;
 
-    @Test
-    void isValid() {
-        assertFalse(startWithNumberCheckValidationService.isValid("1 That's not the case"));
-        assertTrue(startWithNumberCheckValidationService.isValid("How is intensity level?"));
-    }
+	@BeforeEach
+	void setUp() {
+
+		startWithNumberCheckValidationService = new StartWithNumberCheckValidationService();
+	}
+
+	@Test
+	void isValid() {
+
+		assertFalse(startWithNumberCheckValidationService.isValid("1 That's not the case"));
+		assertTrue(startWithNumberCheckValidationService.isValid("How is intensity level?"));
+	}
 }
