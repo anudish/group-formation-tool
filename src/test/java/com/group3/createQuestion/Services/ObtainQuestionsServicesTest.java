@@ -15,7 +15,7 @@ import com.group3.createQuestion.DAO.*;
 
 public class ObtainQuestionsServicesTest {
 
-	private static IDAOInjector daoInjector;
+	private static IDAOAbstractFactory daoInjector;
 	private static IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	public static Logger logger = LogManager.getLogger(ObtainQuestionsServicesTest.class);
 	List<List<String>> questionList;
@@ -23,7 +23,7 @@ public class ObtainQuestionsServicesTest {
 	@BeforeEach
 	void setUp() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		retrieveQuestionsDAO = daoInjector.createRetrieveQuestionsDAO();
 		logger.info("ObtainQuestionsServiceTest setup!");
 	}

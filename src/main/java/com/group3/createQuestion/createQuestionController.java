@@ -20,7 +20,7 @@ public class createQuestionController {
 	private String title, question, type;
 	Logger logger = LogManager.getLogger(createQuestionController.class);
 	private ArrayList<QuestionTypes> questionTypesList;
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
 	ICurrentTimeStampGenerationService currentTimeStampGenerationService;
@@ -32,7 +32,7 @@ public class createQuestionController {
 
 	public createQuestionController() {
 		
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();
 		retrieveQuestionTypesDAO = daoInjector.createRetrieveQuestionTypesDAO();

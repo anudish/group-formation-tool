@@ -1,7 +1,7 @@
 package com.group3.createQuestion.Services;
 
-import com.group3.createQuestion.DAO.DAOMockInjector;
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.DAOMockAbstractFactory;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 
 import org.apache.logging.log4j.LogManager;

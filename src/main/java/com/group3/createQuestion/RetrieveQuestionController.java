@@ -19,13 +19,13 @@ public class RetrieveQuestionController {
 
 	private Logger logger = LogManager.getLogger(RetrieveQuestionController.class);
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IObtainQuestionsService obtainQuestionsService;
 
 	public RetrieveQuestionController() {
 
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
 	}

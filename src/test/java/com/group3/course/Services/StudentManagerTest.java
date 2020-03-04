@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import com.group3.BusinessModels.Student;
-import com.group3.course.DAO.DAOMockInjector;
+import com.group3.course.DAO.DAOMockAbstractFactory;
 
 import com.group3.course.DAO.*;
 
@@ -20,7 +20,7 @@ class StudentManagerTest {
 
 	public StudentManagerTest() {
 		
-		daoInjector = new DAOMockInjector();
+		daoInjector = new DAOMockAbstractFactory();
 		courseDAO = daoInjector.createCourseDAO();
 	}
 

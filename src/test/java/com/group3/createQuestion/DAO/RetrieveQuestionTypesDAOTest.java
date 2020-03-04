@@ -2,8 +2,8 @@ package com.group3.createQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 import com.group3.createQuestion.BusinessModels.QuestionTypes;
-import com.group3.createQuestion.DAO.DAOInjector;
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.DAOAbstractFactory;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
 
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RetrieveQuestionTypesDAOTest {
 
-	IDAOInjector idaoInjector;
+	IDAOAbstractFactory idaoInjector;
 	IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
 	ArrayList<QuestionTypes> possibleQuestionType;
 
@@ -34,7 +34,7 @@ class RetrieveQuestionTypesDAOTest {
 	@BeforeEach
 	void setUp() {
 
-		idaoInjector = DAOInjector.instance();
+		idaoInjector = DAOAbstractFactory.instance();
 		retrieveQuestionTypesDAO = idaoInjector.createRetrieveQuestionTypesDAO();
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 		queryString = "INSERT INTO QUESTION_TYPE(TYPES) VALUES(?)";

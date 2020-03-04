@@ -1,20 +1,20 @@
 package com.group3.createQuestion.DAO;
 
-import com.group3.createQuestion.DAO.DAOInjector;
+import com.group3.createQuestion.DAO.DAOAbstractFactory;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
-public class DAOInjector implements IDAOInjector {
+public class DAOAbstractFactory implements IDAOAbstractFactory {
 
-	public static IDAOInjector daoInjector;
+	public static IDAOAbstractFactory daoInjector;
 	public static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
 	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
 	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
 	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	public static IRemoveQuestionDAO removeQuestionDAO;	
 	
-    public static IDAOInjector instance(){
+    public static IDAOAbstractFactory instance(){
         if (null == daoInjector){
-            daoInjector = new DAOInjector();
+            daoInjector = new DAOAbstractFactory();
         }
         return daoInjector;
     }

@@ -21,7 +21,7 @@ class CourseManagerTest {
 	ArrayList<Course> courseInfo;
 
 	public CourseManagerTest() {
-		daoInjector = new DAOMockInjector();
+		daoInjector = new DAOMockAbstractFactory();
 		taDAO = daoInjector.createTADAO();
 		instructorDAO = daoInjector.createInstructorDAO();
 		courseDAO = daoInjector.createCourseDAO();

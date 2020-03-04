@@ -1,23 +1,23 @@
 package com.group3.createQuestion.DAO;
 
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
 import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
-public class DAOMockInjector implements IDAOInjector {
+public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
-	public static IDAOInjector idaoInjector;
+	public static IDAOAbstractFactory idaoInjector;
 	public static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
 	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
 	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
 	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	public static IRemoveQuestionDAO removeQuestionDAO;
 
-	public static IDAOInjector instance() {
+	public static IDAOAbstractFactory instance() {
 		if (null == idaoInjector) {
-			idaoInjector = new DAOMockInjector();
+			idaoInjector = new DAOMockAbstractFactory();
 		}
 		return idaoInjector;
 	}

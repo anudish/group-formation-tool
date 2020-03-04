@@ -8,13 +8,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.group3.BusinessModels.Instructor;
 
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IRetrieveQuestionsDAO;
 
 public class ObtainQuestionsService implements IObtainQuestionsService {
 
 	IRetrieveQuestionsDAO retrieveQuestionsDAO;
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 
 	private static Logger logger = LogManager.getLogger(ObtainQuestionsService.class);
 

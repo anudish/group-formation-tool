@@ -10,13 +10,13 @@ import com.group3.forgotPassword.Services.*;
 
 class UpdatePasswordManagerTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IUserPasswordDAO userPasswordDAO;
 	IVerificationCode verificationCodeMock;
 
 	public UpdatePasswordManagerTest() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		userPasswordDAO = daoInjector.getUserDAOObj();
 		verificationCodeMock = new VerificationCodeMock();
 	}

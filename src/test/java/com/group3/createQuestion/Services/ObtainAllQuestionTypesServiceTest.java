@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ObtainAllQuestionTypesServiceTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
 	IObtainAllQuestionTypesService obtainAllQuestionTypesService;
@@ -26,7 +26,7 @@ class ObtainAllQuestionTypesServiceTest {
 	@BeforeEach
 	void setUp() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionTypes = new ArrayList<>();
 		retrieveQuestionTypesDAO = daoInjector.createRetrieveQuestionTypesDAO();

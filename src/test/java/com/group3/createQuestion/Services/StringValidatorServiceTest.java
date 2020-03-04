@@ -1,7 +1,7 @@
 package com.group3.createQuestion.Services;
 
-import com.group3.createQuestion.DAO.DAOMockInjector;
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.DAOMockAbstractFactory;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringValidatorServiceTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IStringValidatorService stringValidatorService;
 	IValidationRulesLoaderDAO validationRulesLoaderDAO;
@@ -23,7 +23,7 @@ class StringValidatorServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		validationRulesLoaderDAO = daoInjector.createValidationRulesLoaderDAO();
 		stringValidatorService = serviceAbstractFactory.createStringValidatorService(validationRulesLoaderDAO);

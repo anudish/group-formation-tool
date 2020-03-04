@@ -35,7 +35,7 @@ public class CourseController {
 
 	ILoginDAO loginDAO;
 	IDAOAbstractFactory daoInjector;
-	com.group3.login.DAO.IDAOInjector loginDAOInjector;
+	com.group3.login.DAO.IDAOAbstractFactory loginDAOInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	ICourseManager courseManager;
 
@@ -43,7 +43,7 @@ public class CourseController {
 	
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
-		loginDAOInjector = com.group3.login.DAO.DAOInjector.instance();
+		loginDAOInjector = com.group3.login.DAO.DAOAbstractFactory.instance();
 		courseManager = serviceAbstractFactory.createCourseManager(daoInjector);
 		loginDAO = loginDAOInjector.createLoginDAO();
 	}

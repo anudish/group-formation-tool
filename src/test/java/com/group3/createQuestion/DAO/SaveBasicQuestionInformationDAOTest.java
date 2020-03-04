@@ -28,7 +28,7 @@ class SaveBasicQuestionInformationDAOTest {
 	@BeforeEach
 	void setUp() {
 
-		IDAOInjector idaoInjector = DAOInjector.instance();
+		IDAOAbstractFactory idaoInjector = DAOAbstractFactory.instance();
 		IServiceAbstractFactory serviceAbstractFactory;
 		ICurrentTimeStampGenerationService currentTimeStampGenerationService;
 

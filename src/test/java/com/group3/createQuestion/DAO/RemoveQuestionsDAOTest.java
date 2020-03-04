@@ -20,7 +20,7 @@ import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 class RemoveQuestionsDAOTest {
 
-	private static IDAOInjector daoInjector;
+	private static IDAOAbstractFactory daoInjector;
 	private static IRemoveQuestionDAO removeQuestionDAO;
 	private static Logger logger = LogManager.getLogger(RemoveQuestionsDAOTest.class);
 
@@ -34,7 +34,7 @@ class RemoveQuestionsDAOTest {
 	@BeforeAll
 	public static void setUp() throws SQLException {
 
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		removeQuestionDAO = daoInjector.createRemoveQuestionDAO();
 		logger.info("ObtainQuestionsServiceTest setup!");
 	}

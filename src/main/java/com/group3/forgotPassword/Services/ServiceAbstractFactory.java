@@ -26,7 +26,7 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	}
 
 	@Override
-	public IResetCodeManager createResetCodeManager(IDAOInjector daoInjector, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
+	public IResetCodeManager createResetCodeManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
 		if (null == resetCodeManager) {
 			resetCodeManager = new ResetCodeManager(daoInjector, emailInjector, verificationCodeGenerator);
 		}
@@ -34,7 +34,7 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	}
 
 	@Override
-	public IUpdatePasswordManager createUpdatePasswordManager(IDAOInjector daoInjector) {
+	public IUpdatePasswordManager createUpdatePasswordManager(IDAOAbstractFactory daoInjector) {
 		if (null == updatePasswordManager) {
 			updatePasswordManager = new UpdatePasswordManager(daoInjector);
 		}

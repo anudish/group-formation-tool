@@ -8,7 +8,7 @@ public class UpdatePasswordManager implements IUpdatePasswordManager {
 
 	IUserPasswordDAO userDataAccess;
 
-	public UpdatePasswordManager(IDAOInjector DAOInjector) {
+	public UpdatePasswordManager(IDAOAbstractFactory DAOInjector) {
 		
 		userDataAccess = DAOInjector.getUserDAOObj();
 	}

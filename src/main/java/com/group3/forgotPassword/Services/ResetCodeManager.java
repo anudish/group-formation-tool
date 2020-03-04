@@ -16,7 +16,7 @@ public class ResetCodeManager implements IResetCodeManager {
 
 	private static Logger logger = LogManager.getLogger(ResetCodeManager.class);
 
-	public ResetCodeManager(IDAOInjector userDAOFactory, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
+	public ResetCodeManager(IDAOAbstractFactory userDAOFactory, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
 
 		gmailService = emailInjector.getGmailService();
 		userDataAccess = userDAOFactory.getUserDAOObj();

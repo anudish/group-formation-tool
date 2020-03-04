@@ -4,13 +4,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.group3.course.DAO.StudentDAO;
 
 class InstructorHandlerDAOTest {
     String mailId,courseId;
     IInstructorHandlerDAO iInstructorHandlerDAO;
     ArrayList<String> courseList;
+    private static Logger logger = LogManager.getLogger(InstructorHandlerDAO.class);
 	@BeforeEach
 	void setUp() throws Exception {
 		iInstructorHandlerDAO = new DAOInjector().createInstructorHandlerDAO();
@@ -48,8 +53,12 @@ class InstructorHandlerDAOTest {
 		mailId = "binny.rogers@dal.ca";
 		courseId = "CSCI5408";
 		courseList = this.iInstructorHandlerDAO.getInstructorCourses(mailId);
+		logger.error(courseList.size());
+		assertTrue(courseList.size() == 0);
 		this.iInstructorHandlerDAO.createNewInstructor(mailId, courseId);
 		courseList = this.iInstructorHandlerDAO.getInstructorCourses(mailId);
+		assertTrue(courseList.size() > 0);
+		assertTrue(courseList.get(0).equals(courseId));
 		this.iInstructorHandlerDAO.deleteinstructor(mailId);
 	}
 

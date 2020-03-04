@@ -17,13 +17,13 @@ import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 public class ViewQuestionController {
 	Logger logger = LogManager.getLogger(ViewQuestionController.class);
 
-    IDAOInjector daoInjector;
+    IDAOAbstractFactory daoInjector;
     IServiceAbstractFactory serviceAbstractFactory;
     IObtainQuestionsService obtainQuestionsService;
     
     public ViewQuestionController() {
     	
-    	daoInjector = DAOInjector.instance();
+    	daoInjector = DAOAbstractFactory.instance();
     	serviceAbstractFactory = ServiceAbstractFactory.instance();
         obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
     }

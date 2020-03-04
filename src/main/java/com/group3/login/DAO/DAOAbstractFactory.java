@@ -2,14 +2,14 @@ package com.group3.login.DAO;
 
 import com.group3.login.DAO.*;
 
-public class DAOInjector implements IDAOInjector {
+public class DAOAbstractFactory implements IDAOAbstractFactory {
 
-	public static IDAOInjector daoInjector;
+	public static IDAOAbstractFactory daoInjector;
 	public static ILoginDAO loginDAO;
 
-	public static IDAOInjector instance() {
+	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {
-			daoInjector = new DAOInjector();
+			daoInjector = new DAOAbstractFactory();
 		}
 		return daoInjector;
 	}

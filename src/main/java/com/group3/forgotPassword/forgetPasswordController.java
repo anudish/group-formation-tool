@@ -13,7 +13,7 @@ public class forgetPasswordController {
 	String generated_code;
 	String email;
 	
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IEmailInjector emailInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IVerificationCode verificationCodeGenerator;
@@ -22,7 +22,7 @@ public class forgetPasswordController {
 	
 	public forgetPasswordController() {
 		
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		emailInjector = EmailInjector.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		verificationCodeGenerator = serviceAbstractFactory.createVerificationCodeGenerator();

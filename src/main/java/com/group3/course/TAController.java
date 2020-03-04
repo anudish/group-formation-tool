@@ -25,7 +25,7 @@ public class TAController {
 
 	IServiceAbstractFactory serviceAbstractFactory;
 	IDAOAbstractFactory daoInjector;
-	com.group3.login.DAO.IDAOInjector loginDAOInjector;
+	com.group3.login.DAO.IDAOAbstractFactory loginDAOInjector;
 	ITAManager taManager;
 	ICourseManager courseManager;
 	ILoginDAO loginDAO;
@@ -40,7 +40,7 @@ public class TAController {
 		
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
-		loginDAOInjector = com.group3.login.DAO.DAOInjector.instance();
+		loginDAOInjector = com.group3.login.DAO.DAOAbstractFactory.instance();
 		loginDAO = loginDAOInjector.createLoginDAO();
 		taManager = serviceAbstractFactory.createTAManager(daoInjector);
 		courseManager = serviceAbstractFactory.createCourseManager(daoInjector);

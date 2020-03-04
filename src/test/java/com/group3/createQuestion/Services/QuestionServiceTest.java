@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class QuestionServiceTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IQuestionService questionService;
 	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
@@ -22,7 +22,7 @@ class QuestionServiceTest {
 	@BeforeEach
 	void setUp() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionService = serviceAbstractFactory.createfreeTextQuestionGenerationService();
 		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(serviceAbstractFactory.createCurrentTimeStampGenerationService());

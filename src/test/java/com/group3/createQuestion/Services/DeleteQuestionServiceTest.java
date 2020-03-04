@@ -15,14 +15,14 @@ import com.group3.createQuestion.DAO.*;
 
 class DeleteQuestionServiceTest {
 
-	private static IDAOInjector daoInjector;
+	private static IDAOAbstractFactory daoInjector;
 	private static IRemoveQuestionDAO removeQuestionDAO;
 	public static Logger logger = LogManager.getLogger(DeleteQuestionServiceTest.class);
 
 	@BeforeEach
 	public void setUp() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		removeQuestionDAO = daoInjector.createRemoveQuestionDAO();
 	}
 

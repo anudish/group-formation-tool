@@ -13,14 +13,14 @@ import com.group3.forgotPassword.Services.*;
 class ResetCodeManagerTest {
 
 	GuestModel model = null;
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IUserPasswordDAO userPasswordDAO;
 	IVerificationCode verificationCode;
 	GmailServiceMock gmailServiceMock;
 
 	public ResetCodeManagerTest() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		userPasswordDAO = daoInjector.getUserDAOObj();
 		verificationCode = new VerificationCodeMock();
 		gmailServiceMock = new GmailServiceMock();

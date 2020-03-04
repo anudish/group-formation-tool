@@ -9,13 +9,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.createQuestion.DAO.DAOMockInjector;
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.DAOMockAbstractFactory;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 
 class NumericQuestionGenerationServiceTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IQuestionService questionService;
 	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
@@ -24,7 +24,7 @@ class NumericQuestionGenerationServiceTest {
 	@BeforeEach
 	void intit() {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionService = serviceAbstractFactory.createNumericQuestionGenerationService();
 		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(serviceAbstractFactory.createCurrentTimeStampGenerationService());

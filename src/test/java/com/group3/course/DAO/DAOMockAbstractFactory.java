@@ -2,7 +2,7 @@ package com.group3.course.DAO;
 
 import com.group3.course.DAO.*;
 
-public class DAOMockInjector implements IDAOAbstractFactory {
+public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;
 	public static ICourseDAO courseDAO;
@@ -12,7 +12,7 @@ public class DAOMockInjector implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {
-			daoInjector = new DAOMockInjector();
+			daoInjector = new DAOMockAbstractFactory();
 		}
 		return daoInjector;
 	}

@@ -1,13 +1,13 @@
 package com.group3.signup.DAO;
 
-public class DAOMockInjector implements IDAOInjector {
+public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
-	public static IDAOInjector daoInjector;
+	public static IDAOAbstractFactory daoInjector;
 	public static IUserDAO userDAO;
 
-	public static IDAOInjector instance() {
+	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {
-			daoInjector = new DAOMockInjector();
+			daoInjector = new DAOMockAbstractFactory();
 		}
 		return daoInjector;
 	}

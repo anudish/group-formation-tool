@@ -22,7 +22,7 @@ import com.group3.createQuestion.BusinessModels.Question;
 
 class RetrieveQuestionsDAOTest {
 
-	private static IDAOInjector daoInjector;
+	private static IDAOAbstractFactory daoInjector;
 	private static IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	private static Logger logger = LogManager.getLogger(RetrieveQuestionsDAOTest.class);
 	public static List<List<String>> questionList;
@@ -36,7 +36,7 @@ class RetrieveQuestionsDAOTest {
 
 	@BeforeAll
 	public static void setUp() throws SQLException {
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		retrieveQuestionsDAO = daoInjector.createRetrieveQuestionsDAO();
 		logger.info("ObtainQuestionsServiceTest setup!");
 	}

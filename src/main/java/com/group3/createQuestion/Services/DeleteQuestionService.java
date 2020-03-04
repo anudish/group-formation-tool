@@ -3,12 +3,12 @@ package com.group3.createQuestion.Services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.group3.createQuestion.DAO.IDAOInjector;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IRemoveQuestionDAO;
 
 public class DeleteQuestionService implements IDeleteQuestionService {
 
-	private static IDAOInjector daoInjector;
+	private static IDAOAbstractFactory daoInjector;
 	private static IRemoveQuestionDAO removeQuestionDAO;
 	public static Logger logger = LogManager.getLogger(DeleteQuestionService.class);
 

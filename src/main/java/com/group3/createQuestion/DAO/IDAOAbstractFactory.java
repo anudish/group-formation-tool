@@ -2,7 +2,7 @@ package com.group3.createQuestion.DAO;
 
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
-public interface IDAOInjector {
+public interface IDAOAbstractFactory {
     IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO();
     ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService);
     IValidationRulesLoaderDAO createValidationRulesLoaderDAO();

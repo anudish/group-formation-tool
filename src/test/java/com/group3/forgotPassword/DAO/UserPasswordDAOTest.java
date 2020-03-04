@@ -9,14 +9,14 @@ import com.group3.forgotPassword.DAO.*;
 
 class UserPasswordDAOTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IUserPasswordDAO userPasswordDAO;
 	InsertDataForTest_forgorPassword insert;
 	DeleteDataForTest_forgotPassword delete;
 
 	public UserPasswordDAOTest() {
 
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		userPasswordDAO = daoInjector.getUserDAOObj();
 		insert = new InsertDataForTest_forgorPassword();
 		delete = new DeleteDataForTest_forgotPassword();

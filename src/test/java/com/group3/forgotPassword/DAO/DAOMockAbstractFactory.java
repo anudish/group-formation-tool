@@ -2,22 +2,24 @@ package com.group3.forgotPassword.DAO;
 
 import com.group3.forgotPassword.DAO.*;
 
-public class DAOInjector implements IDAOInjector {
+public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
-	public static IDAOInjector daoInjector;
+	public static IDAOAbstractFactory daoInjector;
 	public static IUserPasswordDAO userPasswordDAO;
 
-	public static IDAOInjector instance() {
+	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {
-			daoInjector = new DAOInjector();
+			daoInjector = new DAOMockAbstractFactory();
 		}
 		return daoInjector;
 	}
-
+	
+	@Override
 	public IUserPasswordDAO getUserDAOObj() {
 		if (null == userPasswordDAO) {
-			userPasswordDAO = new UserPasswordDAO();
+			userPasswordDAO = new UserPasswordDAOMock();
 		}
 		return userPasswordDAO;
 	}
+
 }

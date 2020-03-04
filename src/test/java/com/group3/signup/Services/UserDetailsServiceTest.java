@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.signup.DAO.DAOMockInjector;
-import com.group3.signup.DAO.IDAOInjector;
+import com.group3.signup.DAO.DAOMockAbstractFactory;
+import com.group3.signup.DAO.IDAOAbstractFactory;
 import com.group3.signup.DAO.IUserDAO;
 
 class UserDetailsServiceTest {
@@ -23,13 +23,13 @@ class UserDetailsServiceTest {
 	GuestModel mockUserBadEmailModel;
 
 	IUserDAO userDAO;
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IUserDetailsService userDetails;
 
 	@BeforeEach
 	void setUp() throws Exception {
 
-		daoInjector = DAOMockInjector.instance();
+		daoInjector = DAOMockAbstractFactory.instance();
 		userDAO = daoInjector.createUserDAO();
 		MockitoAnnotations.initMocks(this);
 		mockUserModel = new GuestModel("lastname", "User", "User@gmail.com", "Guest", "Password@1234");

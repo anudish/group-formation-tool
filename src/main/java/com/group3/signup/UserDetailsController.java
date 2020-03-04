@@ -20,7 +20,7 @@ public class UserDetailsController {
 
 	Connection conn;
 	PreparedStatement statement;
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IUserDAO userDAO;
 	IUserDetailsService userService;
@@ -30,7 +30,7 @@ public class UserDetailsController {
 	
 	public UserDetailsController() {
 		
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		userDAO = daoInjector.createUserDAO();
 		userService = serviceAbstractFactory.creatUserDetailsService(userDAO);

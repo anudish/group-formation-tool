@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DeleteQuestionController {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IDeleteQuestionService deleteQuestionService;
 	IObtainQuestionsService obtainQuestionsService;
@@ -26,7 +26,7 @@ public class DeleteQuestionController {
 
 	public DeleteQuestionController() {
 
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		deleteQuestionService = serviceAbstractFactory.createDeleteQuestionService(daoInjector.createRemoveQuestionDAO());
 		obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
