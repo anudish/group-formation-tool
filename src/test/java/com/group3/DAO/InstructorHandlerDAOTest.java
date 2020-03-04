@@ -16,14 +16,17 @@ class InstructorHandlerDAOTest {
     IInstructorHandlerDAO iInstructorHandlerDAO;
     ArrayList<String> courseList;
     private static Logger logger = LogManager.getLogger(InstructorHandlerDAO.class);
-	@BeforeEach
+	
+    @BeforeEach
 	void setUp() throws Exception {
-		iInstructorHandlerDAO = new DAOInjector().createInstructorHandlerDAO();
+	
+    	iInstructorHandlerDAO = new DAOInjector().createInstructorHandlerDAO();
 		courseList = new ArrayList<>();
 	}
 
 	@Test
 	final void testCreateNewInstructor() {
+		
 		mailId ="Caroline@dal.ca";
 		courseId = "CSCI67000$%8&kjadjkk";
 		assertFalse(this.iInstructorHandlerDAO.createNewInstructor(mailId, courseId).length() > 0);
@@ -34,6 +37,7 @@ class InstructorHandlerDAOTest {
 
 	@Test
 	final void testIsInstructorExists() {
+		
 		mailId = "joe.root@dal.ca";
 		assertFalse(this.iInstructorHandlerDAO.isInstructorExists(mailId)==false);
 	    assertTrue(this.iInstructorHandlerDAO.isInstructorExists(mailId));
@@ -41,6 +45,7 @@ class InstructorHandlerDAOTest {
 
 	@Test
 	final void testDeleteinstructor() {
+		
 		mailId = "binny.rogers@dal.ca";
 		assertFalse(this.iInstructorHandlerDAO.deleteinstructor(mailId).length() > 0);
 	    this.iInstructorHandlerDAO.createNewInstructor(mailId, "CSCI5408");
