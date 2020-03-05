@@ -1,11 +1,9 @@
 package com.group3.createQuestion.BusinessModels;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.createQuestion.BusinessModels.NumericQuestion;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NumericQuestionTest {
 

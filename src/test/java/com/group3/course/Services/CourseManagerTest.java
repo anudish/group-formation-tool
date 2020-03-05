@@ -1,16 +1,15 @@
 package com.group3.course.Services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
+import com.group3.BusinessModels.Course;
+import com.group3.course.DAO.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.BusinessModels.Course;
-import com.group3.course.DAO.*;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CourseManagerTest {
 

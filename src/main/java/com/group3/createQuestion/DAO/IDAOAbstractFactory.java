@@ -8,4 +8,5 @@ public interface IDAOAbstractFactory {
     IValidationRulesLoaderDAO createValidationRulesLoaderDAO();
 	IRetrieveQuestionsDAO createRetrieveQuestionsDAO();
 	IRemoveQuestionDAO createRemoveQuestionDAO();
+	ISaveMCQAnswerstoDataBaseDAO createSaveMCQAnswertoDataBaseDAO();
 }

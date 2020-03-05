@@ -1,14 +1,15 @@
 package com.group3.forgotPassword.Services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.group3.BusinessModels.GuestModel;
+import com.group3.forgotPassword.DAO.DAOMockAbstractFactory;
+import com.group3.forgotPassword.DAO.IDAOAbstractFactory;
+import com.group3.forgotPassword.DAO.IUserPasswordDAO;
+import com.group3.forgotPassword.DAO.VerificationCodeMock;
 import org.junit.jupiter.api.Test;
 
-import com.group3.BusinessModels.GuestModel;
-
-import com.group3.forgotPassword.DAO.*;
-import com.group3.forgotPassword.Services.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ResetCodeManagerTest {
 

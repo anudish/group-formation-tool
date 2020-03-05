@@ -33,13 +33,13 @@ public class RetrieveQuestionController {
 	@RequestMapping("/showAvailableQuestionsToDelete")
 	public ModelAndView showDeletableQuestions() {
 		List<List<String>> questionList;
-		
+
 		logger.info("Showing available questions that can be deleted");
 		Instructor instructor = new Instructor();
 		instructor.setEmail(LoginAuthenticationSuccessHandler.email);
 		questionList = obtainQuestionsService.obtainInstructorQuestions(instructor, "");
 		logger.info("Total Questions fetched: " + questionList.size());
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("questionList", questionList);
 		mv.setViewName("deleteQuestionPage.html");
@@ -49,14 +49,14 @@ public class RetrieveQuestionController {
 	@RequestMapping("/showAvailableQuestionsSorted")
 	public ModelAndView showQuestionsSorted(@RequestParam String order, @RequestParam String mode) {
 		List<List<String>> questionList;
-		
+
 		logger.info("Request to available questions in sorted manner!");
 		logger.info("Order requested: " + order);
 		Instructor instructor = new Instructor();
 		instructor.setEmail(LoginAuthenticationSuccessHandler.email);
 		questionList = obtainQuestionsService.obtainInstructorQuestions(instructor, order);
 		logger.info("Total Questions fetched: " + questionList.size());
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("questionList", questionList);
 		mv.addObject("deleteQuery", mode);

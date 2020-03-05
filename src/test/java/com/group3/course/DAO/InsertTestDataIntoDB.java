@@ -1,16 +1,14 @@
 package com.group3.course.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Student;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.course.DAO.CourseDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 public class InsertTestDataIntoDB {
 

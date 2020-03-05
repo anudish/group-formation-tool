@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import com.group3.BusinessModels.Course;
-import com.group3.DAO.DAOInjector;
-import com.group3.Services.IAddCourseService;
-import com.group3.Services.ICourseInputValidation;
-import com.group3.Services.IServiceInjector;
-import com.group3.Services.ServiceInjector;
+import com.group3.AdminAndAuthorization.DAO.DAOInjector;
+import com.group3.AdminAndAuthorization.Services.IAddCourseService;
+import com.group3.AdminAndAuthorization.Services.ICourseInputValidation;
+import com.group3.AdminAndAuthorization.Services.IServiceInjector;
+import com.group3.AdminAndAuthorization.Services.ServiceInjector;
 
 @Controller
 public class CreateCourseController {

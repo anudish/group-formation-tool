@@ -3,8 +3,6 @@ package com.group3.createQuestion.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.group3.createQuestion.Services.IDeleteQuestionService;
-
 public class RemoveQuestionDAOMock implements IRemoveQuestionDAO {
 
 	List<List<String>> questionList;

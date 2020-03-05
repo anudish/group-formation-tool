@@ -1,13 +1,7 @@
 package com.group3.DAO;
 
-import com.group3.course.DAO.CourseDAO;
-import com.group3.course.DAO.ICourseDAO;
-import com.group3.course.DAO.IInstructorDAO;
-import com.group3.course.DAO.IStudentDAO;
-import com.group3.course.DAO.ITADAO;
-import com.group3.course.DAO.InstructorDAO;
-import com.group3.course.DAO.StudentDAO;
-import com.group3.course.DAO.TADAO;
+import com.group3.AdminAndAuthorization.DAO.*;
+import com.group3.course.DAO.*;
 import com.group3.forgotPassword.DAO.IUserPasswordDAO;
 import com.group3.forgotPassword.DAO.UserPasswordDAO;
 import com.group3.login.DAO.ILoginDAO;
@@ -104,11 +98,11 @@ public class DAOInjector implements IDAOInjector {
 	}
 
 	@Override
-	public LoginDao createLoginDAO() {
+	public ILoginDAO createLoginDAO() {
 		if(loginDAO == null) {
 			loginDAO = new LoginDao();
 		}
-		return new LoginDao();
+		return loginDAO;
 	}
     
 	@Override

@@ -1,9 +1,7 @@
 package com.group3.createQuestion.DAO;
 
-import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class SaveBasicQuestionInformationDAOMock implements ISaveBasicQuestionInformationDAO {

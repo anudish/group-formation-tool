@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 
+import com.group3.AdminAndAuthorization.DAO.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +21,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.GuestModel;
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDAOInjector;
-import com.group3.DAO.IGrantInstructorAccessDAO;
-import com.group3.DAO.IViewCoursesDAO;
-import com.group3.Services.IGrantInstructorAccessService;
-import com.group3.Services.IServiceInjector;
-import com.group3.Services.IViewCoursesService;
-import com.group3.Services.ServiceInjector;
+
+import com.group3.AdminAndAuthorization.Services.IServiceInjector;
+import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
+import com.group3.AdminAndAuthorization.Services.ServiceInjector;
 import com.group3.groupmanager.GroupmanagerApplication;
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc

@@ -1,7 +1,6 @@
 package com.group3.forgotPassword.DAO;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.forgotPassword.DAO.IUserPasswordDAO;
 
 public class UserPasswordDAOMock implements IUserPasswordDAO {
 

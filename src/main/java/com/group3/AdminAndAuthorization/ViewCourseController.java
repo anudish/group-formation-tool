@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group3.BusinessModels.Course;
 import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IViewCoursesDAO;
-import com.group3.Services.IViewCoursesService;
+import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
+import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 import com.group3.Services.ServiceInjector;
 
 @Controller

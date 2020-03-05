@@ -1,26 +1,25 @@
 package com.group3.signup.Services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import com.group3.BusinessModels.GuestModel;
+import com.group3.signup.DAO.DAOMockAbstractFactory;
+import com.group3.signup.DAO.IDAOAbstractFactory;
+import com.group3.signup.DAO.IUserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.group3.BusinessModels.GuestModel;
-import com.group3.signup.DAO.DAOMockAbstractFactory;
-import com.group3.signup.DAO.IDAOAbstractFactory;
-import com.group3.signup.DAO.IUserDAO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDetailsServiceTest {
 	@InjectMocks
-	UserDetailsService useService;
+    UserDetailsService useService;
 
 	@Mock
-	GuestModel mockUserModel;
+    GuestModel mockUserModel;
 	@Mock
-	GuestModel mockUserBadEmailModel;
+    GuestModel mockUserBadEmailModel;
 
 	IUserDAO userDAO;
 	IDAOAbstractFactory daoInjector;

@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
 import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDeleteCourseDAO;
+import com.group3.AdminAndAuthorization.DAO.IDeleteCourseDAO;
 import com.group3.groupmanager.GroupmanagerApplication;
 
 
@@ -39,6 +39,10 @@ class CreateCourseControllerTest {
 	public void setup() {
 		
 		iDeleteCourseDAO = new DAOInjector().createDeleteCourseDAO();
+		Course course = new Course();
+		course.setCourseId("csci5608");
+		course.setCourseName("Solid Mechanics");
+		iDeleteCourseDAO.deleteCourse(course);
 	}
 
 	@Test
@@ -56,12 +60,13 @@ class CreateCourseControllerTest {
 		ArrayList<String> operationFeedback = new ArrayList<>();
 		operationFeedback.add("Solid Mechanics with CSCI5608 created successfully");
 		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attribute(("operationFeedback"),operationFeedback));
+		.andExpect(model().attribute("operationFeedback",operationFeedback));
+		
 		
 		operationFeedback.clear();
 		operationFeedback.add("Course Name  Visual Processing with Course ID csci7000 already exists !! ");
 		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attribute(("operationFeedback"),operationFeedback));
+		.andExpect(model().attribute("operationFeedback",operationFeedback));
 	    
 		Course course = new Course();
 		course.setCourseId("csci5608");

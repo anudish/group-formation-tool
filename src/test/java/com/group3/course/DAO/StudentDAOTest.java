@@ -1,17 +1,14 @@
 package com.group3.course.DAO;
 
+import com.group3.BusinessModels.Student;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
-
-import com.group3.BusinessModels.Student;
-
-import com.group3.course.DAO.IStudentDAO;
 
 class StudentDAOTest {
 

@@ -1,14 +1,13 @@
 package com.group3.forgotPassword.DAO;
 
+import com.group3.DBConnectivity.ObtainDataBaseConnection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class InsertDataForTest_forgorPassword {
 

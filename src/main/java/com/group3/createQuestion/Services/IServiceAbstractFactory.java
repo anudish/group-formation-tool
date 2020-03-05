@@ -15,4 +15,6 @@ public interface IServiceAbstractFactory {
      IQuestionService createNumericQuestionGenerationService();
      IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO);
      IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO);
+     ISplitMCQSAnswerService createSplitMCQSAnswerService();
+     IQuestionService createSaveMCQAnswerstoDataBaseService();
 }

@@ -1,12 +1,9 @@
 package com.group3.forgotPassword.Services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-import com.group3.forgotPassword.Services.IVerificationCode;
-import com.group3.forgotPassword.Services.VerificationCode;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VerificationCodeTest {
 

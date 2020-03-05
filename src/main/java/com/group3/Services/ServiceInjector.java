@@ -1,12 +1,9 @@
 package com.group3.Services;
+import com.group3.AdminAndAuthorization.DAO.*;
+import com.group3.AdminAndAuthorization.Services.*;
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.GuestModel;
-import com.group3.DAO.IAddCourseDAO;
-import com.group3.DAO.IDeleteCourseDAO;
-import com.group3.DAO.IGrantInstructorAccessDAO;
-import com.group3.DAO.IInstructorHandlerDAO;
-import com.group3.DAO.IUserRoleHandlerDAO;
-import com.group3.DAO.IViewCoursesDAO;
+
 public class ServiceInjector implements IServiceInjector{
 
 	@Override

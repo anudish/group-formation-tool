@@ -1,10 +1,8 @@
 package com.group3.course.DAO;
 
-import java.util.ArrayList;
-
-import com.group3.BusinessModels.GuestModel;
 import com.group3.BusinessModels.Student;
-import com.group3.course.DAO.IStudentDAO;
+
+import java.util.ArrayList;
 
 public class StudentDAOMock implements IStudentDAO {
 

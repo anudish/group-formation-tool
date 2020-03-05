@@ -70,7 +70,7 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	@Override
 	public IQuestionService createfreeTextQuestionGenerationService() {
 		if (null == questionText) {
-			questionText = new freeTextQuestionGenerationService();
+			questionText = new FreeTextQuestionGenerationService();
 		}
 		return questionText;
 	}
@@ -98,5 +98,15 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 		}
 		return deleteQuestionService;
 	}
+
+    @Override
+    public ISplitMCQSAnswerService createSplitMCQSAnswerService() {
+        return SplitMCQSAnswerService.instance();
+    }
+
+    @Override
+    public IQuestionService createSaveMCQAnswerstoDataBaseService() {
+        return new SaveMCQAnswerstoDataBaseService();
+    }
 
 }
