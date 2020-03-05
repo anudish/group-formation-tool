@@ -1,13 +1,12 @@
 package com.group3.BusinessModels;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class CourseTest {
 	
-    Course testcourse; 
+    Course testcourse;
 	
     @Test
 	final void testGetCourseID() {

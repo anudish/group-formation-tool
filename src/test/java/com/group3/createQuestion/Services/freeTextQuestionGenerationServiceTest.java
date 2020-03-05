@@ -1,15 +1,14 @@
 package com.group3.createQuestion.Services;
 
+import com.group3.createQuestion.DAO.DAOMockAbstractFactory;
+import com.group3.createQuestion.DAO.IDAOAbstractFactory;
+import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.createQuestion.DAO.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class freeTextQuestionGenerationServiceTest {
 

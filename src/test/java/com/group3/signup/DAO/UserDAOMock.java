@@ -1,9 +1,8 @@
 package com.group3.signup.DAO;
 
-import java.util.ArrayList;
-
 import com.group3.BusinessModels.GuestModel;
-import com.group3.signup.DAO.IUserDAO;
+
+import java.util.ArrayList;
 
 public class UserDAOMock implements IUserDAO {
 

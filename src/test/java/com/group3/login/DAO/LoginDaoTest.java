@@ -1,21 +1,14 @@
 package com.group3.login.DAO;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import javax.transaction.Transactional;
-
+import com.group3.BusinessModels.LoginForm;
+import com.group3.groupmanager.GroupmanagerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.group3.BusinessModels.LoginForm;
-import com.group3.groupmanager.GroupmanagerApplication;
-import com.group3.login.DAO.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GroupmanagerApplication.class)

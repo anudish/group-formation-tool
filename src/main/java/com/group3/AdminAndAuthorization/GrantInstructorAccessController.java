@@ -11,15 +11,15 @@ import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.GuestModel;
 import com.group3.DAO.DAOInjector;
 import com.group3.DAO.IDAOInjector;
-import com.group3.DAO.IGrantInstructorAccessDAO;
-import com.group3.DAO.IInstructorHandlerDAO;
-import com.group3.DAO.IUserRoleHandlerDAO;
-import com.group3.DAO.IViewCoursesDAO;
-import com.group3.Services.IExtractCourseIdService;
+import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessDAO;
+import com.group3.AdminAndAuthorization.DAO.IInstructorHandlerDAO;
+import com.group3.AdminAndAuthorization.DAO.IUserRoleHandlerDAO;
+import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
+import com.group3.AdminAndAuthorization.Services.IExtractCourseIdService;
 import com.group3.Services.IGrantAccessFieldsValidation;
-import com.group3.Services.IGrantInstructorAccessService;
+import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessService;
 import com.group3.Services.IServiceInjector;
-import com.group3.Services.IViewCoursesService;
+import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 import com.group3.Services.ServiceInjector;
 @Controller
 public class GrantInstructorAccessController {

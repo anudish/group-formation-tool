@@ -1,11 +1,9 @@
 package com.group3.forgotPassword.DAO;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-import com.group3.forgotPassword.DAO.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserPasswordDAOTest {
 

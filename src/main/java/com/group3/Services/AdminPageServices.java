@@ -3,8 +3,8 @@ package com.group3.Services;
 import java.util.ArrayList;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.DAO.IInstructorHandlerDAO;
-import com.group3.DAO.IUserRoleHandlerDAO;
+import com.group3.AdminAndAuthorization.DAO.IInstructorHandlerDAO;
+import com.group3.AdminAndAuthorization.DAO.IUserRoleHandlerDAO;
 
 public class AdminPageServices implements IAdminPageServices {
     private IInstructorHandlerDAO iInstructorHandlerDAO;

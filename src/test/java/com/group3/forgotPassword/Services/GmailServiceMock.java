@@ -1,17 +1,14 @@
 package com.group3.forgotPassword.Services;
 
-import java.util.Properties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.group3.forgotPassword.Services.IGmailService;
+import java.util.Properties;
 
 public class GmailServiceMock implements IGmailService {
 

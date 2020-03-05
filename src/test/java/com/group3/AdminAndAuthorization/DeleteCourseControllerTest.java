@@ -20,10 +20,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IAddCourseDAO;
-import com.group3.DAO.IViewCoursesDAO;
-import com.group3.Services.IViewCoursesService;
+import com.group3.AdminAndAuthorization.DAO.DAOInjector;
+import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
+import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
+import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 import com.group3.Services.ServiceInjector;
 import com.group3.groupmanager.GroupmanagerApplication;
 @RunWith(SpringRunner.class)
@@ -32,6 +32,7 @@ import com.group3.groupmanager.GroupmanagerApplication;
 class DeleteCourseControllerTest {
 	ArrayList<Course> courseList;
 	Course course;
+	String CourseId,CourseName;
 	@Autowired
 	private MockMvc mockMvc;
 	private IAddCourseDAO iAddcourseDAO;
@@ -43,6 +44,10 @@ class DeleteCourseControllerTest {
 	   	 IViewCoursesService iViewCoursesService = new ServiceInjector().createViewCoursesService(iViewCoursesDAO);
 	   	  courseList = iViewCoursesService.getAllCourses();
 	   	  iAddcourseDAO = injector.createAddCourseDAO();
+	   	  course = courseList.get(0);
+		 CourseId = course.getCourseId();
+		 CourseName = course.getCourseName();
+
 	}
 
 	@Test
@@ -50,7 +55,7 @@ class DeleteCourseControllerTest {
 		
 		this.mockMvc.perform(get("/DeleteCoursePage")).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"));
-		
+		 iAddcourseDAO.addCourse(course);
 		
 	}
 

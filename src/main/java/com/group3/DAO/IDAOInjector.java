@@ -1,17 +1,18 @@
 package com.group3.DAO;
 
+import com.group3.AdminAndAuthorization.DAO.*;
 import com.group3.course.DAO.ICourseDAO;
 import com.group3.course.DAO.IInstructorDAO;
 import com.group3.course.DAO.IStudentDAO;
 import com.group3.course.DAO.ITADAO;
 import com.group3.forgotPassword.DAO.IUserPasswordDAO;
-import com.group3.login.DAO.LoginDao;
+import com.group3.login.DAO.ILoginDAO;
 import com.group3.signup.DAO.IUserDAO;
 
 public interface IDAOInjector {
 	public IUserDAO createUserDAO();
 
-	public LoginDao createLoginDAO();
+	public ILoginDAO createLoginDAO();
 
 	IAddCourseDAO createAddCourseDAO();
 

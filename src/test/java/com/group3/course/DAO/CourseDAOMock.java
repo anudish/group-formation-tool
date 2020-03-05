@@ -1,14 +1,11 @@
 package com.group3.course.DAO;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Instructor;
 import com.group3.BusinessModels.Student;
-import com.group3.course.DAO.ICourseDAO;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CourseDAOMock implements ICourseDAO {
 

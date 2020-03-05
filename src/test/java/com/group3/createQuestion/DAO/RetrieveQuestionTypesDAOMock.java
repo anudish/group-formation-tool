@@ -1,8 +1,6 @@
 package com.group3.createQuestion.DAO;
 
 import com.group3.createQuestion.BusinessModels.QuestionTypes;
-import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

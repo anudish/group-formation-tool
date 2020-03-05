@@ -12,7 +12,7 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 
 	private String query, feedbackMessage;
 	private Connection connection;
-	private PreparedStatement statement; 
+	private PreparedStatement statement;
 	private Timestamp currentTimestamp;
 	private ICurrentTimeStampGenerationService currentTimeStampGenerationService;
 	private static Logger logger = LogManager.getLogger(SaveBasicQuestionInformationDAO.class);
@@ -22,14 +22,14 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 		this.currentTimeStampGenerationService = iCurrentTimeStampGenerationService;
 		feedbackMessage = new String();
 	}
-	
+
 	@Override
 	public String saveDetailsAndReturnId(String title, String text, String type) {
-		
+
 		ResultSet resultSet;
 		query = "INSERT INTO QUESTIONS(TITLE,TEXT,TYPE,TIMESTAMP) VALUES(?,?,?,?)";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-		
+
 		try {
 			statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, title);
@@ -38,15 +38,15 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 			this.currentTimestamp = this.currentTimeStampGenerationService.returnCurrentTimeStamp();
 			statement.setTimestamp(4, this.currentTimestamp);
 			statement.execute();
-			
+
 			resultSet = statement.getGeneratedKeys();
 			resultSet.next();
-			
+
 			if (resultSet != null) {
 				feedbackMessage = String.valueOf(resultSet.getInt(1));
 				logger.info("returned value database : " + feedbackMessage);
 			}
-			
+
 		} catch (SQLException e) {
 			logger.error("error connecting with server !" + e.getMessage());
 		}

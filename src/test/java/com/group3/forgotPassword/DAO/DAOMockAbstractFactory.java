@@ -1,7 +1,5 @@
 package com.group3.forgotPassword.DAO;
 
-import com.group3.forgotPassword.DAO.*;
-
 public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;

@@ -1,5 +1,6 @@
 package com.group3.createQuestion;
 
+
 import com.group3.BusinessModels.Instructor;
 import com.group3.createQuestion.DAO.*;
 import com.group3.createQuestion.Services.*;
@@ -35,7 +36,7 @@ public class DeleteQuestionController {
 	@RequestMapping("/deleteQuestion")
 	public ModelAndView deleteQuestion(@RequestParam String questionId) {
 		List<List<String>> questionList;
-		
+
 		logger.info("Question to be deleted: " + questionId);
 		deleteQuestionService.deleteQuestionByQuestionId(questionId);
 		Instructor instructor = new Instructor();

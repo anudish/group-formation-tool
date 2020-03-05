@@ -31,7 +31,7 @@ public class createQuestionController {
 	IQuestionService questionService;
 
 	public createQuestionController() {
-		
+
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();
@@ -48,7 +48,7 @@ public class createQuestionController {
 		questionTypesList = new ArrayList<>();
 		questionTypesList = obtainAllQuestionTypesService.getAllQuestionTypes();
 		logger.info("question types list length " + questionTypesList.size());
-		
+
 		model.addAttribute("questionTypesList", questionTypesList);
 		return "mainQuestionPage.html";
 	}
@@ -79,11 +79,11 @@ public class createQuestionController {
 	public String renderFreeTextAnswerPage() {
 		String id;
 		logger.log(Level.INFO, "REQUEST FORWARDED TO INVOKE FREE TEXT QUESTION GENERATION CONTROLLER! ");
-		questionService = serviceAbstractFactory.createfreeTextQuestionGenerationService();
-		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
+		//questionService = serviceAbstractFactory.createfreeTextQuestionGenerationService();
+		//saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
 		id = questionService.saveBasicQuestionInformation(title, question, type, saveBasicQuestionInformationDAO);
 		logger.log(Level.INFO, "Question id returned from database " + id);
-		
+
 		return "mainQuestionPage.html";
 	}
 
@@ -91,11 +91,37 @@ public class createQuestionController {
 	public String renderNumericQuestion() {
 		String id;
 		logger.log(Level.INFO, "REQUEST FORWARDED TO INVOKE NUMERIC QUESTION GENERATION CONTROLLER! ");
-		questionService = serviceAbstractFactory.createNumericQuestionGenerationService();
-		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
+		//questionService = serviceAbstractFactory.createNumericQuestionGenerationService();
+		//saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
 		id = questionService.saveBasicQuestionInformation(title, question, type, saveBasicQuestionInformationDAO);
 		logger.log(Level.INFO, "Question id returned from database " + id);
-		
+
 		return "mainQuestionPage.html";
 	}
+
+    @RequestMapping("/invokeMCQSOne")
+    public String rendermcqsPage(){
+
+        return "MCQSChooseOneAnswerUpdatePage.html";
+    }
+    @RequestMapping("/createMCQSChooseOne")
+    public String renderMCQSChooseOne(MCQAnswers mcqsanswer){
+
+        String questionId;
+        IServiceAbstractFactory iServiceAbstractFactory  = ServiceAbstractFactory.instance();
+        ISplitMCQSAnswerService iSplitMCQSAnswerService= iServiceAbstractFactory.createSplitMCQSAnswerService();
+        ISaveMCQAnswerstoDataBaseDAO iSaveMCQAnswerstoDataBaseDAO = daoInjector.createSaveMCQAnswertoDataBaseDAO();
+        ArrayList<MCQAnswers> mcqAnswersList = mcqsanswer.splitAnswerSevice(iSplitMCQSAnswerService,mcqsanswer);
+        logger.log(Level.INFO,"mcq Answer List "+mcqAnswersList.size());
+        MCQAnswers mcqAnswers = BusinessModelAbstractFactory.instance().createMCQSAnswers();
+        saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
+        questionId = questionService.saveBasicQuestionInformation(title,question,type,saveBasicQuestionInformationDAO);
+        int success = mcqAnswers.saveAnswerstoDatabase(Integer.parseInt(questionId),mcqAnswersList,iSaveMCQAnswerstoDataBaseDAO,(SaveMCQAnswerstoDataBaseService) questionService);
+        logger.log(Level.INFO,"mcq Answer List "+success);
+        return "redirect:/requestQuestionPage";
+    }
+
+
 }
+
+

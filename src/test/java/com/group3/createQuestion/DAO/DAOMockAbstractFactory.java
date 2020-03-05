@@ -1,9 +1,5 @@
 package com.group3.createQuestion.DAO;
 
-import com.group3.createQuestion.DAO.IDAOAbstractFactory;
-import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
-import com.group3.createQuestion.DAO.ISaveBasicQuestionInformationDAO;
-import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
 
 public class DAOMockAbstractFactory implements IDAOAbstractFactory {
@@ -62,5 +58,10 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 			removeQuestionDAO = new RemoveQuestionDAOMock();
 		}
 		return removeQuestionDAO;
+	}
+
+	@Override
+	public ISaveMCQAnswerstoDataBaseDAO createSaveMCQAnswertoDataBaseDAO() {
+		return null;
 	}
 }

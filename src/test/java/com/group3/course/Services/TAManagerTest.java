@@ -1,30 +1,26 @@
 package com.group3.course.Services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
+import com.group3.BusinessModels.Student;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeAll;
+import com.group3.course.DAO.DAOMockAbstractFactory;
+import com.group3.course.DAO.IDAOAbstractFactory;
+import com.group3.course.DAO.IStudentDAO;
 import org.junit.jupiter.api.Test;
 
-import com.group3.BusinessModels.Student;
-import com.group3.DAO.DAOMockInjector;
-import com.group3.DAO.IDAOInjector;
-import com.group3.course.DAO.ICourseDAO;
-import com.group3.course.DAO.IStudentDAO;
-import com.group3.course.DAO.StudentDAO;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TAManagerTest {
 
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IStudentDAO studentDAO;
 
 	public TAManagerTest() {
 
-		daoInjector = new DAOMockInjector();
+		daoInjector = new DAOMockAbstractFactory();
 		studentDAO = daoInjector.createStudentDAO();
 	}
 

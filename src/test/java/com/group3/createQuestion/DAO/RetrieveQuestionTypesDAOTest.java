@@ -2,10 +2,6 @@ package com.group3.createQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 import com.group3.createQuestion.BusinessModels.QuestionTypes;
-import com.group3.createQuestion.DAO.DAOAbstractFactory;
-import com.group3.createQuestion.DAO.IDAOAbstractFactory;
-import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RetrieveQuestionTypesDAOTest {
 

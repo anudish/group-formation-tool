@@ -1,7 +1,5 @@
 package com.group3.course.DAO;
 
-import com.group3.course.DAO.*;
-
 public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;

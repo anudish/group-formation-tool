@@ -1,10 +1,9 @@
 package com.group3.createQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-
-import com.group3.createQuestion.DAO.*;
-import com.group3.createQuestion.Services.*;
-
+import com.group3.createQuestion.Services.ICurrentTimeStampGenerationService;
+import com.group3.createQuestion.Services.IServiceAbstractFactory;
+import com.group3.createQuestion.Services.ServiceAbstractFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class SaveBasicQuestionInformationDAOTest {
 

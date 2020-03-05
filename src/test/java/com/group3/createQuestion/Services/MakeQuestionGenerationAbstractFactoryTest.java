@@ -1,13 +1,9 @@
 package com.group3.createQuestion.Services;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.createQuestion.DAO.DAOMockAbstractFactory;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MakeQuestionGenerationAbstractFactoryTest {
 
@@ -26,6 +22,6 @@ class MakeQuestionGenerationAbstractFactoryTest {
 	void makeQuestion() {
 
 		questionService = makeQuestionGenerationAbstractFactory.makeQuestion("Free Text");
-		assertTrue(questionService instanceof freeTextQuestionGenerationService);
+		assertTrue(questionService instanceof FreeTextQuestionGenerationService);
 	}
 }

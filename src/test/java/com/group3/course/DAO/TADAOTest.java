@@ -1,16 +1,14 @@
 package com.group3.course.DAO;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import com.group3.BusinessModels.Course;
+import com.group3.BusinessModels.Student;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.group3.BusinessModels.Course;
-import com.group3.BusinessModels.Student;
-import com.group3.course.DAO.ITADAO;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TADAOTest {
 

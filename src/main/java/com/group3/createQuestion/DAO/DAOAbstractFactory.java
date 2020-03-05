@@ -10,7 +10,7 @@ public class DAOAbstractFactory implements IDAOAbstractFactory {
 	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
 	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
 	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
-	public static IRemoveQuestionDAO removeQuestionDAO;	
+	public static IRemoveQuestionDAO removeQuestionDAO;
 	
     public static IDAOAbstractFactory instance(){
         if (null == daoInjector){
@@ -18,7 +18,7 @@ public class DAOAbstractFactory implements IDAOAbstractFactory {
         }
         return daoInjector;
     }
-    
+
     @Override
     public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
     	if(null == retrieveQuestionTypesDAO) {
@@ -60,5 +60,10 @@ public class DAOAbstractFactory implements IDAOAbstractFactory {
 			removeQuestionDAO = new RemoveQuestionDAO();
 		}
 		return removeQuestionDAO;
+	}
+
+	@Override
+	public ISaveMCQAnswerstoDataBaseDAO createSaveMCQAnswertoDataBaseDAO() {
+		return new SaveMCQAnswerstoDataBaseDAO();
 	}
 }
