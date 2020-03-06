@@ -14,10 +14,7 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	@Override
 	public IUserDAO createUserDAO() {
-		if (null == userDAO) {
-			userDAO = new UserDAOMock();
-		}
-		return userDAO;
+		return new UserDAOMock();
 	}
 
 }

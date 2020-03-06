@@ -20,48 +20,31 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	@Override
 	public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
-		if (null == retrieveQuestionTypesDAO) {
-			retrieveQuestionTypesDAO = new RetrieveQuestionTypesDAOMock();
-		}
-		return retrieveQuestionTypesDAO;
+		return  new RetrieveQuestionTypesDAOMock();
 	}
 
 	@Override
 	public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
-		if (null == saveBasicQuestionInformationDAO) {
-			saveBasicQuestionInformationDAO = new SaveBasicQuestionInformationDAOMock(currentTimeStampGenerationService);
-		}
-		return saveBasicQuestionInformationDAO;
+		return  new SaveBasicQuestionInformationDAOMock(currentTimeStampGenerationService);
 	}
 
 	@Override
 	public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
-		if (null == validationRulesLoaderDAO) {
-			validationRulesLoaderDAO = new ValidationRulesDAOLoaderMock();
-		}
-		return validationRulesLoaderDAO;
+		return  new ValidationRulesDAOLoaderMock();
 	}
 
 	@Override
 	public IRetrieveQuestionsDAO createRetrieveQuestionsDAO() {
-
-		if (null == retrieveQuestionsDAO) {
-			retrieveQuestionsDAO = new RetrieveQuestionsDAOMock();
-		}
-		return retrieveQuestionsDAO;
+		return  new RetrieveQuestionsDAOMock();
 	}
 
 	@Override
 	public IRemoveQuestionDAO createRemoveQuestionDAO() {
-
-		if (null == removeQuestionDAO) {
-			removeQuestionDAO = new RemoveQuestionDAOMock();
-		}
-		return removeQuestionDAO;
+		return  new RemoveQuestionDAOMock();
 	}
 
 	@Override
 	public ISaveMCQAnswerstoDataBaseDAO createSaveMCQAnswertoDataBaseDAO() {
-		return null;
+		return new SaveMCQAnswerstoDataBaseDAOMock();
 	}
 }

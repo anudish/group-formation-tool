@@ -61,7 +61,7 @@ public class createQuestionController {
 			@RequestParam("question") String question) {
 
 		logger.info("response type :: " + questionTypeSelector);
-		IQuestionService questionService;
+
 		IReturnControllerPathService returnControllerPathService;
 		String controllerPath = new String();
 

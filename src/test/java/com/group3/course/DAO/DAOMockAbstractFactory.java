@@ -17,33 +17,21 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	@Override
 	public ICourseDAO createCourseDAO() {
-		if (null == courseDAO) {
-			courseDAO = new CourseDAOMock();
-		}
-		return courseDAO;
+		return new CourseDAOMock();
 	}
 
 	@Override
 	public IStudentDAO createStudentDAO() {
-		if (null == studentDAO) {
-			studentDAO = new StudentDAOMock();
-		}
-		return studentDAO;
+		return  new StudentDAOMock();
 	}
 
 	@Override
 	public ITADAO createTADAO() {
-		if (null == taDAO) {
-			taDAO = new TADAOMock();
-		}
-		return taDAO;
+		return  new TADAOMock();
 	}
 
 	@Override
 	public IInstructorDAO createInstructorDAO() {
-		if (null == instructorDAO) {
-			instructorDAO = new InstructorDAOMock();
-		}
-		return instructorDAO;
+		return  new InstructorDAOMock();
 	}
 }

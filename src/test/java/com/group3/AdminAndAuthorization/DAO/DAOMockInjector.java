@@ -4,8 +4,7 @@ import com.group3.AdminAndAuthorization.DAO.IDAOInjector;
 
 import com.group3.AdminAndAuthorization.DAO.*;
 
-public class DAOMockInjector implements IDAOInjector
-{
+public class DAOMockInjector implements IDAOInjector {
 	IAddCourseDAO addCourseDAO;
 	IViewCoursesDAO viewCoursesDAO;
 	IDeleteCourseDAO deleteCourseDAO;
@@ -14,10 +13,8 @@ public class DAOMockInjector implements IDAOInjector
 	IUserRoleHandlerDAO userRoleHandlerDAO;
 
 	@Override
-	public IAddCourseDAO createAddCourseDAO()
-	{
-		if (null == addCourseDAO)
-		{
+	public IAddCourseDAO createAddCourseDAO() {
+		if (null == addCourseDAO) {
 			addCourseDAO = new AddCourseDAOMock();
 		}
 
@@ -25,57 +22,27 @@ public class DAOMockInjector implements IDAOInjector
 	}
 
 	@Override
-	public IViewCoursesDAO createViewCourseDAO()
-	{
-		if (null == viewCoursesDAO)
-		{
-			viewCoursesDAO = new ViewCoursesDAOMock();
-		}
-
-		return viewCoursesDAO;
+	public IViewCoursesDAO createViewCourseDAO() {
+		return new ViewCoursesDAOMock();
 	}
 
 	@Override
-	public IDeleteCourseDAO createDeleteCourseDAO()
-	{
-		if (null == deleteCourseDAO)
-		{
-			deleteCourseDAO = new DeleteCourseDAOMock();
-		}
-
-		return deleteCourseDAO;
+	public IDeleteCourseDAO createDeleteCourseDAO() {
+		return new DeleteCourseDAOMock();
 	}
 
 	@Override
-	public IGrantInstructorAccessDAO createGrantInstructorAccessDAO()
-	{
-		if (null == grantInstructorAccessDAO)
-		{
-			grantInstructorAccessDAO = new GrantInstructorAccessDAOMock();
-		}
-
-		return grantInstructorAccessDAO;
+	public IGrantInstructorAccessDAO createGrantInstructorAccessDAO() {
+		return new GrantInstructorAccessDAOMock();
 	}
 
 	@Override
-	public IInstructorHandlerDAO createInstructorHandlerDAO()
-	{
-		if (null == instructorHandlerDAO)
-		{
-			instructorHandlerDAO = new InstructorHandlerDAOMock();
-		}
-
-		return instructorHandlerDAO;
+	public IInstructorHandlerDAO createInstructorHandlerDAO() {
+		return new InstructorHandlerDAOMock();
 	}
 
 	@Override
-	public IUserRoleHandlerDAO createUserRoleHandlerDAO()
-	{
-		if (null == userRoleHandlerDAO)
-		{
-			userRoleHandlerDAO = new UserRoleHandlerDAOMock();
-		}
-
-		return userRoleHandlerDAO;
+	public IUserRoleHandlerDAO createUserRoleHandlerDAO() {
+		return new UserRoleHandlerDAOMock();
 	}
 }

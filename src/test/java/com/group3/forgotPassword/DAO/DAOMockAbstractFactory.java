@@ -14,10 +14,7 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 	
 	@Override
 	public IUserPasswordDAO getUserDAOObj() {
-		if (null == userPasswordDAO) {
-			userPasswordDAO = new UserPasswordDAOMock();
-		}
-		return userPasswordDAO;
+		return new UserPasswordDAOMock();
 	}
 
 }
