@@ -86,6 +86,7 @@ public class GrantInstructorAccessController {
 		feebackMessage = serviceInjector
 				.createAdminPageServices(instructorHandlerDAO, userRoleHandlerDAO, guestmodel, courseId)
 				.alterUserRole();
+		System.out.println(feebackMessage);
 
 			logger.info("The role "+feebackMessage + " is granted.");
 		model.addAttribute("feedbackMessage", feebackMessage);

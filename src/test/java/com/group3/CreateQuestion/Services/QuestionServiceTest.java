@@ -3,8 +3,8 @@ package com.group3.CreateQuestion.Services;
 import com.group3.CreateQuestion.DAO.DAOMockAbstractFactory;
 import com.group3.CreateQuestion.DAO.IDAOAbstractFactory;
 import com.group3.CreateQuestion.DAO.ISaveBasicQuestionInformationDAO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

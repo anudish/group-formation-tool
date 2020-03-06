@@ -7,9 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.group3.ForgotPassword.DAO.*;
 import com.group3.ForgotPassword.Services.*;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 @Controller
 public class ForgetPasswordController {
-
+	private static Logger logger = LogManager.getLogger(ForgetPasswordController.class);
 	String generated_code;
 	String email;
 
@@ -38,28 +42,34 @@ public class ForgetPasswordController {
 
 	@RequestMapping("/enterCode")
 	public ModelAndView enterCode(String email) {
-		final int code_length = 8;
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		final int code_length = 5;
 		this.email = email;
 		ModelAndView mv;
 		mv = resetCodeManager.checkEmailIdExistance(email);
-		generated_code = resetCodeManager.generateCode(code_length);
+
+		try {
+			generated_code = resetCodeManager.generateCode(code_length);
+		} catch (IllegalArgumentException e) {
+			logger.error("Error passing length to verification code generator! " + e);
+		}
+
 		resetCodeManager.sendCodeEmail(email);
 		return mv;
 	}
 
 	@RequestMapping("/checkCode")
 	public ModelAndView checkCode(String code_input) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		ModelAndView mv;
-		System.out.println("UserCode: " + code_input);
-		System.out.println("GeneratedCode: " + generated_code);
+		logger.debug("UserCode: " + code_input);
+		logger.debug("GeneratedCode: " + generated_code);
 		mv = updatePasswordManager.compareCode(code_input, generated_code);
 		return mv;
 	}
 
 	@RequestMapping("/passwordUpdater")
 	public String passwordUpdater(String password) {
-		System.out.println("Password: " + password);
-		System.out.println("email for Password to update: " + email);
 		updatePasswordManager.updatePassword(email, password);
 		return "login";
 	}

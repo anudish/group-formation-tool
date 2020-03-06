@@ -2,8 +2,8 @@ package com.group3.CreateQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 import com.group3.CreateQuestion.BusinessModels.QuestionTypes;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

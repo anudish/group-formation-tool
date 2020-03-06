@@ -2,8 +2,8 @@ package com.group3.CreateQuestion.Services;
 
 import com.group3.CreateQuestion.DAO.IValidationRulesLoaderDAO;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 

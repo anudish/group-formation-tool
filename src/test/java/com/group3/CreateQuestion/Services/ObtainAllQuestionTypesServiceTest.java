@@ -4,9 +4,8 @@ import com.group3.CreateQuestion.BusinessModels.QuestionTypes;
 import com.group3.CreateQuestion.DAO.DAOMockAbstractFactory;
 import com.group3.CreateQuestion.DAO.IDAOAbstractFactory;
 import com.group3.CreateQuestion.DAO.IRetrieveQuestionTypesDAO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.BeforeEach;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

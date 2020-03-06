@@ -15,7 +15,7 @@ public class LoginController {
 	        String email = loginForm.getEmail();
 	        String password = loginForm.getPassword();
 	        model.addAttribute("invalidCredentials",true);
-	        return "login";       
+	        return "login";
 	    }
 
 }

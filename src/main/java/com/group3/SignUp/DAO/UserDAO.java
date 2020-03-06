@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.group3.BusinessModels.Guest;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
@@ -19,7 +20,7 @@ public class UserDAO implements IUserDAO {
 	private static Logger logger = LogManager.getLogger(UserDAO.class);
 
 	public boolean getSignUpDetailsofUser(Guest guest) {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		boolean checkUser = false;
 		String query;
 		ResultSet result;

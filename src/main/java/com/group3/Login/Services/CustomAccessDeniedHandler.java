@@ -6,8 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,18 +16,18 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-	private static Logger logger = LogManager.getLogger(CustomAccessDeniedHandler.class);
+    private static Logger logger = LogManager.getLogger(CustomAccessDeniedHandler.class);
 
-	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException, ServletException {
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            logger.warn("User: " + auth.getName() + " attempted to access the protected URL: " + request.getRequestURI());
+        }
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null) {
-			logger.warn("User: " + auth.getName() + " attempted to access the protected URL: " + request.getRequestURI());
-		}
-
-		response.sendRedirect(request.getContextPath() + "/accessdenied");
-	}
+        response.sendRedirect(request.getContextPath() + "/accessdenied");
+    }
 
 }

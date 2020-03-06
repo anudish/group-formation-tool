@@ -3,8 +3,8 @@ package com.group3.Course.DAO;
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Student;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,17 +27,14 @@ public class RemoveTestDataFromDB {
 				+ "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println(result);
 
 		sql = "delete from USER_DATABASE where MAIL_ID ='" + student.getEmail() + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println(result);
 
 		sql = "delete from AUTHENTICATION_DATABASE where MAIL_ID ='" + student.getEmail() + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println(result);
 		connection.close();
 	}
 
@@ -47,12 +44,10 @@ public class RemoveTestDataFromDB {
 		sql = "delete from COURSES where COURSE_ID ='" + courseId + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println("Test Course deleted!");
 
 		sql = "delete from ALLOCATE_INSTRUCTOR where MAIL_ID ='" + instId + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println("Test Instructor deleted!");
 		connection.close();
 	}
 
@@ -62,12 +57,10 @@ public class RemoveTestDataFromDB {
 		sql = "delete from COURSES where COURSE_ID ='" + courseId + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println("Test Course deleted!");
 
 		sql = "delete from student_enrollments where COURSE_ID ='" + courseId + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println("Test Instructor deleted!");
 		connection.close();
 	}
 
@@ -77,7 +70,6 @@ public class RemoveTestDataFromDB {
 		sql = "delete from USER_DATABASE where MAIL_ID ='" + student.getEmail() + "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
-		System.out.println("Test Student deleted!");
 		connection.close();
 
 	}

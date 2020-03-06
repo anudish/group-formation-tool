@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -22,7 +23,7 @@ import com.group3.Login.DAO.ILoginDAO;
 
 public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	protected Log logger = LogFactory.getLog(this.getClass());
+	protected Logger logger = LogManager.getLogger(AuthenticationSuccessHandler.class);
 
 	public static String email = null;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -37,7 +38,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		String targetUrl = determineTargetUrl(authentication);
 
 		if (response.isCommitted()) {

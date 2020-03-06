@@ -6,8 +6,8 @@ import com.group3.CreateQuestion.Services.ICurrentTimeStampGenerationService;
 import java.sql.*;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInformationDAO {
 	private String query, feedbackMessage;

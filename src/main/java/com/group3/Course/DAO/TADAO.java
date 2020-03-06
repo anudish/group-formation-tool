@@ -3,10 +3,12 @@ package com.group3.Course.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.group3.BusinessModels.Course;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
@@ -20,7 +22,7 @@ public class TADAO implements ITADAO {
 	ArrayList<Course> courseInfo;
 
 	public ArrayList<Course> getCoursesByTAMailId(String studentMailId) {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		courseInfo = new ArrayList<Course>();
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
@@ -28,7 +30,6 @@ public class TADAO implements ITADAO {
 					+ " JOIN student_enrollments S ON S.COURSE_ID=C.COURSE_ID" + " WHERE S.MAIL_ID=\"" + studentMailId
 					+ "\"";
 
-			logger.info(query);
 			statement = connection.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			courseInfo = new ArrayList<Course>();
@@ -42,8 +43,10 @@ public class TADAO implements ITADAO {
 			}
 
 			connection.close();
-		} catch (Exception e) {
-			logger.error(e);
+		} catch (NullPointerException e) {
+			logger.error("No courses available!" + e.getMessage());
+		} catch (SQLException e) {
+			logger.error("Error getting courses for TA/Student! "+e.getMessage()+" SQL State:"+e.getSQLState()+" Error code:"+e.getErrorCode());
 		}
 		return courseInfo;
 	}

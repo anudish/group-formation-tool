@@ -9,16 +9,16 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class GmailService implements IGmailService {
 
+	private static Logger logger = LogManager.getLogger(GmailService.class);
 	Properties properties = null;
 	Session session = null;
 	Message msg = null;
-
-	private static Logger logger = LogManager.getLogger(GmailService.class);
 
 	public void setSMTPClient() {
 
@@ -35,6 +35,7 @@ public class GmailService implements IGmailService {
 	}
 
 	public void prepareMail(String subject, String message, String to) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 
 		try {
 			msg = new MimeMessage(session);
@@ -43,16 +44,16 @@ public class GmailService implements IGmailService {
 			msg.setSubject(subject);
 			msg.setText(message);
 		} catch (Exception e) {
-			logger.info(e);
+			logger.info("Error occurred while preparing mail" + e);
 		}
 	}
 
 	public void sendEmail() {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		try {
 			Transport.send(msg);
 		} catch (Exception e) {
-			logger.info(e);
+			logger.info("Error in sending mail " + e);
 		}
 	}
 }

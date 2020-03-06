@@ -2,9 +2,9 @@ package com.group3.CreateQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 import com.group3.CreateQuestion.BusinessModels.MCQAnswers;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.Connection;
