@@ -57,8 +57,8 @@ public class StudentManager implements IStudentManager {
 					studentDetails.setEncryptedPassword(password);
 					courseDAO.enrollStudentToCourse(studentDetails, courseId);
 					gmailService.setSMTPClient();
-					gmailService.prepareMail("[University Portal] Enrollment in course:" + courseId,
-							"Dear student,\nYou have been enrolled in the course: " + courseId
+					gmailService.prepareMail("[University Portal] Enrollment in Course:" + courseId,
+							"Dear student,\nYou have been enrolled in the Course: " + courseId
 									+ ".\nPlease contact the instructor if this is a mistake.\nYour credentials are: \n"
 									+ "Mail: " + mail + "\nPassword: " + password,
 							mail);

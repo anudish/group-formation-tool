@@ -19,7 +19,7 @@ public class GrantAccessFieldsValidation implements IGrantAccessFieldsValidation
 		String feedBackMessage = new String();
 		try {
 		if (courseName.equals("Select courses")) {
-			feedBackMessage = "Select course " + "\n";
+			feedBackMessage = "Select Course " + "\n";
 		}
 		if (role.equals("Select Role")) {
 			feedBackMessage += "Select Role" + "\n";

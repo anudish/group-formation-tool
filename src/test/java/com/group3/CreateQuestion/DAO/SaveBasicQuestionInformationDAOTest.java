@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
 class SaveBasicQuestionInformationDAOTest {
 
@@ -55,11 +56,4 @@ class SaveBasicQuestionInformationDAOTest {
 		}
 	}
 
-	@Test
-	void saveDetails() {
-
-		returnMessageFromDataBase = saveBasicQuestionInformationDAO.saveDetailsAndReturnId("Programming Capacity",
-				"How many hours you can spent on programming per week ?", "Free text");
-		assertNotNull(returnMessageFromDataBase);
-	}
 }

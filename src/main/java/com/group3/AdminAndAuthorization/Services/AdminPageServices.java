@@ -60,7 +60,7 @@ public class AdminPageServices implements IAdminPageServices {
 						if (courseid.equalsIgnoreCase(CourseId)) {
 
 							outputMessage = firstName + " " + lastName + " "
-									+ "is already an instructor for the course " + courseid;
+									+ "is already an instructor for the Course " + courseid;
 							return outputMessage;
 						}
 					}

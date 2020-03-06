@@ -11,10 +11,8 @@ import com.group3.BusinessModels.LoginForm;
 public class LoginController {
 
 		@PostMapping(path = "/login")
-	    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
-	        String email = loginForm.getEmail();
-	        String password = loginForm.getPassword();
-	        model.addAttribute("invalidCredentials",true);
+	    public String login(){
+	       
 	        return "login";
 	    }
 

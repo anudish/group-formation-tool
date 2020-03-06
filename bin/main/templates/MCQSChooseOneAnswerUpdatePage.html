@@ -22,15 +22,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         function appendText() {
-            var txt1 = "<p></p>";        // Create text with HTML
-            var txt2 = $("<label>\"Display Text\"</label><input class=\"answer\" placeholder=\"Answer Text\" name=\"answer\" type=\"text\"></input>&nbsp;&nbsp;<label>Stored As:</label><input class=\"storedAs\" name=\"storedAs\" placeholder=\"Store answer as\" type=\"text\"></input>").text("");  // Create text with jQuery
+            var txt1 = "<p></p>";
+            var txt2 = $("<label>\"Display Text\"</label><input class=\"answer\" placeholder=\"Answer Text\" name=\"answer\" type=\"text\"></input>&nbsp;&nbsp;<label>Stored As:</label><input class=\"storedAs\" name=\"storedAs\" placeholder=\"Store answer as\" type=\"text\"></input>").text("");
             var txt3 = document.createElement("p");
-            txt3.innerHTML = "";         // Create text with DOM
-            $("#addinputs").append(txt1, txt2, txt3);   // Append new elements
+            txt3.innerHTML = "";
+            $("#addinputs").append(txt1, txt2, txt3);
         }
         function validateFields() {
             var answer  = document.getElementsByClassName("answer");
-            alert(answer);
             if (answer == ""){
                 alert("empty field");
                 return false;

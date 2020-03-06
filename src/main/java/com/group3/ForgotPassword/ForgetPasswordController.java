@@ -71,6 +71,6 @@ public class ForgetPasswordController {
 	@RequestMapping("/passwordUpdater")
 	public String passwordUpdater(String password) {
 		updatePasswordManager.updatePassword(email, password);
-		return "login";
+		return "Login";
 	}
 }

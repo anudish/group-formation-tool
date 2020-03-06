@@ -41,7 +41,7 @@ public class DeleteCourseDAOMock implements IDeleteCourseDAO {
 				courseList.remove(course1);
 				break;
 			} else {
-				feedbackMessage = "Error occured while deleting the course";
+				feedbackMessage = "Error occured while deleting the Course";
 			}
 		}
 		return feedbackMessage;

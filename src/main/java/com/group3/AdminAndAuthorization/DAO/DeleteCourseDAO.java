@@ -36,7 +36,7 @@ public class DeleteCourseDAO implements IDeleteCourseDAO {
 				feedBackMessage = course.getCourseName() + " (" + course.getCourseId() + ") "
 						+ " is deleted sucessfully ";
 			} else {
-				feedBackMessage = "Error occured while deleting the course";
+				feedBackMessage = "Error occured while deleting the Course";
 			}
 		} catch (SQLException e) {
 			feedBackMessage = "Server not responding";

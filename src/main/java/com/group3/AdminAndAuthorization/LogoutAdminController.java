@@ -8,7 +8,7 @@ public class LogoutAdminController {
 	@RequestMapping("/logoutAdmin")
 	String logoutRequest() {
 	try {
-		return "login";
+		return "Login";
 	} catch (NullPointerException e) {
 		return "error.html";
 	}

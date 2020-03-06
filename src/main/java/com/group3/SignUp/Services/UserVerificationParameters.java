@@ -20,7 +20,7 @@ public class UserVerificationParameters {
 	public static String SIGN_UP_ERROR_PAGE = "CustomErrorPage";
 	public static String NULL_PTR_EXECTIONS = "There are no records related to user inputs";
 	public static String EXCEPTION_MESSAGE = "ExceptionMessage";
-	public static String SIGNUP_PASSED = "You have signed up successfully! Please proceed with login";
+	public static String SIGNUP_PASSED = "You have signed up successfully! Please proceed with Login";
 	public static String VALID_EMAIL_MESSAGE = "Please enter a valid email address";
 	public static String VALID_PASSWORD_MESSAGE = "Password and Repeat Password does not match";
 	public static String SQL_EXCEPTION_MESSAGE = "Sorry! Unfortunately we are facing connectivity issues. Please try again";

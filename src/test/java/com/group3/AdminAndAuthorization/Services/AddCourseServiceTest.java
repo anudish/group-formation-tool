@@ -34,7 +34,7 @@ class AddCourseServiceTest {
 		String expectedErrorMessage;
 		feedbackMessage = new ArrayList<>();
 		Course course = new Course();
-		course.setCourseId("CS135"); // False Pattern for course
+		course.setCourseId("CS135"); // False Pattern for Course
 		course.setCourseName("Software Engineering");
 		feedbackMessage = addCourseService.insertCourseDetails(course, courseInputValidation);
 		expectedErrorMessage = "Invalid Course Id (It Should Like : csci5308)";

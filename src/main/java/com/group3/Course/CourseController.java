@@ -115,7 +115,7 @@ public class CourseController {
             courseModel.setCourseId(this.courseId);
             courseModel.setCourseName(this.courseName);
             mv.addObject("courseInfo", courseModel);
-            mv.setViewName("course.html");
+            mv.setViewName("Course.html");
 
         } else if (role.equals("Instructor") || role.equals("Ta")) {
             mv.addObject("courseInfo", courseModel);
@@ -125,7 +125,7 @@ public class CourseController {
         return mv;
     }
 
-    @RequestMapping("/course")
+    @RequestMapping("/Course")
     public ModelAndView displayCoursePage() {
 
         ModelAndView mv = new ModelAndView();
@@ -133,7 +133,7 @@ public class CourseController {
         courseModel.setCourseId(this.courseId);
         courseModel.setCourseName(this.courseName);
         mv.addObject("courseInfo", courseModel);
-        mv.setViewName("course.html");
+        mv.setViewName("Course.html");
         return mv;
     }
 

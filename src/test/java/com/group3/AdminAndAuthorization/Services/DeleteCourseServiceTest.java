@@ -33,7 +33,7 @@ class DeleteCourseServiceTest {
 		deleteCourseService = ServiceAbstractFactory.instance().createDeleteCourseService(deleteCourseDAO, course);
 
 		feedbackString = deleteCourseService.deleteCourse();
-		expectedResponse = "Error occured while deleting the course";
+		expectedResponse = "Error occured while deleting the Course";
 		assertTrue(feedbackString.equals(expectedResponse) == true);
 
 		course.setCourseId("CSCI7800");

@@ -40,7 +40,7 @@ public class CreateCourseController {
 		operationFeedback = addCourseService.insertCourseDetails(course, courseInputValidation);
 
 		model.addAttribute("operationFeedback", operationFeedback);
-    	  logger.info("The course : " + operationFeedback + " is added successfully.");
+    	  logger.info("The Course : " + operationFeedback + " is added successfully.");
 		return "AddCourse.html";
 		} catch (NullPointerException np) {
 			logger.log(Level.ERROR, np.getMessage());

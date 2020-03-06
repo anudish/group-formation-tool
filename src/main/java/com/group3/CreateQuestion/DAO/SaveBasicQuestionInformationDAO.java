@@ -6,6 +6,8 @@ import com.group3.CreateQuestion.Services.ICurrentTimeStampGenerationService;
 import java.sql.*;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -30,6 +32,8 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 		ResultSet resultSet;
 		query = "INSERT INTO QUESTIONS(TITLE,TEXT,TYPE,TIMESTAMP) VALUES(?,?,?,?)";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+		Authentication authentication;
+		String email;
 
 		try {
 			statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -47,7 +51,22 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 				feedbackMessage = String.valueOf(resultSet.getInt(1));
 				logger.info("returned value database : " + feedbackMessage);
 			}
+			
 		} catch (SQLException e) {
+			logger.error("error connecting with server !" + e.getMessage());
+		}
+		
+		query = "INSERT INTO INSTRUCTOR_QUESTION_MAPPING VALUES(?,?)";
+		
+		try {
+			authentication = SecurityContextHolder.getContext().getAuthentication();
+			email = authentication.getName();
+			statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, email);
+			statement.setString(2, feedbackMessage);
+			statement.execute();
+
+		}catch(SQLException e){
 			logger.error("error connecting with server !" + e.getMessage());
 		}
 		return feedbackMessage;
