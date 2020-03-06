@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 
+import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -34,12 +35,12 @@ class CreateCourseControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	private IDeleteCourseDAO iDeleteCourseDAO;
-	
-	@BeforeEach
-	public void setup() {
+	private Course course;
+
+	public CreateCourseControllerTest() {
 		
-		iDeleteCourseDAO = new DAOInjector().createDeleteCourseDAO();
-		Course course = new Course();
+		iDeleteCourseDAO = DAOInjector.instance().createDeleteCourseDAO();
+		course = new Course();
 		course.setCourseId("csci5608");
 		course.setCourseName("Solid Mechanics");
 		iDeleteCourseDAO.deleteCourse(course);
@@ -47,36 +48,48 @@ class CreateCourseControllerTest {
 
 	@Test
 	final void testRenderCoursePage() throws Exception {
-		
-		
+
+
 		this.mockMvc.perform(get("/addCoursePageRequest")
 				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(content().string(containsString("")));
 		
 	}
 
-//	@Test
-//	final void testAddCourse() throws Exception {
-//		
-//		ArrayList<String> operationFeedback = new ArrayList<>();
-//		operationFeedback.add("Solid Mechanics with CSCI5608 created successfully");
-//		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")
-//				.with(user("user").password("password").roles("ADMIN")))
-//				.andDo(print()).andExpect(status().isOk())
-//		.andExpect(model().attribute("operationFeedback",operationFeedback));
-//		
-//		
-//		operationFeedback.clear();
-//		operationFeedback.add("Course Name  Visual Processing with Course ID csci7000 already exists !! ");
-//		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")
-//				.with(user("user").password("password").roles("ADMIN")))
-//				.andDo(print()).andExpect(status().isOk())
-//		.andExpect(model().attribute("operationFeedback",operationFeedback));
-//	    
-//		Course course = new Course();
-//		course.setCourseId("csci5608");
-//		course.setCourseName("Solid Mechanics");
-//		iDeleteCourseDAO.deleteCourse(course);
-//	}
+	@Test
+	final void testAddCourseCreatedSucess() throws Exception {
 
+		ArrayList<String> operationFeedback = new ArrayList<>();
+		operationFeedback.add("Solid Mechanics with CSCI5608 created successfully");
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")
+				.with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk())
+		.andExpect(model().attribute("operationFeedback",operationFeedback));
+
+
+		operationFeedback.clear();
+
+
+		 course = new Course();
+		course.setCourseId("csci5608");
+		course.setCourseName("Solid Mechanics");
+		iDeleteCourseDAO.deleteCourse(course);
+	}
+
+	@Test
+	final void testAddCourseAlreadyExist() throws Exception {
+		ArrayList<String> operationFeedback = new ArrayList<>();
+		Course course = new Course();
+		course.setCourseId("csci7000");
+		course.setCourseName("Visual Processing");
+		IAddCourseDAO iAddCourseDAO = DAOInjector.instance().createAddCourseDAO();
+		iAddCourseDAO.addCourse(course);
+		operationFeedback.add("Course Name  Visual Processing with Course ID csci7000 already exists !! ");
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")
+				.with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(model().attribute("operationFeedback",operationFeedback));
+		IDeleteCourseDAO iDeleteCourseDAO = DAOInjector.instance().createDeleteCourseDAO();
+		iDeleteCourseDAO.deleteCourse(course);
+	}
 }

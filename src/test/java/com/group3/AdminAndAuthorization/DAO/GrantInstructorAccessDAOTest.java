@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessDAO;
+import com.group3.signup.DAO.IUserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import com.group3.BusinessModels.GuestModel;
 class GrantInstructorAccessDAOTest {
 	 ArrayList<GuestModel> accessUserlist;
 	 IGrantInstructorAccessDAO iGrantInstructorAccessDAO;
+	 IUserDAO iUserDAO;
 	 GuestModel falseUser,trueUser;
 	@BeforeEach
 	void setUp() throws Exception {
@@ -26,7 +28,7 @@ class GrantInstructorAccessDAOTest {
 		falseUser.setFirstName("Atal");
 		falseUser.setLastName("Vajpayee");
 		falseUser.setUserRole("Guest");
-		
+
 		trueUser = new GuestModel();
 		trueUser.setFirstName("Joe");
 		trueUser.setLastName("Root");

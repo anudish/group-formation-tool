@@ -68,6 +68,11 @@ public class DAOInjector implements IDAOInjector {
 	}
 
 	@Override
+	public IDeleteUserDAO createDeleteUserDAO() {
+		return new DeleteUserDAO();
+	}
+
+	@Override
 	public IInstructorHandlerDAO createInstructorHandlerDAO() {
 		if (instructorHandlerDAO == null) {
 			instructorHandlerDAO = new InstructorHandlerDAO();

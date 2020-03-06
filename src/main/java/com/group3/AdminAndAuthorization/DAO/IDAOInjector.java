@@ -14,4 +14,6 @@ public interface IDAOInjector {
 	IInstructorHandlerDAO createInstructorHandlerDAO();
 
 	IUserRoleHandlerDAO createUserRoleHandlerDAO();
+
+	IDeleteUserDAO createDeleteUserDAO();
 }

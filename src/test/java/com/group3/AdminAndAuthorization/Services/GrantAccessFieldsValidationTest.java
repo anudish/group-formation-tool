@@ -10,25 +10,32 @@ class GrantAccessFieldsValidationTest {
 	
 	private IGrantAccessFieldsValidation iGrantAccessFieldsValidation;
 	IServiceInjector serviceInjector;
-	@BeforeEach
-	void setUp() throws Exception {
-		 serviceInjector = new ServiceInjector();
+
+	public GrantAccessFieldsValidationTest(){
+		 serviceInjector = ServiceInjector.instance();
 	}
 
 	@Test
 	final void testValidateFields() {
 		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Instructor");
 	    assertFalse(iGrantAccessFieldsValidation.validateFields().length() > 0);
-	
-	    iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Instructor");
-	    assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
-	    
-	    iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Select Role");
-	    assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
-	
-	    iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Select Role");
-	    assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
-	
+
+	}
+	@Test
+	final void testValidateFieldsCaseInstructor(){
+		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Instructor");
+		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
 	}
 
+	@Test
+	final void testValidateFieldsCaseSelectRole(){
+		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Select Role");
+		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
+	}
+
+	@Test
+	final void testValidateFieldsCaseSelectRoleAndCourse(){
+		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Select Role");
+		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
+	}
 }

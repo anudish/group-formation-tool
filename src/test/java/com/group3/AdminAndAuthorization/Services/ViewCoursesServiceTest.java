@@ -17,11 +17,10 @@ class ViewCoursesServiceTest {
 	IViewCoursesDAO iViewCoursesDAO;
 	IViewCoursesService iViewCoursesService;
 	ArrayList<Course> courseList;
-	@BeforeEach
-	void setUp() throws Exception {
-		injector = new DAOMockInjector();
+
+	public ViewCoursesServiceTest() {
+		injector = DAOMockInjector.instance();
 		 iViewCoursesDAO = injector.createViewCourseDAO();
-		 
 	}
 
 	

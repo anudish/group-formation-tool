@@ -18,10 +18,10 @@ class GrantInstructorAccessServiceTest {
 	 IGrantInstructorAccessService iGrantInstructorAccessService;
 	 ArrayList<GuestModel> userDataSet;
 	 
-	@BeforeEach
-	void setUp() throws Exception {
-		iGrantInstructorAccessDAO = new DAOMockInjector().createGrantInstructorAccessDAO();
-		iGrantInstructorAccessService = new ServiceInjector().createGrantInstructorAccessService(iGrantInstructorAccessDAO);
+
+	public GrantInstructorAccessServiceTest() {
+		iGrantInstructorAccessDAO = DAOMockInjector.instance().createGrantInstructorAccessDAO();
+		iGrantInstructorAccessService = ServiceInjector.instance().createGrantInstructorAccessService(iGrantInstructorAccessDAO);
 		userDataSet = new ArrayList<>();
 		GuestModel data =  new GuestModel();
 		data.setEmail("john@dal.ca");

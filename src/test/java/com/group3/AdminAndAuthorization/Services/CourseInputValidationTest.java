@@ -12,9 +12,9 @@ import com.group3.AdminAndAuthorization.Services.ICourseInputValidation;
 class CourseInputValidationTest {
 	ICourseInputValidation courseInputValidation;
 	String CourseId,CourseName,CourseIdErrorMesssage,CourseNameErrorMesssage;
-	Course course; 
-	@BeforeEach
-	void setUp() throws Exception {
+	Course course;
+
+	public CourseInputValidationTest() {
 		course  = new Course();
 		 courseInputValidation = new ServiceInjector().createCourseInputValidation();
 		 CourseIdErrorMesssage = "Invalid Course Id (It Should Like : csci5308)";
@@ -22,9 +22,8 @@ class CourseInputValidationTest {
 	}
 
 	@Test
-	final void testValidateInputCourse() {
-		//fail("Not yet implemented"); // TODO
-		//Failing Test Cases for Invalid Id Format
+	final void testValidateInputCourseInValidCourseId() {
+
 		CourseId = "CSC6400";
 		CourseName = "Virtual Reality";
 		
@@ -34,25 +33,34 @@ class CourseInputValidationTest {
 		assertTrue(courseInputValidation.validateInputCourse(course).get(0).equals(CourseIdErrorMesssage),CourseIdErrorMesssage);
 		
 		
-		//Passing test case for Valid CourseId 
+
+
+
+	}
+
+	@Test
+	public void testValidateInputCourseValidCourseId(){
+
 		CourseId = "CSCI5308";
 		CourseName = "QA";
 		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
-		//System.out.println("CC" +courseInputValidation.validateInputCourse(course).get(0));
-		
 		assertTrue(courseInputValidation.validateInputCourse(course).size()==0,"No Error condition");
 		assertFalse(courseInputValidation.validateInputCourse(course).size()> 0,"No Error condition");
-		
-		//Failing test case for Invalid CourseName
+
+
+	}
+	@Test
+	public void testValidateInputCourseInValidCourseName(){
 		CourseId = "CSCI5308";
 		CourseName = "12345QA";
 		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
 		assertTrue(courseInputValidation.validateInputCourse(course).get(0).equals(CourseNameErrorMesssage),CourseNameErrorMesssage);
-		
-		
-		//Passing Test Case for Valid CourseName
+
+	}
+	@Test
+	public void testValidateInputCourseValidCourseName(){
 		CourseId = "CSCI5308";
 		CourseName = "Quality Assurance";
 		course.setCourseId(CourseId);
@@ -60,5 +68,4 @@ class CourseInputValidationTest {
 		assertTrue(courseInputValidation.validateInputCourse(course).size()==0,"No Error condition");
 		assertFalse(courseInputValidation.validateInputCourse(course).size()> 0,"No Error condition");
 	}
-
 }

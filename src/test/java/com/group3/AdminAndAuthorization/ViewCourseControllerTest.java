@@ -24,10 +24,7 @@ class ViewCourseControllerTest {
     
 	@Autowired
 	private MockMvc mockMvc;
-	
-	@BeforeEach
-	void setUp() throws Exception {
-	}
+
 
 	@Test
 	final void testViewCoursePage() throws Exception {

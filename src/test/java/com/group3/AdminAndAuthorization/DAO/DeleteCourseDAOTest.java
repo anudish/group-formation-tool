@@ -14,11 +14,11 @@ class DeleteCourseDAOTest {
 	private IDeleteCourseDAO iDeleteCourseDAO;
 	private Course course;
 	private String CourseName,CourseId;
-	@BeforeEach
-	void setUp() throws Exception {
+
+	public DeleteCourseDAOTest() {
 		course = new Course();
 		 CourseName = "Penentration Testing(Cyber)";
-	     CourseId = "CSCI6786";
+	     CourseId = "CSCT6786";
 		course.setCourseId(CourseId);
 		course.setCourseName(CourseName);
  	    DAOInjector daoinjector = new DAOInjector();

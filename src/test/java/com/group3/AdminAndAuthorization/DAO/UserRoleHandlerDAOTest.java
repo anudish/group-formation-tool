@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 class UserRoleHandlerDAOTest {
 	IUserRoleHandlerDAO iUserRoleHandlerDAO;
 	String mailId,role,switchedRole;
-	@BeforeEach
-	void setUp() throws Exception {
-		iUserRoleHandlerDAO = new DAOInjector().createUserRoleHandlerDAO();
+
+	public UserRoleHandlerDAOTest() {
+		iUserRoleHandlerDAO = DAOInjector.instance().createUserRoleHandlerDAO();
 		switchedRole = "Instructor";
 	}
 

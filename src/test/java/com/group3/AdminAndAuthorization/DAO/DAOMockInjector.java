@@ -11,14 +11,22 @@ public class DAOMockInjector implements IDAOInjector {
 	IGrantInstructorAccessDAO grantInstructorAccessDAO;
 	IInstructorHandlerDAO instructorHandlerDAO;
 	IUserRoleHandlerDAO userRoleHandlerDAO;
+	static DAOMockInjector daoMockInjector;
+	private DAOMockInjector(){
 
-	@Override
-	public IAddCourseDAO createAddCourseDAO() {
-		if (null == addCourseDAO) {
-			addCourseDAO = new AddCourseDAOMock();
+	}
+	public static DAOMockInjector instance() {
+		if (null == daoMockInjector ) {
+			daoMockInjector = new DAOMockInjector();
 		}
 
-		return addCourseDAO;
+		return daoMockInjector;
+	}
+	@Override
+	public IAddCourseDAO createAddCourseDAO() {
+
+			return new AddCourseDAOMock();
+
 	}
 
 	@Override
@@ -44,5 +52,10 @@ public class DAOMockInjector implements IDAOInjector {
 	@Override
 	public IUserRoleHandlerDAO createUserRoleHandlerDAO() {
 		return new UserRoleHandlerDAOMock();
+	}
+
+	@Override
+	public IDeleteUserDAO createDeleteUserDAO() {
+		return new DeleteUserDAO();
 	}
 }

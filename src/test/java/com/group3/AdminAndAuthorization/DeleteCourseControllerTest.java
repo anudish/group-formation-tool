@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 
+import com.group3.AdminAndAuthorization.DAO.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,9 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
-import com.group3.AdminAndAuthorization.DAO.DAOInjector;
-import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
-import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 import com.group3.AdminAndAuthorization.Services.ServiceInjector;
 import com.group3.groupmanager.GroupmanagerApplication;
@@ -39,31 +37,30 @@ class DeleteCourseControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	private IAddCourseDAO iAddcourseDAO;
+	private IDeleteCourseDAO iDeleteCourseDAO;
 
-	@BeforeEach
-	void setUp() throws Exception {
-		DAOInjector injector = new DAOInjector();
-		IViewCoursesDAO iViewCoursesDAO = injector.createViewCourseDAO();
-		IViewCoursesService iViewCoursesService = new ServiceInjector().createViewCoursesService(iViewCoursesDAO);
-		courseList = iViewCoursesService.getAllCourses();
+	public DeleteCourseControllerTest() {
+		IDAOInjector injector = DAOInjector.instance();
+		iDeleteCourseDAO = injector.createDeleteCourseDAO();
 		iAddcourseDAO = injector.createAddCourseDAO();
-		course = courseList.get(0);
-		CourseId = course.getCourseId();
-		CourseName = course.getCourseName();
+		course = new Course();
+		 course.setCourseId("CSCT3100");
+		 course.setCourseName("NLP Advanced");
 
 	}
 
 	@Test
 	final void testDeleteCoursePage() throws Exception {
+		iAddcourseDAO.addCourse(course);
 		this.mockMvc.perform(get("/DeleteCoursePage")
 				.with(user("user").password("passwrd").roles("ADMIN"))).andDo(print()).andExpect(status().isOk());
-		iAddcourseDAO.addCourse(course);
+		iDeleteCourseDAO.deleteCourse(course);
 	}
 
 	@Test
 	final void testDeleteCourseRequest() throws Exception {
 
-		course = courseList.get(0);
+		iAddcourseDAO.addCourse(course);
 		String CourseId = course.getCourseId();
 		String CourseName = course.getCourseName();
 		String expectedMessage = course.getCourseName() + " (" + course.getCourseId() + ") "
@@ -72,6 +69,7 @@ class DeleteCourseControllerTest {
 				.with(user("user").password("password").roles("ADMIN")))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(model().attribute("feedBackMessage", expectedMessage));
+		iAddcourseDAO.addCourse(course);
 	}
 
 }

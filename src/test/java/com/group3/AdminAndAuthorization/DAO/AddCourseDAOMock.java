@@ -27,7 +27,6 @@ public class AddCourseDAOMock implements IAddCourseDAO {
 	
 	@Override
 	public String addCourse(Course course) {
-		// TODO Auto-generated method stub
 		courseList.add(course);
 		String CourseName = course.getCourseName();
 		String CourseId = course.getCourseId();

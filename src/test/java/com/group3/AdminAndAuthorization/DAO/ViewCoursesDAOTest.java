@@ -22,15 +22,15 @@ class ViewCoursesDAOTest {
    IDeleteCourseDAO iDeleteCoursesDAO;
    IAddCourseDAO iAddCourseDAO;
    Course testCourse;
-	@BeforeEach
-	void setUp() throws Exception {
+
+	public ViewCoursesDAOTest() {
 		courseList = new ArrayList<>();
-		DAOInjector dAOInjector = new DAOInjector();
+		IDAOInjector dAOInjector = DAOInjector.instance();
 		iAddCourseDAO = dAOInjector.createAddCourseDAO();
 		iDeleteCoursesDAO = dAOInjector.createDeleteCourseDAO();
 		iViewCoursesDAO = dAOInjector.createViewCourseDAO();
 		testCourse = new Course();
-		testCourse.setCourseId("CSCI7777");
+		testCourse.setCourseId("CSCT7777");
 		testCourse.setCourseName("Computational Biotechnology II");
 	}
 

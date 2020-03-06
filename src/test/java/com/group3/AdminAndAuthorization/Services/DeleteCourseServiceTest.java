@@ -16,18 +16,17 @@ class DeleteCourseServiceTest {
     private Course course;
     private IDeleteCourseService iDeleteCourseService;
     private IDeleteCourseDAO iDeleteCourseDAO;
-	@BeforeEach
-	void setUp() throws Exception {
-		iDeleteCourseDAO = new DAOMockInjector().createDeleteCourseDAO();
+
+	public DeleteCourseServiceTest() {
+		iDeleteCourseDAO = DAOMockInjector.instance().createDeleteCourseDAO();
 		
 	}
 
 	
 	@Test
 	final void testDeleteCourse() {
-		//fail("Not yet implemented"); // TODO
+
 		course = new Course();
-		//Failing test ()
 		course.setCourseId("CSCI7000");
 		course.setCourseName("Software Architecture");
 		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
@@ -36,8 +35,8 @@ class DeleteCourseServiceTest {
 	    assertTrue(feedBackString.equals(expectedResponse)==true);
 	    
 	    
-	    //Passing Test 
-	    course.setCourseId("CSCI7800");   //Course exist
+
+	    course.setCourseId("CSCI7800");
 		course.setCourseName("Advanced Algorithms"); 
 		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
 		feedBackString = iDeleteCourseService.deleteCourse();
