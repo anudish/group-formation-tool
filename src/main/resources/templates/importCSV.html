@@ -15,6 +15,7 @@
   <h3 th:text="${courseInfo.courseId}"></h3>
   <h4 th:text="${courseInfo.courseName}"></h4>
   <p>Please upload a CSV file!</p> 
+  <button class="btn btn-primary active" onclick="window.location.href='courseAdmin'">Home</button>
 </div>
 <center>
 	<form method="POST" th:action="@{/upload-csv-file}" enctype="multipart/form-data">

@@ -30,9 +30,9 @@
                 
                     <tr align = "center" th:each="course : ${courseList}">
                     <form action="/deleteCourse" method="post">
-                      <input type="hidden" th:value="${course.getCourseID()}" name="CourseID"/> 
+                      <input type="hidden" th:value="${course.getCourseId()}" name="CourseId"/> 
                        <input type="hidden" th:value="${course.getCourseName()}" name="CourseName"/>
-                      <td th:value="${course.getCourseID()}" th:text = "${course.getCourseID()}" name="CourseID"></td>
+                      <td th:value="${course.getCourseId()}" th:text = "${course.getCourseId()}" name="CourseId"></td>
                       <td th:value="${course.getCourseName()}"    th:text = "${course.getCourseName()}" name="CourseName"></td>
                       <td><button class="btn btn-danger" type="submit">delete</button></td>
                     </form>
