@@ -3,12 +3,13 @@ package com.group3.createQuestion;
 import com.group3.BusinessModels.Instructor;
 import com.group3.createQuestion.DAO.*;
 import com.group3.createQuestion.Services.*;
-import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +40,11 @@ public class DeleteQuestionController {
 		List<List<String>> questionList;
 
 		logger.info("Question to be deleted: " + questionId);
-		deleteQuestionService.deleteQuestionByQuestionId(questionId);
+		deleteQuestionService.deleteQuestionByQuestionId(questionId);Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String email = authentication.getName();
 		Instructor instructor = new Instructor();
-		instructor.setEmail(LoginAuthenticationSuccessHandler.email);
+		instructor.setEmail(email);
 		questionList = obtainQuestionsService.obtainInstructorQuestions(instructor, "");
 		logger.info("Total Questions fetched: " + questionList.size());
 

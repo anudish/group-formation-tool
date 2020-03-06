@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Student;
 import com.group3.login.DAO.ILoginDAO;
-import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 
 import com.group3.course.DAO.DAOAbstractFactory;
 import com.group3.course.DAO.IDAOAbstractFactory;
@@ -80,8 +81,11 @@ public class TAController {
 		taManager.addTA(studentMailId);
 
 		logger.info("TAship assigned");
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String email = authentication.getName();
 
-		String email = LoginAuthenticationSuccessHandler.email;
 		String role = loginDAO.getRoleByEmail(email);
 		ArrayList<Course> rows = new ArrayList<Course>();
 

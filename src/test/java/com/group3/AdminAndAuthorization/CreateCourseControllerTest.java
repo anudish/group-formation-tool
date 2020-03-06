@@ -1,7 +1,7 @@
 package com.group3.AdminAndAuthorization;
 
 import static org.hamcrest.CoreMatchers.containsString;
-
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -49,7 +49,8 @@ class CreateCourseControllerTest {
 	final void testRenderCoursePage() throws Exception {
 		
 		
-		this.mockMvc.perform(get("/addCoursePageRequest")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/addCoursePageRequest")
+				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(content().string(containsString("")));
 		
 	}
@@ -59,13 +60,17 @@ class CreateCourseControllerTest {
 		
 		ArrayList<String> operationFeedback = new ArrayList<>();
 		operationFeedback.add("Solid Mechanics with CSCI5608 created successfully");
-		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "CSCI5608").param("CourseName", "Solid Mechanics")
+				.with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attribute("operationFeedback",operationFeedback));
 		
 		
 		operationFeedback.clear();
 		operationFeedback.add("Course Name  Visual Processing with Course ID csci7000 already exists !! ");
-		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/addCourse").param("CourseId", "csci7000").param("CourseName", "Visual Processing")
+				.with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attribute("operationFeedback",operationFeedback));
 	    
 		Course course = new Course();

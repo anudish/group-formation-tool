@@ -30,7 +30,7 @@
                 
                     <tr align = "center" th:each="course : ${courseList}">
                     <form action="/deleteCourse" method="post">
-                      <input type="hidden" th:value="${course.getCourseId()}" name="CourseID"/> 
+                      <input type="hidden" th:value="${course.getCourseId()}" name="CourseId"/> 
                        <input type="hidden" th:value="${course.getCourseName()}" name="CourseName"/>
                       <td th:value="${course.getCourseId()}" th:text = "${course.getCourseId()}" name="CourseId"></td>
                       <td th:value="${course.getCourseName()}"    th:text = "${course.getCourseName()}" name="CourseName"></td>

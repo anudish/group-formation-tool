@@ -3,16 +3,20 @@ package com.group3.course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.login.DAO.ILoginDAO;
-import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 import com.group3.course.Services.ICourseManager;
 import com.group3.course.Services.IServiceAbstractFactory;
 import com.group3.course.Services.ServiceAbstractFactory;
@@ -49,11 +53,25 @@ public class CourseController {
 
 	@RequestMapping("/courseAdmin")
 	public ModelAndView getCoursesByEmailId() {
+		//get and show courses for TA from database
+		
+		logger.info("COURSE");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String email = authentication.getName();
+		
+		String formattedRole = null;
+		
+		@SuppressWarnings("unchecked")
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+		for (GrantedAuthority authority : authorities) {
+		     String role = authority.getAuthority().replace("ROLE_","").toLowerCase();
+		     System.out.println("Role formatted: " + role.substring(0, 1).toUpperCase() + role.substring(1));
+		     formattedRole = role.substring(0, 1).toUpperCase() + role.substring(1);
+		 }
 
+		role = formattedRole;
 		ArrayList<Course> rows = new ArrayList<Course>();
-		String email = new String();
-		email = LoginAuthenticationSuccessHandler.email;
-		role = loginDAO.getRoleByEmail(email);
 
 		ModelAndView mv = new ModelAndView();
 		if (role.equals("Guest")) {
@@ -66,7 +84,8 @@ public class CourseController {
 			mv.addObject("courseInfo", rows);
 			mv.addObject("questionManager", "visible");
 			mv.setViewName("showCourses.html");
-		} else if (role.equals("TA") || role.equals("Student")) {
+		}
+		else if(role.equals("Ta") || role.equals("Student")){
 			rows = courseManager.getCoursesByTAMailId(email);
 			mv.addObject("courseInfo", rows);
 			mv.addObject("questionManager", "hidden");
@@ -93,12 +112,14 @@ public class CourseController {
 			courseModel.setCourseName(this.courseName);
 			mv.addObject("courseInfo", courseModel);
 			mv.setViewName("course.html");
-
-		} else if (role.equals("Instructor") || role.equals("TA")) {
-			logger.info("Instructor/TA Logged In!");
-			mv.addObject("courseInfo", courseModel);
-			mv.setViewName("courseAction.html");
+			
+		}else if(role.equals("Instructor") || role.equals("Ta")) {
+	        mv.addObject("courseInfo",courseModel);
+	        mv.setViewName("courseAction.html");
+	        
 		}
+
+		
 		return mv;
 	}
 
