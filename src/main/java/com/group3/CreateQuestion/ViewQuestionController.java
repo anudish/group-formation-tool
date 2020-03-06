@@ -2,6 +2,7 @@ package com.group3.CreateQuestion;
 
 import java.util.List;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,7 @@ public class ViewQuestionController {
 
 	@RequestMapping("/viewQuestions")
 	public ModelAndView viewQuestions() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		List<List<String>> questionList;
 
 		logger.info("Fetching the available questions!");
@@ -43,14 +45,18 @@ public class ViewQuestionController {
 
 		String email = authentication.getName();
 		Instructor instructor = new Instructor();
+        ModelAndView mv = new ModelAndView();
+        try {
 		instructor.setEmail(email);
 		questionList = obtainQuestionsService.obtainInstructorQuestions(instructor, "");
 		logger.info("Total Questions fetched: " + questionList.size());
 
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("questionList", questionList);
+				mv.addObject("questionList", questionList);
 		mv.addObject("deleteQuery", "hidden");
 		mv.setViewName("deleteQuestionPage.html");
+		} catch (NullPointerException e) {
+			mv.setViewName("error.html");
+		}
 		return mv;
 	}
 }

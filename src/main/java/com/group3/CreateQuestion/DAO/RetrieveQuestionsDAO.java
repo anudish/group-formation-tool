@@ -3,9 +3,11 @@ package com.group3.CreateQuestion.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,6 +24,7 @@ public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO {
 
 	@Override
 	public List<List<String>> getQuestionsByInstructorID(String instructorId, String order) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 
 		instructorQuestions = new ArrayList<List<String>>();
 		ResultSet result;
@@ -62,8 +65,10 @@ public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO {
 
 			connection.close();
 			logger.info("Questions fetched for the instructor with ID: " + instructorId);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error("Exception at RetrieveQuestionsDAO while fetching instructor questions! " + e);
+		} catch(NullPointerException np) {
+			logger.error(np.getMessage());
 		}
 		return instructorQuestions;
 	}

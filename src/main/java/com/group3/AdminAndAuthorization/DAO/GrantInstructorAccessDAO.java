@@ -3,8 +3,10 @@ package com.group3.AdminAndAuthorization.DAO;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.*;
 
@@ -26,6 +28,7 @@ public class GrantInstructorAccessDAO implements IGrantInstructorAccessDAO {
 
 	@Override
 	public ArrayList<Guest> returnEligibleUsersList() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		ResultSet resultset;
 		query = "select *From " + "USER_DATABASE" + " where ROLE = ? OR ROLE = ? ";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
@@ -53,10 +56,8 @@ public class GrantInstructorAccessDAO implements IGrantInstructorAccessDAO {
 		}
 
 		catch (SQLException e) {
-			logger.error(e);
-		}
-
-		finally {
+			logger.log(Level.ERROR, e.getMessage());
+		}finally {
 			ObtainDataBaseConnection.terminateConnection();
 		}
 

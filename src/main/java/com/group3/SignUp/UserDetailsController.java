@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,11 +48,13 @@ public class UserDetailsController {
 			@RequestParam("psw") String psw, @RequestParam("psw-repeat") String pswRpeat)
 			throws SQLException, NullPointerException {
 
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		ModelAndView mv = new ModelAndView();
 		String output;
 		try {
 			guest = new Guest(lastName, firstName, email, UserVerificationParameters.GUEST_USER, psw);
 			output = userService.saveUser(lastName, firstName, email, psw, pswRpeat);
+			logger.debug("Output of user details : " + output);
 
 			if (output.contains(UserVerificationParameters.INVALID_PASSWORD_EMAIL)) {
 				mv.addObject(UserVerificationParameters.MAIL_VALIDITY, UserVerificationParameters.VALID_EMAIL_MESSAGE);
@@ -71,11 +74,18 @@ public class UserDetailsController {
 				mv.addObject(UserVerificationParameters.USER, UserVerificationParameters.USER_EXISTS);
 				mv.setViewName(UserVerificationParameters.LOGIN);
 			} else {
-				mv.setViewName(UserVerificationParameters.SIGN_UP);
+	mv.setViewName("error.html");
 			}
 
-		} catch (Exception e) {
-			logger.error(e);
+		} catch (NullPointerException np) {
+			logger.error(np.getMessage());
+			mv.setViewName("error.html");
+		} catch (SecurityException sec) {
+			logger.error(sec.getMessage());
+			mv.setViewName("error.html");
+		} catch (IndexOutOfBoundsException ind) {
+			logger.error(ind.getMessage());
+			mv.setViewName("error.html");
 		}
 		return mv;
 	}

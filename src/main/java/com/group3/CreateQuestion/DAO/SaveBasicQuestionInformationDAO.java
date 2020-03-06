@@ -5,6 +5,7 @@ import com.group3.CreateQuestion.Services.ICurrentTimeStampGenerationService;
 
 import java.sql.*;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,8 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 
 	@Override
 	public String saveDetailsAndReturnId(String title, String text, String type) {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+	
 		ResultSet resultSet;
 		query = "INSERT INTO QUESTIONS(TITLE,TEXT,TYPE,TIMESTAMP) VALUES(?,?,?,?)";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();

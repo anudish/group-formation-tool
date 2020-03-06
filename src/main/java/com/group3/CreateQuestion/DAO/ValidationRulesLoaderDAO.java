@@ -1,6 +1,8 @@
 package com.group3.CreateQuestion.DAO;
 
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +22,8 @@ public class ValidationRulesLoaderDAO implements IValidationRulesLoaderDAO {
 
 	@Override
 	public ArrayList<String> getValidationRules() {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+	
 		ResultSet resultSet;
 		validationRulesList = new ArrayList<>();
 		query = "select RULE from VALIDATION_RULES WHERE PACKAGE_NAME=? AND ENABLED=?";

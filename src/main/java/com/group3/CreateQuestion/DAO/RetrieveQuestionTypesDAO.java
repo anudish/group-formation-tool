@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +22,7 @@ public class RetrieveQuestionTypesDAO implements IRetrieveQuestionTypesDAO {
 
 	@Override
 	public ArrayList<QuestionTypes> getQuestionTypes() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 
 		ResultSet resultSet;
 		questionType = new ArrayList<>();

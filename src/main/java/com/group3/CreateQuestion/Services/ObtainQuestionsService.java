@@ -28,9 +28,14 @@ public class ObtainQuestionsService implements IObtainQuestionsService {
 
 		List<List<String>> questionList = new ArrayList<List<String>>();
 		logger.info("Starting the process of retrieving instructor questions!");
-
+		try {
 		questionList = retrieveQuestionsDAO.getQuestionsByInstructorID(instructor.getEmail(), order);
 		logger.info("Retrieved instructor questions!");
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
+		} catch (IndexOutOfBoundsException ind) {
+			logger.error(ind.getMessage());
+		}
 		return questionList;
 	}
 

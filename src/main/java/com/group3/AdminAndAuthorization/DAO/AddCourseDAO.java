@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
 import com.group3.BusinessModels.Course;
@@ -21,6 +23,7 @@ public class AddCourseDAO implements IAddCourseDAO {
 
 	@Override
 	public String addCourse(Course course) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");	
 		String courseId;
 		String courseName;
 		String feedBackMessage = new String();
@@ -43,8 +46,8 @@ public class AddCourseDAO implements IAddCourseDAO {
 		}
 
 		catch (SQLException e) {
-			e.printStackTrace();
-
+			
+			logger.log(Level.WARN,e.getMessage() + " The SQLState is : " + e.getSQLState() + ". Error Code : " + e.getErrorCode());
 			feedBackMessage = "Course already exist !";
 		}
 
@@ -58,6 +61,7 @@ public class AddCourseDAO implements IAddCourseDAO {
 
 	@Override
 	public String isCourseExist(String courseId) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");	
 		ResultSet resultSet;
 		String feedBackMessage = new String();
 		query = "select *from COURSES WHERE COURSE_ID = ?";
@@ -77,10 +81,8 @@ public class AddCourseDAO implements IAddCourseDAO {
 		}
 
 		catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		finally {
+			logger.log(Level.WARN,e.getMessage() + " The SQLState is : " + e.getSQLState() + ". Error Code : " + e.getErrorCode());
+		}finally {
 			ObtainDataBaseConnection.terminateConnection();
 		}
 

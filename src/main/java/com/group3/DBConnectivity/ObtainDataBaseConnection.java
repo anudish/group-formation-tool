@@ -1,7 +1,8 @@
 package com.group3.DBConnectivity;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ public class ObtainDataBaseConnection {
 	private static String dataBaseconfigFile;
 	private static InputStream databasepropertyFile;
 	private String server, port, database, username, password;
-	private Logger logger = LogManager.getLogger(ObtainDataBaseConnection.class);
+	private static Logger logger = LogManager.getLogger(ObtainDataBaseConnection.class);
 
 	private ObtainDataBaseConnection() {
 		dataBaseCrediatialList = new HashMap<String, String>();
@@ -65,6 +66,8 @@ public class ObtainDataBaseConnection {
 	}
 
 	public static Connection obtainDatabaseConnection() {
+			PropertyConfigurator.configure("src/main/resources/log4j.properties");
+
 		ObtainDataBaseConnection.instance();
 		String user = dataBaseCrediatialList.get("username");
 		String password = dataBaseCrediatialList.get("password");
@@ -75,15 +78,18 @@ public class ObtainDataBaseConnection {
 		try {
 			Class.forName(ConnectionParameters.DRIVER_NAME);
 			databaseConnection = DriverManager.getConnection(databaseConnectionURL, user, password);
+		} catch (ClassNotFoundException ClassNotFound) {
+			logger.error(ClassNotFound.getMessage());
 
-		} catch (Exception e) {
-
-			System.out.println("Error occured while connecting to remote database : " + e);
+		} catch (SQLException sql) {
+			logger.error("Error occured while connecting to remote database : " + sql.getMessage());
+	
 		}
 		return databaseConnection;
 	}
 
 	public static boolean terminateConnection() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		try {
 
 			if (databaseConnection.isClosed() == false) {
@@ -92,7 +98,7 @@ public class ObtainDataBaseConnection {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Error terminating connection with server " + e);
+			logger.error(e.getMessage());
 		}
 
 		return true;

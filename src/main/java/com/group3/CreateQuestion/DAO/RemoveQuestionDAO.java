@@ -2,7 +2,9 @@ package com.group3.CreateQuestion.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +17,8 @@ public class RemoveQuestionDAO implements IRemoveQuestionDAO {
 	PreparedStatement statement;
 
 	public boolean removeQuestionFromDatabase(String questionId) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		
 		boolean result = true;
 		int resultStatus;
 
@@ -34,9 +38,11 @@ public class RemoveQuestionDAO implements IRemoveQuestionDAO {
 					+ " along with all its mappings in QUESTIONS, MULTIPLE_CHOICE_QUESTIONS, INSTRUCTOR_QUESTION_MAPPING, SURVEY_QUESTIONS, AND RESPONSE deleted!");
 
 			connection.close();
-		} catch (Exception e) {
-			logger.error("Exception at RemoveQuestionDAO while deleting everything related to questionID" + questionId
-					+ "! " + e);
+		} catch (SQLException e) {
+			logger.error("Exception at RemoveQuestionDAO while deleting everything related to questionID" + questionId + "! " + e);
+			result = false;
+		} catch (NullPointerException np) {
+			logger.error(np.getMessage());
 			result = false;
 		}
 		return result;

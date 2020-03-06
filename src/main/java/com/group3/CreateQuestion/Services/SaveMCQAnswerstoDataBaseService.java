@@ -5,15 +5,24 @@ import com.group3.CreateQuestion.DAO.ISaveMCQAnswerstoDataBaseDAO;
 
 import java.util.ArrayList;
 
-public class SaveMCQAnswerstoDataBaseService extends QuestionService {
-	public SaveMCQAnswerstoDataBaseService() {
-		super(QuestionGenerationServicesEnum.MCQS_ONE);
-	}
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class SaveMCQAnswerstoDataBaseService  extends QuestionService  {
+	public static Logger logger = LogManager.getLogger(SaveMCQAnswerstoDataBaseService.class);
+	public SaveMCQAnswerstoDataBaseService(){
+        super(QuestionGenerationServicesEnum.MCQS_ONE);
+    }
 
 	public int saveMCQAnswertoDataBase(ISaveMCQAnswerstoDataBaseDAO saveMCQAnswerstoDataBaseDAO, int questionId,
 			ArrayList<MCQAnswers> mcqAnswers) {
-
-		int success = saveMCQAnswerstoDataBaseDAO.saveOptionsToDataBase(questionId, mcqAnswers);
+		int success=0;
+    	try {
+		success = saveMCQAnswerstoDataBaseDAO.saveOptionsToDataBase(questionId, mcqAnswers);
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
+		}
 		return success;
 	}
 }

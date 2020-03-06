@@ -5,6 +5,7 @@ import com.group3.CreateQuestion.BusinessModels.MCQAnswers;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ public class SaveMCQAnswerstoDataBaseDAO implements ISaveMCQAnswerstoDataBaseDAO
 
 	@Override
 	public int saveOptionsToDataBase(int id, ArrayList<MCQAnswers> mcqAnswers) {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		query = "INSERT INTO MULTIPLE_CHOICE_QUESTIONS(QUESTION_ID,OPTION,STOREDAS) VALUES(?,?,?)";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 		int[] rowsUpdatedCounter;

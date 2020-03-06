@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import com.group3.BusinessModels.Course;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
@@ -27,6 +27,7 @@ public class ViewCoursesDAO implements IViewCoursesDAO {
 
 	@Override
 	public ArrayList<Course> getAllCourses() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		ResultSet result;
 		query = "Select *from COURSES";
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
@@ -53,10 +54,8 @@ public class ViewCoursesDAO implements IViewCoursesDAO {
 		}
 
 		catch (SQLException e) {
-			logger.error(e);
-		}
-
-		finally {
+			logger.error(e.getMessage() + " The SQL State is :" + e.getSQLState() + ". Error Code : " + e.getErrorCode());
+		} finally {
 			ObtainDataBaseConnection.terminateConnection();
 		}
 

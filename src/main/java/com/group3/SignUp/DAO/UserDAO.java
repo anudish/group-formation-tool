@@ -3,6 +3,7 @@ package com.group3.SignUp.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -61,9 +62,9 @@ public class UserDAO implements IUserDAO {
 
 			statement.close();
 			connection.close();
-		} catch (Exception e) {
-			logger.error(e);
-		}
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			}
 
 		return checkUser;
 	}

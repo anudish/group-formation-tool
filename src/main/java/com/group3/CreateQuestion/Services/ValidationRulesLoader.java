@@ -1,6 +1,7 @@
 package com.group3.CreateQuestion.Services;
 
 import com.group3.CreateQuestion.DAO.IValidationRulesLoaderDAO;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +30,8 @@ public class ValidationRulesLoader {
 	}
 
 	private ArrayList<IStringValidatorService> getValidationRules() {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		try {
 		for (String rule : validationRules) {
 			logger.info(rule);
 
@@ -43,6 +45,9 @@ public class ValidationRulesLoader {
 				logger.info("enabling special character check service..");
 				enabledValidationServiceList.add(new StartWithSpecialSymbolValidationService());
 			}
+		}
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
 		}
 		return enabledValidationServiceList;
 	}

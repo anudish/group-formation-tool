@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LogoutAdminController {
 	@RequestMapping("/logoutAdmin")
 	String logoutRequest() {
+	try {
 		return "login";
+	} catch (NullPointerException e) {
+		return "error.html";
 	}
+  }
 }

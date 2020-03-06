@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import com.group3.BusinessModels.Course;
 import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
 
@@ -21,11 +21,17 @@ public class ViewCoursesService implements IViewCoursesService {
 
 	@Override
 	public ArrayList<Course> getAllCourses() {
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		try {
 		courses = this.viewCoursesDAO.getAllCourses();
 		if (courses.isEmpty()) {
 			logger.info("No courses to display at all ");
 		}
-
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
+		} catch (IndexOutOfBoundsException ind) {
+			logger.error(ind.getMessage());
+		}
 		return courses;
 	}
 }

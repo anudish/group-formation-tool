@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.group3.BusinessModels.Course;
 import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class AddCourseService implements IAddCourseService {
 	private IAddCourseDAO addCourseDAO;
@@ -26,11 +26,17 @@ public class AddCourseService implements IAddCourseService {
 
 	public ArrayList<String> insertCourseDetails(Course course, ICourseInputValidation icourseInputValidation) {
 		String feedBackMessage;
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		try {
 
 		errorList = icourseInputValidation.validateInputCourse(course);
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
+		}
 		if (errorList.size() > 0) {
 			return errorList;
 		} else {
+			try {
 			feedBackMessage = addCourseDAO.isCourseExist(course.getCourseId());
 
 			if (feedBackMessage.isEmpty()) {
@@ -38,6 +44,11 @@ public class AddCourseService implements IAddCourseService {
 			}
 
 			successMessage.add(feedBackMessage);
+			} catch (StringIndexOutOfBoundsException e) {
+				logger.error(e.getMessage());
+			} catch (NullPointerException np) {
+				logger.error(np.getMessage());
+			}
 			return successMessage;
 		}
 	}

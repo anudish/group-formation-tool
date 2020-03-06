@@ -1,5 +1,6 @@
 package com.group3.CreateQuestion.Services;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,11 +19,18 @@ public class DeleteQuestionService implements IDeleteQuestionService {
 
 	@Override
 	public boolean deleteQuestionByQuestionId(String questionId) {
-
+		PropertyConfigurator.configure("src/main/resources/log4j.properties");
+		
 		logger.info("Starting the process of deleting question: " + questionId + "!");
-		boolean result = removeQuestionDAO.removeQuestionFromDatabase(questionId);
-		logger.info("QuestionId : " + questionId + " deleted!");
-		return result;
+		try {
+			boolean result = removeQuestionDAO.removeQuestionFromDatabase(questionId);
+			logger.info("QuestionId : " + questionId + " deleted!");
+			return result;
+			
+		} catch (NullPointerException e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 }

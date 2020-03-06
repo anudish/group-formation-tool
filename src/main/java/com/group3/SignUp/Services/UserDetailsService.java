@@ -2,12 +2,17 @@ package com.group3.SignUp.Services;
 
 import java.util.regex.Pattern;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.group3.BusinessModels.Guest;
 import com.group3.SignUp.DAO.IUserDAO;
 
 public class UserDetailsService implements IUserDetailsService {
 	IUserDAO userDAO;
 	Guest guest;
+	private static Logger logger = LogManager.getLogger(UserDetailsService.class);
 
 	public UserDetailsService(IUserDAO userDAO) {
 
@@ -22,10 +27,11 @@ public class UserDetailsService implements IUserDetailsService {
 		Pattern passwordPattern;
 		boolean emailValidate;
 		boolean checkInsert;
+PropertyConfigurator.configure("src/main/resources/log4j.properties");
 
 		emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$";
 		passwordPattern = Pattern.compile(emailRegex);
-
+		try {
 		guest = new Guest(lastName, firstName, email, "Guest", pass);
 
 		emailValidate = passwordPattern.matcher(email).matches();
@@ -49,6 +55,10 @@ public class UserDetailsService implements IUserDetailsService {
 			}
 			return message;
 		}
+		} catch (NullPointerException np) {
+			logger.error(np.getMessage());
+			return np.getMessage();
 	}
 
+	}
 }
