@@ -78,6 +78,5 @@ public class GrantInstructorAccessController {
 		model.addAttribute("userlist", userlist);
 		model.addAttribute("courseList", courseList);
 		return "GrantAccessPage.html";
-
 	}
 }
