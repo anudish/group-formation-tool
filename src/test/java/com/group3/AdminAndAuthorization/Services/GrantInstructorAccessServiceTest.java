@@ -1,13 +1,11 @@
 package com.group3.AdminAndAuthorization.Services;
 import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessService;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
 import com.group3.AdminAndAuthorization.DAO.DAOMockInjector;
-import com.group3.AdminAndAuthorization.DAO.IDAOInjector;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,14 +14,14 @@ import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessDAO;
 class GrantInstructorAccessServiceTest {
 	 IGrantInstructorAccessDAO  iGrantInstructorAccessDAO;
 	 IGrantInstructorAccessService iGrantInstructorAccessService;
-	 ArrayList<GuestModel> userDataSet;
+	 ArrayList<Guest> userDataSet;
 	 
 
 	public GrantInstructorAccessServiceTest() {
 		iGrantInstructorAccessDAO = DAOMockInjector.instance().createGrantInstructorAccessDAO();
 		iGrantInstructorAccessService = ServiceInjector.instance().createGrantInstructorAccessService(iGrantInstructorAccessDAO);
 		userDataSet = new ArrayList<>();
-		GuestModel data =  new GuestModel();
+		Guest data =  new Guest();
 		data.setEmail("john@dal.ca");
 		data.setFirstName("John");
 		data.setLastName("Kellog");
@@ -47,11 +45,11 @@ class GrantInstructorAccessServiceTest {
 
 	@Test
 	final void testReturnUserList() {
-		ArrayList<GuestModel> userList = iGrantInstructorAccessService.returnUserList();
+		ArrayList<Guest> userList = iGrantInstructorAccessService.returnUserList();
 		for(int i=0; i<userList.size(); ++i) {
 			
-			GuestModel outcome = userList.get(i);
-			GuestModel expectedOutcome = userDataSet.get(i);
+			Guest outcome = userList.get(i);
+			Guest expectedOutcome = userDataSet.get(i);
 			assertEquals(outcome.getEmail(),expectedOutcome.getEmail());
 			assertEquals(outcome.getFirstName(),expectedOutcome.getFirstName());
 			assertEquals(outcome.getLastName(),expectedOutcome.getLastName());

@@ -11,9 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 
 import com.group3.AdminAndAuthorization.DAO.*;
-import com.group3.signup.DAO.DAOAbstractFactory;
-import com.group3.signup.DAO.IUserDAO;
-import org.junit.jupiter.api.BeforeEach;
+import com.group3.SignUp.DAO.DAOAbstractFactory;
+import com.group3.SignUp.DAO.IUserDAO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 
 import com.group3.AdminAndAuthorization.Services.IServiceInjector;
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
@@ -34,7 +33,7 @@ import com.group3.groupmanager.GroupmanagerApplication;
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
 class GrantInstructorAccessControllerTest {
 	ArrayList<Course> courseList;
-	ArrayList<GuestModel> userlist;
+	ArrayList<Guest> userlist;
 	IUserDAO iUserDAO;
 	IDeleteUserDAO iDeleteUserDAO;
 	IAddCourseDAO iAddCourseDAO;
@@ -74,17 +73,17 @@ class GrantInstructorAccessControllerTest {
 		String previousRole = "Guest";
 		String expectedRole ="Instructor";
 		String pass ="Hello@123";
-		GuestModel guestModel = new GuestModel();
-		guestModel.setEmail(email);
-		guestModel.setFirstName(firstName);
-		guestModel.setLastName(lastName);
-		guestModel.setUserRole(previousRole);
-		guestModel.setEncryptedPassword(pass);
+		Guest guest = new Guest();
+		guest.setEmail(email);
+		guest.setFirstName(firstName);
+		guest.setLastName(lastName);
+		guest.setUserRole(previousRole);
+		guest.setEncryptedPassword(pass);
 		Course course = new Course();
 		course.setCourseName("Data Technology");
 		course.setCourseId("CSCT5111");
 
-		iUserDAO.getSignUpDetailsofUser(guestModel);
+		iUserDAO.getSignUpDetailsofUser(guest);
 		String courseId = course.getCourseId()+"-"+course.getCourseName();
 		String expectedOutcome =   firstName+" "+lastName+" "+" switched their role from "+previousRole+" to "+expectedRole;
 		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", expectedRole).param("CourseId",courseId)

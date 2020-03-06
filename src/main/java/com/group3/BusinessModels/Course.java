@@ -1,8 +1,8 @@
 package com.group3.BusinessModels;
 
 import java.util.ArrayList;
-import com.group3.course.DAO.IDAOAbstractFactory;
-import com.group3.course.Services.*;
+import com.group3.Course.DAO.IDAOAbstractFactory;
+import com.group3.Course.Services.*;
 
 public class Course {
 	String courseId;

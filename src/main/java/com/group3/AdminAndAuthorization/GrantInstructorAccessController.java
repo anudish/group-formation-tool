@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group3.AdminAndAuthorization.DAO.*;
 import com.group3.AdminAndAuthorization.Services.*;
 import com.group3.BusinessModels.Course;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 
 @Controller
 public class GrantInstructorAccessController {
@@ -26,7 +26,7 @@ public class GrantInstructorAccessController {
 	IExtractCourseIdService extractCourseIdService;
 
 	ArrayList<Course> courseList;
-	ArrayList<GuestModel> userlist;
+	ArrayList<Guest> userlist;
 
 	public GrantInstructorAccessController() {
 		daoInjector = DAOInjector.instance();
@@ -48,8 +48,8 @@ public class GrantInstructorAccessController {
 	}
 
 	@RequestMapping("/GrantRoleRequest")
-	public String grantInstructorRole(GuestModel guestmodel, @RequestParam("CourseId") String courseId, String role,
-			Model model) {
+	public String grantInstructorRole(Guest guestmodel, @RequestParam("CourseId") String courseId, String role,
+									  Model model) {
 		String feebackMessage;
 		guestmodel.setUserRole(role);
 		System.out.println(guestmodel.getUserRole());

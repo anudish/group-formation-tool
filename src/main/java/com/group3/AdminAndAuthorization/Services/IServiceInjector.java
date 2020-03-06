@@ -2,7 +2,7 @@ package com.group3.AdminAndAuthorization.Services;
 
 import com.group3.AdminAndAuthorization.DAO.*;
 import com.group3.BusinessModels.Course;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 
 public interface IServiceInjector {
 	ICourseInputValidation createCourseInputValidation();
@@ -17,7 +17,7 @@ public interface IServiceInjector {
 			IGrantInstructorAccessDAO grantInstructorAccessDAO);
 
 	IAdminPageServices createAdminPageServices(IInstructorHandlerDAO instructorHandlerDAO,
-			IUserRoleHandlerDAO userRoleHandlerDAO, GuestModel guestModel, String courseId);
+											   IUserRoleHandlerDAO userRoleHandlerDAO, Guest guest, String courseId);
 
 	IExtractCourseIdService createExtractCourseIdService(String inputCourseString);
 

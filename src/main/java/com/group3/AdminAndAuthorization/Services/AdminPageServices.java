@@ -2,7 +2,6 @@ package com.group3.AdminAndAuthorization.Services;
 
 import java.util.ArrayList;
 
-import com.group3.BusinessModels.GuestModel;
 import com.group3.AdminAndAuthorization.DAO.IInstructorHandlerDAO;
 import com.group3.AdminAndAuthorization.DAO.IUserRoleHandlerDAO;
 
@@ -12,9 +11,9 @@ public class AdminPageServices implements IAdminPageServices {
     String Role,MailId,LastName,FirstName,outputMessage;
     private static final String Guest = "Guest";
 	private static final String Instructor = "Instructor";
-	private GuestModel guestmodel;
+	private com.group3.BusinessModels.Guest guestmodel;
 	private String CourseId;
-	public  AdminPageServices(IInstructorHandlerDAO iInstructorHandlerDAO,IUserRoleHandlerDAO  iUserRoleHandlerDAO,GuestModel guestmodel,String CourseId ) {
+	public  AdminPageServices(IInstructorHandlerDAO iInstructorHandlerDAO, IUserRoleHandlerDAO  iUserRoleHandlerDAO, com.group3.BusinessModels.Guest guestmodel, String CourseId ) {
 		this.iInstructorHandlerDAO = iInstructorHandlerDAO;
 		this.iUserRoleHandlerDAO = iUserRoleHandlerDAO;
 		this.guestmodel = guestmodel;

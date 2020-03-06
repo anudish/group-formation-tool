@@ -2,14 +2,13 @@ package com.group3.AdminAndAuthorization.DAO;
 
 import java.util.ArrayList;
 
-import com.group3.AdminAndAuthorization.DAO.IGrantInstructorAccessDAO;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 
 public class GrantInstructorAccessDAOMock implements IGrantInstructorAccessDAO {
-    ArrayList<GuestModel> userDataSet;
+    ArrayList<Guest> userDataSet;
     public GrantInstructorAccessDAOMock() {
     	userDataSet = new ArrayList<>();
-		GuestModel data =  new GuestModel();
+		Guest data =  new Guest();
 		data.setEmail("john@dal.ca");
 		data.setFirstName("John");
 		data.setLastName("Kellog");
@@ -30,7 +29,7 @@ public class GrantInstructorAccessDAOMock implements IGrantInstructorAccessDAO {
     	
     }
 	@Override
-	public ArrayList<GuestModel> returnEligibleUsersList() {
+	public ArrayList<Guest> returnEligibleUsersList() {
 		
 		
 		return userDataSet;

@@ -2,9 +2,7 @@ package com.group3.AdminAndAuthorization.Services;
 
 import com.group3.AdminAndAuthorization.DAO.*;
 import com.group3.BusinessModels.Course;
-import com.group3.BusinessModels.GuestModel;
-import com.group3.createQuestion.Services.IServiceAbstractFactory;
-import com.group3.createQuestion.Services.ServiceAbstractFactory;
+import com.group3.BusinessModels.Guest;
 
 public class ServiceInjector implements IServiceInjector {
 	public static IServiceInjector serviceInjector;
@@ -54,8 +52,8 @@ public class ServiceInjector implements IServiceInjector {
 
 	@Override
 	public IAdminPageServices createAdminPageServices(IInstructorHandlerDAO instructorHandlerDAO,
-			IUserRoleHandlerDAO userRoleHandlerDAO, GuestModel guestModel, String courseId) {
-		return new AdminPageServices(instructorHandlerDAO, userRoleHandlerDAO, guestModel, courseId);
+													  IUserRoleHandlerDAO userRoleHandlerDAO, Guest guest, String courseId) {
+		return new AdminPageServices(instructorHandlerDAO, userRoleHandlerDAO, guest, courseId);
 
 	}
 

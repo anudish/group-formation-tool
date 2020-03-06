@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.group3.BusinessModels.Course;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.course.DAO.CourseDAO;
 
 public class DeleteCourseDAO implements IDeleteCourseDAO {
 	Connection connection;

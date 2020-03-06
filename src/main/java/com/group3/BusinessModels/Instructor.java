@@ -2,9 +2,9 @@ package com.group3.BusinessModels;
 
 import java.util.ArrayList;
 
-import com.group3.course.DAO.IDAOAbstractFactory;
-import com.group3.course.Services.ICourseManager;
-import com.group3.course.Services.ServiceAbstractFactory;
+import com.group3.Course.DAO.IDAOAbstractFactory;
+import com.group3.Course.Services.ICourseManager;
+import com.group3.Course.Services.ServiceAbstractFactory;
 
 public class Instructor extends Person {
 	String instructorId;

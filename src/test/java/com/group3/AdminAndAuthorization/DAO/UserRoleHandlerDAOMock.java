@@ -1,29 +1,28 @@
 package com.group3.AdminAndAuthorization.DAO;
 import java.util.ArrayList;
 
-import com.group3.AdminAndAuthorization.DAO.IUserRoleHandlerDAO;
-import com.group3.BusinessModels.GuestModel;
+import com.group3.BusinessModels.Guest;
 public class UserRoleHandlerDAOMock implements IUserRoleHandlerDAO {
 
 	
-	ArrayList<GuestModel> userDataSet;
+	ArrayList<Guest> userDataSet;
 	public UserRoleHandlerDAOMock() {
 		userDataSet = new ArrayList<>();
-		GuestModel data =  new GuestModel();
+		Guest data =  new Guest();
 		data.setEmail("john@dal.ca");
 		data.setFirstName("John");
 		data.setLastName("Kellog");
 		data.setUserRole("Guest");
 		userDataSet.add(data);
 		
-		data =  new GuestModel();
+		data =  new Guest();
 		data.setEmail("vlado@dal.ca");
 		data.setFirstName("Vlado");
 		data.setLastName("Keslji");
 		data.setUserRole("instructor");
 		userDataSet.add(data);
 		
-		data =  new GuestModel();
+		data =  new Guest();
 		data.setEmail("robert@dal.ca");
 		data.setFirstName("Robert");
 		data.setLastName("Hawkey");
@@ -34,7 +33,7 @@ public class UserRoleHandlerDAOMock implements IUserRoleHandlerDAO {
 	@Override
 	public String updateUserRole(String Role, String MaildId) {
 		String feedBackMessage = new String();
-		for(GuestModel model:userDataSet) {
+		for(Guest model:userDataSet) {
 			
 			if(model.getEmail().equals(MaildId)) {
 				
@@ -49,7 +48,7 @@ public class UserRoleHandlerDAOMock implements IUserRoleHandlerDAO {
 	@Override
 	public String returnUserRole(String MailId) {
 		String feedBackMessage = new String();
-		for(GuestModel model:userDataSet) {
+		for(Guest model:userDataSet) {
 			
 			if(model.getEmail().equals(MailId)) {
 				feedBackMessage  = model.getUserRole();

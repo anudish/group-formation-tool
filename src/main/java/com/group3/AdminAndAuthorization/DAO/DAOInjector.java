@@ -1,9 +1,5 @@
 package com.group3.AdminAndAuthorization.DAO;
 
-import com.group3.*;
-import com.group3.course.DAO.DAOAbstractFactory;
-import com.group3.course.DAO.IDAOAbstractFactory;
-
 public class DAOInjector implements IDAOInjector {
 	static IDAOInjector daoInjector;
 	static IAddCourseDAO addCourseDAO;

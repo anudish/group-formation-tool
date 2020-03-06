@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
 import com.group3.BusinessModels.Course;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
-import com.group3.course.DAO.CourseDAO;
 
 public class ViewCoursesDAO implements IViewCoursesDAO {
 	ArrayList<Course> allCourses;
