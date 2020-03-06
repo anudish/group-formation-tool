@@ -41,10 +41,10 @@
      <input type = "hidden" th:value = "${guestmodel.getFirstName()}" name="firstName">
       <input type = "hidden" th:value = "${guestmodel.getEmail()}" name="email"></td>
     <td>
-    <select name="CourseID" >
+    <select name="CourseId" >
     <option>Select courses</option>
     <div th:each="course : ${courseList}">
-    <div><option th:text = "${course.getCourseID()}+'-'+|${course.getCourseName()}|"></option></div>
+    <div><option th:text = "${course.getCourseId()}+'-'+|${course.getCourseName()}|"></option></div>
    
     
     </div>

@@ -1,4 +1,5 @@
 package com.group3.ApplicationContext;
+
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class ConfigApplicationContext {
@@ -11,6 +12,5 @@ public class ConfigApplicationContext {
 	public void setApplicationContext(ConfigurableApplicationContext ApplicationContext) {
 		this.ApplicationContext = ApplicationContext;
 	}
-
 
 }
