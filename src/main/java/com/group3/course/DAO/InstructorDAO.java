@@ -12,7 +12,6 @@ import com.group3.BusinessModels.Course;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class InstructorDAO implements IInstructorDAO {
-
 	Connection connection;
 	String query;
 	private static Logger logger = LogManager.getLogger(CourseDAO.class);
@@ -23,18 +22,17 @@ public class InstructorDAO implements IInstructorDAO {
 	@Override
 	public ArrayList<Course> getCoursesByInstructorMailId(String instructorMailId) {
 
-		courseInfo = new ArrayList<Course> ();
+		courseInfo = new ArrayList<Course>();
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-			String query = "SELECT C.COURSE_ID, C.COURSE_NAME" +
-				" FROM COURSES C" +
-				" JOIN ALLOCATE_INSTRUCTOR A ON A.COURSE_ID=C.COURSE_ID" +
-				" WHERE A.MAIL_ID=\"" + instructorMailId + "\"";
+			String query = "SELECT C.COURSE_ID, C.COURSE_NAME" + " FROM COURSES C"
+					+ " JOIN ALLOCATE_INSTRUCTOR A ON A.COURSE_ID=C.COURSE_ID" + " WHERE A.MAIL_ID=\""
+					+ instructorMailId + "\"";
 			statement = connection.prepareStatement(query);
 			logger.info(query);
 
 			ResultSet result = statement.executeQuery();
-			courseInfo = new ArrayList<Course> ();
+			courseInfo = new ArrayList<Course>();
 
 			while (result.next()) {
 				logger.info(result.getObject("COURSE_ID") + ": " + result.getObject("COURSE_NAME"));
@@ -43,7 +41,7 @@ public class InstructorDAO implements IInstructorDAO {
 				courseModel.setCourseName(result.getObject("COURSE_NAME").toString());
 				courseInfo.add(courseModel);
 			}
-			
+
 			connection.close();
 			logger.info(courseInfo.isEmpty());
 		} catch (Exception e) {

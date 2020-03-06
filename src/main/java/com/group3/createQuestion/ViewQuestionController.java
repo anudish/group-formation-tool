@@ -15,11 +15,11 @@ import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 
 @Controller
 public class ViewQuestionController {
-	Logger logger = LogManager.getLogger(ViewQuestionController.class);
-
-    IDAOAbstractFactory daoInjector;
+	IDAOAbstractFactory daoInjector;
     IServiceAbstractFactory serviceAbstractFactory;
     IObtainQuestionsService obtainQuestionsService;
+
+    private Logger logger = LogManager.getLogger(ViewQuestionController.class);
     
     public ViewQuestionController() {
     	

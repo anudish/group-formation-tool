@@ -11,7 +11,6 @@ import com.group3.course.DAO.*;
 import com.group3.BusinessModels.Course;
 
 public class CourseManager implements ICourseManager {
-
 	Connection conn;
 	PreparedStatement statement;
 	Course courseModel;
@@ -24,7 +23,7 @@ public class CourseManager implements ICourseManager {
 	private static Logger logger = LogManager.getLogger(CourseManager.class);
 
 	public CourseManager(IDAOAbstractFactory daoInjector) {
-	
+
 		this.daoInjector = daoInjector;
 		this.courseDAO = daoInjector.createCourseDAO();
 		this.taDAO = daoInjector.createTADAO();
@@ -33,7 +32,7 @@ public class CourseManager implements ICourseManager {
 
 	@Override
 	public ArrayList<Course> getCoursesByTAMailId(String studentMailId) {
-		
+
 		courseInfo = new ArrayList<Course>();
 		courseInfo = taDAO.getCoursesByTAMailId(studentMailId);
 		return courseInfo;
@@ -41,16 +40,16 @@ public class CourseManager implements ICourseManager {
 
 	@Override
 	public ArrayList<Course> getCoursesByInstructorMailId(String instructorMailId) {
-		
-		courseInfo = new ArrayList<Course> ();
+
+		courseInfo = new ArrayList<Course>();
 		courseInfo = instructorDAO.getCoursesByInstructorMailId(instructorMailId);
 		return courseInfo;
 	}
 
 	@Override
 	public ArrayList<Course> getCoursesForGuest() {
-		
-		courseInfo = new ArrayList<Course> ();
+
+		courseInfo = new ArrayList<Course>();
 		courseInfo = courseDAO.getCoursesForGuest();
 		return courseInfo;
 	}

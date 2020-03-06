@@ -20,7 +20,7 @@ public class LoginDao implements ILoginDAO {
 	LoginForm user;
 
 	private static Logger logger = LogManager.getLogger(LoginDao.class);
-	
+
 	@Override
 	public LoginForm getUserByEmail(String email) {
 
@@ -28,7 +28,7 @@ public class LoginDao implements ILoginDAO {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			statement = connection.prepareStatement("select * from  AUTHENTICATION_DATABASE WHERE MAIL_ID = ?");
 			statement.setString(1, email);
-			
+
 			resultSet = statement.executeQuery();
 			resultSet.next();
 			logger.info("email " + resultSet.getString("MAIL_ID"));

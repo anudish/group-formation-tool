@@ -44,10 +44,14 @@ class AddCourseServiceTest {
 		course.setCourseId("CSCI5308");
 		course.setCourseName("Quality Assurance");
 
-		String expectedResponse = "Course Name  "+course.getCourseName()+" with "+"Course ID "+course.getCourseId()+" already exists !! ";
-		feedbackMessage =  iAddCourseService.insertCourseDetails(course, iCourseInputValidation);
+		String expectedResponse = "Course Name  "+course.getCourseName()+" with "+"Course Id "+course.getCourseId()+" already exists !! ";
 		IAddCourseDAO iAddCourseDAO  = new DAOMockInjector().createAddCourseDAO();
+		feedbackMessage =  iAddCourseService.insertCourseDetails(course, iCourseInputValidation);
+		
 		iAddCourseService = new ServiceInjector().createaddCourseService(iAddCourseDAO);
+		
+		
+		System.out.println(feedbackMessage.get(0)+"\n"+expectedResponse+" "+feedbackMessage.get(0).equals(expectedResponse));
 		assertTrue(feedbackMessage.get(0).equals(expectedResponse));
 		 feedbackMessage.clear();
 

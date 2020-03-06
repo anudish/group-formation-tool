@@ -16,9 +16,6 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 
 	@Override
 	public IUserDetailsService creatUserDetailsService(IUserDAO userDAO) {
-		if (null == userDetailsService) {
-			userDetailsService = new UserDetailsService(userDAO);
-		}
-		return userDetailsService;
+		return new UserDetailsService(userDAO);
 	}
 }

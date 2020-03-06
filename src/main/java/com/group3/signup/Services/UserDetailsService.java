@@ -6,7 +6,6 @@ import com.group3.BusinessModels.GuestModel;
 import com.group3.signup.DAO.IUserDAO;
 
 public class UserDetailsService implements IUserDetailsService {
-
 	IUserDAO userDAO;
 	GuestModel guestModel;
 
@@ -16,7 +15,7 @@ public class UserDetailsService implements IUserDetailsService {
 	}
 
 	public String saveUser(String lastName, String firstName, String email, String pass, String passConfirm)
-	throws NullPointerException {
+			throws NullPointerException {
 
 		String emailRegex;
 		String message = "";
@@ -24,8 +23,7 @@ public class UserDetailsService implements IUserDetailsService {
 		boolean emailValidate;
 		boolean checkInsert;
 
-		emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-			"A-Z]{2,7}$";
+		emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$";
 		passwordPattern = Pattern.compile(emailRegex);
 
 		guestModel = new GuestModel(lastName, firstName, email, "Guest", pass);
@@ -36,7 +34,7 @@ public class UserDetailsService implements IUserDetailsService {
 				message = UserVerificationParameters.INVALID_PASSWORD_EMAIL;
 			} else if (emailValidate == false) {
 				message = UserVerificationParameters.INVALID_EMAIL;
-			} else if (pass.matches(passConfirm)  == false) {
+			} else if (pass.matches(passConfirm) == false) {
 				message = UserVerificationParameters.INVALID_PASSWORD;
 			}
 			return message;

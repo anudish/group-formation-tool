@@ -1,9 +1,8 @@
 package com.group3.AdminAndAuthorization.DAO;
 
-import com.group3.DAO.*;
+import com.group3.AdminAndAuthorization.DAO.*;
 
 public interface IDAOInjector {
-
 	IAddCourseDAO createAddCourseDAO();
 
 	IViewCoursesDAO createViewCourseDAO();
@@ -14,5 +13,5 @@ public interface IDAOInjector {
 
 	IInstructorHandlerDAO createInstructorHandlerDAO();
 
-
+	IUserRoleHandlerDAO createUserRoleHandlerDAO();
 }

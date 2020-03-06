@@ -7,6 +7,8 @@ import com.group3.BusinessModels.Student;
 
 public interface ICourseDAO {
 	public ArrayList<String> getEnrolledStudentsByCourseId(String courseId);
+
 	public void enrollStudentToCourse(Student studentDetails, String courseId);
+
 	public ArrayList<Course> getCoursesForGuest();
 }

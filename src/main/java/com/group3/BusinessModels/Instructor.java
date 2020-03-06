@@ -6,8 +6,7 @@ import com.group3.course.DAO.IDAOAbstractFactory;
 import com.group3.course.Services.ICourseManager;
 import com.group3.course.Services.ServiceAbstractFactory;
 
-public class Instructor extends Person{
-	
+public class Instructor extends Person {
 	String instructorId;
 
 	public String getInstructorId() {

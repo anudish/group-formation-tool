@@ -1,4 +1,5 @@
 package com.group3.signup;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.BusinessModels.GuestModel;
-import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 import com.group3.signup.DAO.*;
 import com.group3.signup.Services.*;
 
 @Controller
 public class UserDetailsController {
-
 	Connection conn;
 	PreparedStatement statement;
 	IDAOAbstractFactory daoInjector;
@@ -27,9 +26,9 @@ public class UserDetailsController {
 	GuestModel guestModel;
 
 	private static Logger logger = LogManager.getLogger(UserDetailsController.class);
-	
+
 	public UserDetailsController() {
-		
+
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		userDAO = daoInjector.createUserDAO();
@@ -38,21 +37,22 @@ public class UserDetailsController {
 
 	@RequestMapping("/signUp")
 	public ModelAndView gotoSignUpPage() {
-		
+
 		return new ModelAndView(UserVerificationParameters.SIGN_UP);
 	}
 
 	@RequestMapping("/formSubmit")
-	public ModelAndView getSignUpDetails(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("email") String email, @RequestParam("psw") String psw,
-			@RequestParam("psw-repeat") String pswRpeat) throws SQLException, NullPointerException {
+	public ModelAndView getSignUpDetails(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
+			@RequestParam("psw") String psw, @RequestParam("psw-repeat") String pswRpeat)
+			throws SQLException, NullPointerException {
 
 		ModelAndView mv = new ModelAndView();
 		String output;
-		try {	
+		try {
 			guestModel = new GuestModel(lastName, firstName, email, UserVerificationParameters.GUEST_USER, psw);
 			output = userService.saveUser(lastName, firstName, email, psw, pswRpeat);
-			
+
 			if (output.contains(UserVerificationParameters.INVALID_PASSWORD_EMAIL)) {
 				mv.addObject(UserVerificationParameters.MAIL_VALIDITY, UserVerificationParameters.VALID_EMAIL_MESSAGE);
 				mv.addObject(UserVerificationParameters.STATUS, UserVerificationParameters.VALID_PASSWORD_MESSAGE);
@@ -64,7 +64,8 @@ public class UserDetailsController {
 				mv.addObject(UserVerificationParameters.STATUS, UserVerificationParameters.VALID_PASSWORD_MESSAGE);
 				mv.setViewName(UserVerificationParameters.SIGN_UP);
 			} else if (output.contains(UserVerificationParameters.SIGNUP_SUCCESS)) {
-				mv.addObject(UserVerificationParameters.SIGNUP_SUCCESS_MESSAGE, UserVerificationParameters.SIGNUP_PASSED);
+				mv.addObject(UserVerificationParameters.SIGNUP_SUCCESS_MESSAGE,
+						UserVerificationParameters.SIGNUP_PASSED);
 				mv.setViewName(UserVerificationParameters.LOGIN);
 			} else if (output.contains(UserVerificationParameters.USER_EXISTS)) {
 				mv.addObject(UserVerificationParameters.USER, UserVerificationParameters.USER_EXISTS);
@@ -78,10 +79,10 @@ public class UserDetailsController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("/login")
 	public ModelAndView getLoginPage(ModelAndView mv) {
-		
+
 		return new ModelAndView(UserVerificationParameters.LOGIN);
 	}
 }

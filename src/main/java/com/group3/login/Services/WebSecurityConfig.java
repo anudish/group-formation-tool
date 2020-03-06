@@ -18,22 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.cors();
 
-		http.anonymous().and().authorizeRequests()
-			.antMatchers("/", "/home", "/formSubmit", "/**").permitAll()
-			.and()
-			.formLogin()
-			.loginPage("/login")
-			.usernameParameter("email")
-			.successHandler(myAuthenticationSuccessHandler())
-			.permitAll()
-			.and()
-			.logout()
-			.permitAll();
+		http.anonymous().and().authorizeRequests().antMatchers("/", "/home", "/formSubmit", "/**").permitAll().and()
+				.formLogin().loginPage("/login").usernameParameter("email")
+				.successHandler(myAuthenticationSuccessHandler()).permitAll().and().logout().permitAll();
 	}
 
 	@Override
-	public void configure(AuthenticationManagerBuilder builder)
-	throws Exception {
+	public void configure(AuthenticationManagerBuilder builder) throws Exception {
 
 		builder.userDetailsService(new UserService());
 	}

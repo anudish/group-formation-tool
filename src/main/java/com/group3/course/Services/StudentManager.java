@@ -17,7 +17,6 @@ import com.group3.course.CourseController;
 import com.group3.course.DAO.*;
 
 public class StudentManager implements IStudentManager {
-
 	IDAOAbstractFactory daoInjector;
 	IEmailInjector emailInjector;
 	ICourseDAO courseDAO;
@@ -29,7 +28,7 @@ public class StudentManager implements IStudentManager {
 	private static Logger logger = LogManager.getLogger(StudentManager.class);
 
 	public StudentManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector, IPassword passwordGenerator) {
-		
+
 		this.courseDAO = daoInjector.createCourseDAO();
 		this.gmailService = emailInjector.getGmailService();
 		this.passwordGenerator = passwordGenerator;
@@ -43,9 +42,9 @@ public class StudentManager implements IStudentManager {
 		String mail;
 		String password;
 		ArrayList<String> current_students = courseDAO.getEnrolledStudentsByCourseId(courseId);
-		
+
 		try {
-			for (int i = 0; i<students.size(); i++) {
+			for (int i = 0; i < students.size(); i++) {
 				mail = studentList.get(i).get(csvMailIndex);
 				studentDetails = new Student();
 				studentDetails.setBannerId(studentList.get(i).get(csvBannerIndex));
@@ -58,9 +57,11 @@ public class StudentManager implements IStudentManager {
 					studentDetails.setEncryptedPassword(password);
 					courseDAO.enrollStudentToCourse(studentDetails, courseId);
 					gmailService.setSMTPClient();
-					gmailService.prepareMail("[University Portal] Enrollment in course:" + courseId, "Dear student,\nYou have been enrolled in the course: " + courseId +
-						".\nPlease contact the instructor if this is a mistake.\nYour credentials are: \n" +
-						"Mail: " + mail + "\nPassword: " + password, mail);
+					gmailService.prepareMail("[University Portal] Enrollment in course:" + courseId,
+							"Dear student,\nYou have been enrolled in the course: " + courseId
+									+ ".\nPlease contact the instructor if this is a mistake.\nYour credentials are: \n"
+									+ "Mail: " + mail + "\nPassword: " + password,
+							mail);
 					gmailService.sendEmail();
 				}
 			}
@@ -76,16 +77,16 @@ public class StudentManager implements IStudentManager {
 		ArrayList<List<String>> result = new ArrayList<>();
 		String line;
 		List<String> row;
-		
+
 		if (file.isEmpty() == false) {
-			try {		
+			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()));
-				
+
 				while ((line = br.readLine()) != null) {
 					row = Arrays.asList(line.split(","));
 					result.add(row);
 				}
-				
+
 				br.close();
 				logger.info(result);
 			} catch (IOException e) {

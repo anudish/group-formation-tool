@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminLogOutController {
-  @RequestMapping("/adminLogout")
-  String adminLogout() {
-	  
-	  return "login.html";
-  }
+	@RequestMapping("/adminLogout")
+	String adminLogout() {
+		return "login.html";
+	}
 }

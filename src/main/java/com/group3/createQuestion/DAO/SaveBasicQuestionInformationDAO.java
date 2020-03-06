@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInformationDAO {
-
 	private String query, feedbackMessage;
 	private Connection connection;
 	private PreparedStatement statement;
@@ -17,9 +16,9 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 	private ICurrentTimeStampGenerationService currentTimeStampGenerationService;
 	private static Logger logger = LogManager.getLogger(SaveBasicQuestionInformationDAO.class);
 
-	public SaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService) {
+	public SaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
 
-		this.currentTimeStampGenerationService = iCurrentTimeStampGenerationService;
+		this.currentTimeStampGenerationService = currentTimeStampGenerationService;
 		feedbackMessage = new String();
 	}
 
@@ -46,7 +45,6 @@ public class SaveBasicQuestionInformationDAO implements ISaveBasicQuestionInform
 				feedbackMessage = String.valueOf(resultSet.getInt(1));
 				logger.info("returned value database : " + feedbackMessage);
 			}
-
 		} catch (SQLException e) {
 			logger.error("error connecting with server !" + e.getMessage());
 		}

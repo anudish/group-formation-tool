@@ -16,18 +16,18 @@ import com.group3.login.Services.LoginAuthenticationSuccessHandler;
 
 @Controller
 public class RetrieveQuestionController {
-
-	private Logger logger = LogManager.getLogger(RetrieveQuestionController.class);
-
 	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	IObtainQuestionsService obtainQuestionsService;
 
+	private Logger logger = LogManager.getLogger(RetrieveQuestionController.class);
+	
 	public RetrieveQuestionController() {
 
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
-		obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
+		obtainQuestionsService = serviceAbstractFactory
+				.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
 	}
 
 	@RequestMapping("/showAvailableQuestionsToDelete")

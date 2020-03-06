@@ -8,7 +8,6 @@ import com.group3.createQuestion.DAO.IRemoveQuestionDAO;
 
 public class DeleteQuestionService implements IDeleteQuestionService {
 
-	private static IDAOAbstractFactory daoInjector;
 	private static IRemoveQuestionDAO removeQuestionDAO;
 	public static Logger logger = LogManager.getLogger(DeleteQuestionService.class);
 

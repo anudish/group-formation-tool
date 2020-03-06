@@ -6,43 +6,42 @@ import java.util.regex.Pattern;
 import com.group3.AdminAndAuthorization.Services.ICourseInputValidation;
 import com.group3.BusinessModels.Course;
 
-
-
 public class CourseInputValidation implements ICourseInputValidation {
 	ArrayList<String> ErrorarrayList = null;
-	public CourseInputValidation() {
-    }
+	String courseIdPattern;
+	String courseNamePattern;
+	String courseId;
+	String message;
+	String courseName;
+
 	@Override
 	public ArrayList<String> validateInputCourse(Course course) {
-		
-		 String courseIdPattern =  "[A-za-z]{4}[0-9]{4}";
-		 String courseNamePattern = "[A-Za-z{\\s}*]+[0-9]*";
-		 ErrorarrayList = new ArrayList<>();
-		String CourseId = course.getCourseId();
-		
-		if(!Pattern.matches(courseIdPattern,CourseId)) {
-		
-			System.out.println("Invalid Course Id (It Should Like : csci5308)");
-			String Message = "Invalid Course Id (It Should Like : csci5308)";
-			if(ErrorarrayList==null) {
-				
-				ErrorarrayList = new ArrayList<>();
-			}
-			ErrorarrayList.add(Message);
-		}
-		String CourseName = course.getCourseName();
-		if(!Pattern.matches(courseNamePattern,CourseName)) {
-			System.out.println("Invalid Course Name (It Should start with String only)");
-			String Message = "Invalid Course Name (It Should start with String only)";
-			if(ErrorarrayList==null) {
-				
-				ErrorarrayList = new ArrayList<>();
-			}
-			ErrorarrayList.add(Message);
-			
-		}
-		 return ErrorarrayList;
-		
-	}
+		ErrorarrayList = new ArrayList<>();
+		courseIdPattern = "[A-za-z]{4}[0-9]{4}";
+		courseNamePattern = "[A-Za-z{\\s}*]+[0-9]*";
+		courseId = course.getCourseId();
 
+		if (Pattern.matches(courseIdPattern, courseId) == false) {
+			message = "Invalid Course Id (It Should Like : csci5308)";
+
+			if (ErrorarrayList == null) {
+				ErrorarrayList = new ArrayList<>();
+			}
+
+			ErrorarrayList.add(message);
+		}
+
+		courseName = course.getCourseName();
+		if (Pattern.matches(courseNamePattern, courseName) == false) {
+			message = "Invalid Course Name (It Should start with String only)";
+
+			if (ErrorarrayList == null) {
+				ErrorarrayList = new ArrayList<>();
+			}
+
+			ErrorarrayList.add(message);
+		}
+
+		return ErrorarrayList;
+	}
 }

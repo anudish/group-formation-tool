@@ -12,32 +12,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SaveMCQAnswerstoDataBaseDAO implements ISaveMCQAnswerstoDataBaseDAO {
-    private Connection dataBaseConnection;
-    private String queryString;
-    private PreparedStatement preparedStatement;
-    private int successStatus=0;
-    private Logger logger = LogManager.getLogger(SaveMCQAnswerstoDataBaseDAO.class);
-    @Override
-    public int saveOptionsToDataBase(int id, ArrayList<MCQAnswers> mcqAnswers) {
-        queryString = "INSERT INTO MULTIPLE_CHOICE_QUESTIONS(QUESTION_ID,OPTION,STOREDAS) VALUES(?,?,?)";
-        dataBaseConnection = ObtainDataBaseConnection.obtainDatabaseConnection();
-        try {
-            preparedStatement  =  dataBaseConnection.prepareStatement(queryString);
-            for (MCQAnswers mcqAnsersInstance:mcqAnswers){
-                preparedStatement.setInt(1,id);
-                preparedStatement.setString(2,mcqAnsersInstance.getAnswer());
-                preparedStatement.setString(3,mcqAnsersInstance.getStoredAs());
-                preparedStatement.addBatch();
-            }
-            int[] rowsUpdatedCounter = preparedStatement.executeBatch();
-            logger.log(Level.INFO," no of rows Appended : "+rowsUpdatedCounter.length);
-            if (rowsUpdatedCounter.length == mcqAnswers.size()){
-                successStatus = 1;
-            }
-        } catch (SQLException e) {
-            logger.log(Level.INFO,"Failure reasons" +e.getSQLState());
-            logger.log(Level.ERROR,"failed to apped row due to database connectivity problem "+e.getMessage());
-        }
-        return successStatus;
-    }
+	private Connection connection;
+	private String query;
+	private PreparedStatement statement;
+	private int resultStatus = 0;
+	private Logger logger = LogManager.getLogger(SaveMCQAnswerstoDataBaseDAO.class);
+
+	@Override
+	public int saveOptionsToDataBase(int id, ArrayList<MCQAnswers> mcqAnswers) {
+		query = "INSERT INTO MULTIPLE_CHOICE_QUESTIONS(QUESTION_ID,OPTION,STOREDAS) VALUES(?,?,?)";
+		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+		int[] rowsUpdatedCounter;
+
+		try {
+			statement = connection.prepareStatement(query);
+			for (MCQAnswers mcqAnsersInstance : mcqAnswers) {
+				statement.setInt(1, id);
+				statement.setString(2, mcqAnsersInstance.getAnswer());
+				statement.setString(3, mcqAnsersInstance.getStoredAs());
+				statement.addBatch();
+			}
+
+			rowsUpdatedCounter = statement.executeBatch();
+			logger.log(Level.INFO, " no of rows Appended : " + rowsUpdatedCounter.length);
+			if (rowsUpdatedCounter.length == mcqAnswers.size()) {
+				resultStatus = 1;
+			}
+		} catch (SQLException e) {
+			logger.error("Failure reasons" + e.getSQLState());
+			logger.error("failed to apped row due to database connectivity problem " + e.getMessage());
+		}
+		return resultStatus;
+	}
 }

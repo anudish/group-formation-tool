@@ -5,10 +5,10 @@ import com.group3.forgotPassword.DAO.*;
 public class ServiceAbstractFactory implements IServiceAbstractFactory {
 
 	public static IServiceAbstractFactory serviceInjector;
-	public static IGmailService gmailService;
-	public static IResetCodeManager resetCodeManager;
-	public static IUpdatePasswordManager updatePasswordManager;
-	public static IVerificationCode verificationCode;
+	public IGmailService gmailService;
+	public IResetCodeManager resetCodeManager;
+	public IUpdatePasswordManager updatePasswordManager;
+	public IVerificationCode verificationCode;
 
 	public static IServiceAbstractFactory instance() {
 		if (null == serviceInjector) {
@@ -19,33 +19,23 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 
 	@Override
 	public IGmailService createGmailService(IEmailInjector emailInjector) {
-		if (null == gmailService) {
-			gmailService = new GmailService();
-		}
-		return gmailService;
+		return new GmailService();
+
 	}
 
 	@Override
-	public IResetCodeManager createResetCodeManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
-		if (null == resetCodeManager) {
-			resetCodeManager = new ResetCodeManager(daoInjector, emailInjector, verificationCodeGenerator);
-		}
-		return resetCodeManager;
+	public IResetCodeManager createResetCodeManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector,
+			IVerificationCode verificationCodeGenerator) {
+		return new ResetCodeManager(daoInjector, emailInjector, verificationCodeGenerator);
 	}
 
 	@Override
 	public IUpdatePasswordManager createUpdatePasswordManager(IDAOAbstractFactory daoInjector) {
-		if (null == updatePasswordManager) {
-			updatePasswordManager = new UpdatePasswordManager(daoInjector);
-		}
-		return updatePasswordManager;
+		return new UpdatePasswordManager(daoInjector);
 	}
 
 	@Override
 	public IVerificationCode createVerificationCodeGenerator() {
-		if (null == verificationCode) {
-			verificationCode = new VerificationCode();
-		}
-		return verificationCode;
+		return new VerificationCode();
 	}
 }

@@ -51,7 +51,7 @@ public class ResetCodeManager implements IResetCodeManager {
 		final int code_length = 5;
 		generated_code = verificationCodeGenerator.getNewCode(code_length);
 		logger.info("Code Generated!");
-		
+
 		return generated_code;
 	}
 }

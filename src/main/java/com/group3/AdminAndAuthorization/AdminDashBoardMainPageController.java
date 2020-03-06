@@ -5,12 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminDashBoardMainPageController {
-	
- @RequestMapping("/adminMainPageRequest")
- public String  returnAdminDashBoardPage() {
-	
-	return "AdminMainPage.html";
-	 
-	 
- }
+	@RequestMapping("/adminMainPageRequest")
+	public String returnAdminDashBoardPage() {
+		return "AdminMainPage.html";
+	}
 }

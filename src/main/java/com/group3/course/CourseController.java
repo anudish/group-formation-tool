@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.login.DAO.ILoginDAO;
 import com.group3.login.Services.LoginAuthenticationSuccessHandler;
-
 import com.group3.course.Services.ICourseManager;
 import com.group3.course.Services.IServiceAbstractFactory;
 import com.group3.course.Services.ServiceAbstractFactory;
@@ -40,7 +39,7 @@ public class CourseController {
 	ICourseManager courseManager;
 
 	public CourseController() {
-	
+
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		loginDAOInjector = com.group3.login.DAO.DAOAbstractFactory.instance();
@@ -51,7 +50,7 @@ public class CourseController {
 	@RequestMapping("/courseAdmin")
 	public ModelAndView getCoursesByEmailId() {
 
-		ArrayList<Course> rows = new ArrayList<Course> ();
+		ArrayList<Course> rows = new ArrayList<Course>();
 		String email = new String();
 		email = LoginAuthenticationSuccessHandler.email;
 		role = loginDAO.getRoleByEmail(email);

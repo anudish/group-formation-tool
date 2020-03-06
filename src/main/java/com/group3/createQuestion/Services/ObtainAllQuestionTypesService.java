@@ -6,19 +6,18 @@ import com.group3.createQuestion.DAO.IRetrieveQuestionTypesDAO;
 import java.util.ArrayList;
 
 public class ObtainAllQuestionTypesService implements IObtainAllQuestionTypesService {
-
-	private IRetrieveQuestionTypesDAO iRetrieveQuestionTypesDAO;
+	private IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
 	private ArrayList<QuestionTypes> questionTypes;
 
-	public ObtainAllQuestionTypesService(IRetrieveQuestionTypesDAO iRetrieveQuestionTypesDAO) {
+	public ObtainAllQuestionTypesService(IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO) {
 
-		this.iRetrieveQuestionTypesDAO = iRetrieveQuestionTypesDAO;
+		this.retrieveQuestionTypesDAO = retrieveQuestionTypesDAO;
 	}
 
 	@Override
 	public ArrayList<QuestionTypes> getAllQuestionTypes() {
 
-		questionTypes = this.iRetrieveQuestionTypesDAO.getQuestionTypes();
+		questionTypes = this.retrieveQuestionTypesDAO.getQuestionTypes();
 		return questionTypes;
 	}
 }

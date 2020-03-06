@@ -43,7 +43,7 @@ public class AddCourseDAOMock implements IAddCourseDAO {
 			System.out.println(course.getCourseId());
 			if(course.getCourseId().equals(courseId)) {
 				
-				feedBackMessage = "Course Name  "+course.getCourseName()+" with "+"Course ID "+course.getCourseId()+" already exists !! ";
+				feedBackMessage = "Course Name  "+course.getCourseName()+" with "+"Course Id "+course.getCourseId()+" already exists !! ";
 			    break;
 			}
 		}

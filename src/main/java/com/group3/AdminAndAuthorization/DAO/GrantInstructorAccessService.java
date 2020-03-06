@@ -5,19 +5,17 @@ import java.util.ArrayList;
 import com.group3.BusinessModels.GuestModel;
 
 public class GrantInstructorAccessService implements IGrantInstructorAccessService {
-    
 	private ArrayList<GuestModel> userList;
-	private IGrantInstructorAccessDAO iGrantInstructorAccessDAO;
-	public GrantInstructorAccessService(IGrantInstructorAccessDAO iGrantInstructorAccessDAO) {
-		this.iGrantInstructorAccessDAO = iGrantInstructorAccessDAO;
+	private IGrantInstructorAccessDAO grantInstructorAccessDAO;
+
+	public GrantInstructorAccessService(IGrantInstructorAccessDAO grantInstructorAccessDAO) {
+		this.grantInstructorAccessDAO = grantInstructorAccessDAO;
 		userList = new ArrayList<>();
 	}
+
 	@Override
 	public ArrayList<GuestModel> returnUserList() {
-
-		userList = this.iGrantInstructorAccessDAO.returnEligibleUsersList();
-		
+		userList = this.grantInstructorAccessDAO.returnEligibleUsersList();
 		return userList;
 	}
-
 }

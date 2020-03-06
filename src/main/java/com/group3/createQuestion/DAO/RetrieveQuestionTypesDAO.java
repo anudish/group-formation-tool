@@ -12,28 +12,30 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class RetrieveQuestionTypesDAO implements IRetrieveQuestionTypesDAO {
-
 	private ArrayList<QuestionTypes> questionType;
-	private String queryString, questionTypeText;
-	private Connection databaseConnection;
+	private String query, questionTypeText;
+	private Connection connection;
 	private PreparedStatement statement;
-	private static Logger logger = LogManager.getLogger(RetrieveQuestionTypesDAO.class);
+	private Logger logger = LogManager.getLogger(RetrieveQuestionTypesDAO.class);
+	private QuestionTypes questTypeInstance;
 
 	@Override
 	public ArrayList<QuestionTypes> getQuestionTypes() {
 
 		ResultSet resultSet;
 		questionType = new ArrayList<>();
-		queryString = "select TYPES from QUESTION_TYPE";
-		
+		query = "select TYPES from QUESTION_TYPE";
+
 		try {
-			databaseConnection = ObtainDataBaseConnection.obtainDatabaseConnection();
-			statement = databaseConnection.prepareStatement(queryString);
+			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+			statement = connection.prepareStatement(query);
 			resultSet = statement.executeQuery();
+
 			while (resultSet.next()) {
+
 				logger.info(resultSet.getObject("TYPES"));
 				questionTypeText = resultSet.getObject("TYPES").toString();
-				QuestionTypes questTypeInstance = new QuestionTypes();
+				questTypeInstance = new QuestionTypes();
 				questTypeInstance.setQuestionType(questionTypeText);
 				questionType.add(questTypeInstance);
 			}

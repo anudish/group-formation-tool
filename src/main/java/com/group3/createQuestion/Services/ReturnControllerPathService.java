@@ -14,21 +14,21 @@ public class ReturnControllerPathService implements IReturnControllerPathService
 		logger.info("REQUESTED QUESTION TYPE " + questionGenerationServicesEnum);
 		switch (questionGenerationServicesEnum) {
 
-			case FREE_TEXT:
-				controllerPath = "invokeFreeText";
-				break;
+		case FREE_TEXT:
+			controllerPath = "invokeFreeText";
+			break;
 
-			case NUMERIC:
-				controllerPath = "invokeNumeric";
-				break;
+		case NUMERIC:
+			controllerPath = "invokeNumeric";
+			break;
 
-			case MCQS_ONE:
-				controllerPath = "invokeMCQSOne";
-				break;
+		case MCQS_ONE:
+			controllerPath = "invokeMCQSOne";
+			break;
 
-			case MCQS_MULTIPLE:
-				controllerPath = "invokeMCQSMultiple";
-				break;
+		case MCQS_MULTIPLE:
+			controllerPath = "invokeMCQSMultiple";
+			break;
 		}
 		return controllerPath;
 	}

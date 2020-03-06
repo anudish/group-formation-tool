@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.group3.BusinessModels.Course;
-import com.group3.DAO.DAOInjector;
+import com.group3.AdminAndAuthorization.DAO.DAOInjector;
 import com.group3.AdminAndAuthorization.DAO.IDeleteCourseDAO;
 import com.group3.groupmanager.GroupmanagerApplication;
 

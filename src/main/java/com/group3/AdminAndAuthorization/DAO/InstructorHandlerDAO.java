@@ -6,99 +6,111 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class InstructorHandlerDAO implements IInstructorHandlerDAO {
-    private Connection connect;
-    private  ArrayList<String> courseList;
+	private Connection connection;
+	PreparedStatement statement;
+	String query;
+	private ArrayList<String> courseList;
+
+	private static Logger logger = LogManager.getLogger(InstructorHandlerDAO.class);
+
 	public InstructorHandlerDAO() {
-    	
-    	connect = ObtainDataBaseConnection.obtainDatabaseConnection();
-    	courseList = new ArrayList<>();
-    }
+		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
+		courseList = new ArrayList<>();
+	}
+
 	@Override
 	public String createNewInstructor(String MailId, String CourseId) {
-		// TODO Auto-generated method stub
 		String feedbackMessage = new String();
-		// TODO Auto-generated method stub
-		 String SQLInstructorAllocaterQuery = "INSERT INTO ALLOCATE_INSTRUCTOR(MAIL_ID,COURSE_ID) VALUES(?,?)";
-		 PreparedStatement preparestatement;
+		int queryResult;
+		query = "INSERT INTO ALLOCATE_INSTRUCTOR(MAIL_ID,COURSE_ID) VALUES(?,?)";
+
 		try {
-			preparestatement = connect.prepareStatement(SQLInstructorAllocaterQuery);
-			preparestatement.setString(1, MailId);
-			 preparestatement.setString(2,CourseId);
-			 int rowsEffected = preparestatement.executeUpdate();
-			 if(rowsEffected > 0 ) {
-				 
-				 feedbackMessage = "Instructor Assigned for "+ CourseId;
-				 
-			 }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			statement = connection.prepareStatement(query);
+			statement.setString(1, MailId);
+			statement.setString(2, CourseId);
+			queryResult = statement.executeUpdate();
+
+			if (queryResult > 0) {
+				feedbackMessage = "Instructor Assigned for " + CourseId;
+			}
 		}
-		 
+
+		catch (SQLException e) {
+			logger.error(e);
+		}
+
 		return feedbackMessage;
-		
 	}
 
 	@Override
 	public boolean isInstructorExists(String MailId) {
-		// TODO Auto-generated method stub
-		String SQLSelectQuery = "select * from ALLOCATE_INSTRUCTOR where MAIL_ID = ?";
-		PreparedStatement preparestatement;
+		int queryResult;
+		boolean state;
+		query = "select *from ALLOCATE_INSTRUCTOR where MAIL_ID = ?";
+
 		try {
-			preparestatement = ObtainDataBaseConnection.obtainDatabaseConnection().prepareStatement(SQLSelectQuery);
-			preparestatement.setString(1,MailId);
-			boolean state = preparestatement.execute();
+			statement = ObtainDataBaseConnection.obtainDatabaseConnection().prepareStatement(query);
+			statement.setString(1, MailId);
+			state = statement.execute();
+
 			return state;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+		catch (SQLException e) {
+			logger.error(e);
+		}
+
 		return false;
-		
-	}
-	@Override
-	public String deleteinstructor(String MailId) {
-		String feedBackMessage = new String();
-		// TODO Auto-generated method stub
-		String deleteinstructorQuery = "DELETE FROM ALLOCATE_INSTRUCTOR WHERE MAIL_ID = ?";
-		PreparedStatement preparestatement;
-		try {
-			preparestatement = connect.prepareStatement(deleteinstructorQuery);
-			 preparestatement.setString(1,MailId);
-		   	    int rowsEffected = preparestatement.executeUpdate();
-		   	   if(rowsEffected > 0) {
-		   		  
-		   		  
-		   		  feedBackMessage = "Instructor deleted";
-		   	  }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-   	   
-		return feedBackMessage;
-	}
-	@Override
-	public ArrayList<String> getInstructorCourses(String MailId) {
-		// TODO Auto-generated method stub
-		String SQLSelectQuery = "select * from ALLOCATE_INSTRUCTOR where MAIL_ID = ?";
-		PreparedStatement preparestatement;
-		try {
-			preparestatement = ObtainDataBaseConnection.obtainDatabaseConnection().prepareStatement(SQLSelectQuery);
-			preparestatement.setString(1,MailId);
-			ResultSet result = preparestatement.executeQuery();
-			while(result.next()) {
-				
-				courseList.add(result.getString("COURSE_ID"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return courseList;
 	}
 
+	@Override
+	public String deleteinstructor(String MailId) {
+		int queryResult;
+		String feedBackMessage = new String();
+		String query = "DELETE FROM ALLOCATE_INSTRUCTOR WHERE MAIL_ID = ?";
+
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, MailId);
+			queryResult = statement.executeUpdate();
+
+			if (queryResult > 0) {
+				feedBackMessage = "Instructor deleted";
+			}
+		}
+
+		catch (SQLException e) {
+			logger.error(e);
+		}
+
+		return feedBackMessage;
+	}
+
+	@Override
+	public ArrayList<String> getInstructorCourses(String MailId) {
+		ResultSet result;
+		query = "select *from ALLOCATE_INSTRUCTOR where MAIL_ID = ?";
+
+		try {
+			statement = ObtainDataBaseConnection.obtainDatabaseConnection().prepareStatement(query);
+			statement.setString(1, MailId);
+			result = statement.executeQuery();
+
+			while (result.next()) {
+				courseList.add(result.getString("COURSE_ID"));
+			}
+		}
+
+		catch (SQLException e) {
+			logger.error(e);
+		}
+
+		return courseList;
+	}
 }

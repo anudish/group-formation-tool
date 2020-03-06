@@ -11,7 +11,6 @@ import com.group3.BusinessModels.GuestModel;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class UserDAO implements IUserDAO {
-
 	Connection connection;
 	String query;
 	PreparedStatement statement;
@@ -23,7 +22,7 @@ public class UserDAO implements IUserDAO {
 		boolean checkUser = false;
 		String query;
 		ResultSet result;
-		
+
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			query = "SELECT count(MAIL_ID) FROM USER_DATABASE WHERE MAIL_ID = '" + guestModel.getEmail() + "';";
@@ -43,7 +42,7 @@ public class UserDAO implements IUserDAO {
 			}
 
 			if (checkUser) {
-				query= "INSERT INTO USER_DATABASE(LAST_NAME,FIRST_NAME,ROLE,MAIL_ID) VALUES (?, ?, ?, ?);";
+				query = "INSERT INTO USER_DATABASE(LAST_NAME,FIRST_NAME,ROLE,MAIL_ID) VALUES (?, ?, ?, ?);";
 				statement = connection.prepareStatement(query);
 				statement.setString(1, guestModel.getLastName());
 				statement.setString(2, guestModel.getFirstName());

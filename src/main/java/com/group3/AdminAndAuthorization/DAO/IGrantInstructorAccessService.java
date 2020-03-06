@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.group3.BusinessModels.GuestModel;
 
-
 public interface IGrantInstructorAccessService {
-  ArrayList<GuestModel> returnUserList();
+	ArrayList<GuestModel> returnUserList();
 }

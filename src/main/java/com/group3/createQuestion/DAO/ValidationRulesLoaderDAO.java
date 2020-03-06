@@ -11,17 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ValidationRulesLoaderDAO implements IValidationRulesLoaderDAO {
-
 	private ArrayList<String> validationRulesList;
 	private String query;
 	private Connection connection;
-	private PreparedStatement statement; 
+	private PreparedStatement statement;
 	private String rule;
 	private static Logger logger = LogManager.getLogger(ValidationRulesLoaderDAO.class);
 
 	@Override
 	public ArrayList<String> getValidationRules() {
-		
+
 		ResultSet resultSet;
 		validationRulesList = new ArrayList<>();
 		query = "select RULE from VALIDATION_RULES WHERE PACKAGE_NAME=? AND ENABLED=?";
@@ -39,7 +38,7 @@ public class ValidationRulesLoaderDAO implements IValidationRulesLoaderDAO {
 				rule = resultSet.getObject("RULE").toString();
 				validationRulesList.add(rule);
 			}
-			
+
 		} catch (SQLException e) {
 			logger.error("facing database server connectivity error");
 		}

@@ -10,14 +10,15 @@ public abstract class Person {
 	public Person() {
 		super();
 	}
-	public Person(String lastName, String firstName, String email,String role, String psw) {
+
+	public Person(String lastName, String firstName, String email, String role, String psw) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;
 		this.email = email;
 		this.psw = psw;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -41,12 +42,15 @@ public abstract class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getUserRole() {
-	return role;
+		return role;
 	}
+
 	public void setUserRole(String role) {
 		this.role = role;
 	}
+
 	public String getEncryptedPassword() {
 		return psw;
 	}
@@ -54,5 +58,4 @@ public abstract class Person {
 	public void setEncryptedPassword(String psw) {
 		this.psw = psw;
 	}
-
 }

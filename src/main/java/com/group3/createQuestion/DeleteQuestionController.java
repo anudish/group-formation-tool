@@ -1,6 +1,5 @@
 package com.group3.createQuestion;
 
-
 import com.group3.BusinessModels.Instructor;
 import com.group3.createQuestion.DAO.*;
 import com.group3.createQuestion.Services.*;
@@ -29,8 +28,10 @@ public class DeleteQuestionController {
 
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
-		deleteQuestionService = serviceAbstractFactory.createDeleteQuestionService(daoInjector.createRemoveQuestionDAO());
-		obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
+		deleteQuestionService = serviceAbstractFactory
+				.createDeleteQuestionService(daoInjector.createRemoveQuestionDAO());
+		obtainQuestionsService = serviceAbstractFactory
+				.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
 	}
 
 	@RequestMapping("/deleteQuestion")

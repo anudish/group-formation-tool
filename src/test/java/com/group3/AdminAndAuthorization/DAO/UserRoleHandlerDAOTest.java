@@ -3,7 +3,6 @@ package com.group3.AdminAndAuthorization.DAO;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.group3.AdminAndAuthorization.DAO.IUserRoleHandlerDAO;
-import com.group3.DAO.DAOInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

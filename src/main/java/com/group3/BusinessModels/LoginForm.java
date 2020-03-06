@@ -1,10 +1,9 @@
 package com.group3.BusinessModels;
 
 public class LoginForm {
-	
 	private String email;
 	private String password;
-	
+
 	public LoginForm(String email, String password) {
 		this.email = email;
 		this.password = password;
@@ -24,6 +23,5 @@ public class LoginForm {
 
 	public void setPassword(String password) {
 		this.password = password;
- 	}
-
+	}
 }

@@ -12,7 +12,6 @@ import com.group3.createQuestion.DAO.IDAOAbstractFactory;
 import com.group3.createQuestion.DAO.IRetrieveQuestionsDAO;
 
 public class ObtainQuestionsService implements IObtainQuestionsService {
-
 	IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	IDAOAbstractFactory daoInjector;
 
@@ -27,8 +26,9 @@ public class ObtainQuestionsService implements IObtainQuestionsService {
 	@Override
 	public List<List<String>> obtainInstructorQuestions(Instructor instructor, String order) {
 
-		List<List<String>> questionList = new ArrayList<List<String>> ();
+		List<List<String>> questionList = new ArrayList<List<String>>();
 		logger.info("Starting the process of retrieving instructor questions!");
+
 		questionList = retrieveQuestionsDAO.getQuestionsByInstructorID(instructor.getEmail(), order);
 		logger.info("Retrieved instructor questions!");
 		return questionList;

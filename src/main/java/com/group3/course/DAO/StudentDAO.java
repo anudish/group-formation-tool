@@ -13,7 +13,6 @@ import com.group3.DBConnectivity.ObtainDataBaseConnection;
 import com.group3.course.CourseController;
 
 public class StudentDAO implements IStudentDAO {
-
 	Connection connection;
 	String query;
 	private static Logger logger = LogManager.getLogger(StudentDAO.class);
@@ -22,8 +21,8 @@ public class StudentDAO implements IStudentDAO {
 
 	@Override
 	public ArrayList<Student> getAllStudents() {
-		
-		ArrayList<Student> rows = new ArrayList<Student> ();
+
+		ArrayList<Student> rows = new ArrayList<Student>();
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			query = "SELECT * FROM USER_DATABASE where ROLE = 'Student'";
@@ -39,7 +38,7 @@ public class StudentDAO implements IStudentDAO {
 				studentDetails.setEmail(result.getObject("MAIL_ID").toString());
 				rows.add(studentDetails);
 			}
-			
+
 			connection.close();
 		} catch (Exception e) {
 			logger.error(e);
@@ -49,11 +48,12 @@ public class StudentDAO implements IStudentDAO {
 
 	@Override
 	public ArrayList<Student> getStudentByMailId(String studentMailId) {
-		
-		ArrayList<Student> rows = new ArrayList<Student> ();
+
+		ArrayList<Student> rows = new ArrayList<Student>();
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-			query = "SELECT * FROM USER_DATABASE where (ROLE = 'Student' OR ROLE = 'TA') and MAIL_ID LIKE '%" + studentMailId + "%'";
+			query = "SELECT * FROM USER_DATABASE where (ROLE = 'Student' OR ROLE = 'TA') and MAIL_ID LIKE '%"
+					+ studentMailId + "%'";
 			statement = connection.prepareStatement(query);
 
 			ResultSet result = statement.executeQuery();
@@ -67,7 +67,7 @@ public class StudentDAO implements IStudentDAO {
 				studentDetails.setUserRole(result.getObject("ROLE").toString());
 				rows.add(studentDetails);
 			}
-			
+
 			connection.close();
 		} catch (Exception e) {
 			logger.error(e);
@@ -76,17 +76,18 @@ public class StudentDAO implements IStudentDAO {
 	}
 
 	public void assignTA(String studentMailId) {
-		
+
 		int queryResult;
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-			query = "insert into COURSE_TA (MAIL_ID,COURSE_ID) values ('" + studentMailId + "','" + CourseController.courseId + "')";
+			query = "insert into COURSE_TA (MAIL_ID,COURSE_ID) values ('" + studentMailId + "','"
+					+ CourseController.courseId + "')";
 			statement = connection.prepareStatement(query);
 
 			queryResult = statement.executeUpdate();
 			System.out.println(queryResult);
 
-			query = "update USER_DATABASE SET ROLE = 'TA' where MAIL_ID='" + studentMailId + "'";;
+			query = "update USER_DATABASE SET ROLE = 'TA' where MAIL_ID='" + studentMailId + "'";
 			statement = connection.prepareStatement(query);
 			queryResult = statement.executeUpdate();
 			System.out.println(queryResult);

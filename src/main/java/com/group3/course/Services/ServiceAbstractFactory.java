@@ -3,13 +3,12 @@ package com.group3.course.Services;
 import com.group3.course.DAO.*;
 
 public class ServiceAbstractFactory implements IServiceAbstractFactory {
-
 	public static IServiceAbstractFactory serviceInjector;
-	public static ICourseManager courseManager;
-	public static IStudentManager studentManager;
-	public static ITAManager taManager;
-	public static IGmailService gmailService;
-	public static IPassword passwordGenerator;
+	public ICourseManager courseManager;
+	public IStudentManager studentManager;
+	public ITAManager taManager;
+	public IGmailService gmailService;
+	public IPassword passwordGenerator;
 
 	public static IServiceAbstractFactory instance() {
 		if (null == serviceInjector) {
@@ -20,41 +19,28 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 
 	@Override
 	public ICourseManager createCourseManager(IDAOAbstractFactory daoInjector) {
-		if (null == courseManager) {
-			courseManager = new CourseManager(daoInjector);
-		}
-		return courseManager;
+		return new CourseManager(daoInjector);
 	}
 
 	@Override
-	public IStudentManager createStudentManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector, IPassword password) {
-		if (null == studentManager) {
-			studentManager = new StudentManager(daoInjector, emailInjector, password);
-		}
-		return studentManager;
+	public IStudentManager createStudentManager(IDAOAbstractFactory daoInjector, IEmailInjector emailInjector,
+			IPassword password) {
+		return new StudentManager(daoInjector, emailInjector, password);
 	}
 
 	@Override
 	public ITAManager createTAManager(IDAOAbstractFactory daoInjector) {
-		if (null == taManager) {
-			taManager = new TAManager(daoInjector);
-		}
-		return taManager;
+		return new TAManager(daoInjector);
 	}
 
 	@Override
 	public IGmailService createGmailService() {
-		if (null == gmailService) {
-			gmailService = new GmailService();
-		}
-		return gmailService;
+		return new GmailService();
 	}
 
 	@Override
 	public IPassword createPasswordGenerator() {
-		if (null == passwordGenerator) {
-			passwordGenerator = new PasswordGenerator();
-		}
-		return passwordGenerator;
+		return new PasswordGenerator();
+
 	}
 }

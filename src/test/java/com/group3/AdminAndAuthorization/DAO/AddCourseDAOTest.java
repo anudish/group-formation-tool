@@ -4,14 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-import com.group3.DAO.DAOInjector;
-import com.group3.DAO.IDAOInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.group3.BusinessModels.Course;
-import com.group3.Services.IServiceInjector;
+import com.group3.AdminAndAuthorization.Services.IServiceInjector;
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
-import com.group3.Services.ServiceInjector;
+import com.group3.AdminAndAuthorization.Services.ServiceInjector;
 
 class AddCourseDAOTest {
 

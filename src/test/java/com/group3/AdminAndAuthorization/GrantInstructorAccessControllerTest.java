@@ -67,20 +67,20 @@ class GrantInstructorAccessControllerTest {
 		if(userlist.get(0).getUserRole().equalsIgnoreCase(role)) {
 			role = "Guest";
 			expectedOutcome =   firstName+" "+lastName+" "+" switched their role from "+previousRole+" to "+role;
-			this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseID",CourseId)).andDo(print()).andExpect(status().isOk())
+			this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseId",CourseId)).andDo(print()).andExpect(status().isOk())
 			.andExpect(model().attributeExists("courseList"))
 			.andExpect(model().attributeExists("userlist"))
 			.andExpect(model().attribute("feedbackMessage", expectedOutcome));
 			
 		}
 		
-		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseID",CourseId)).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseId",CourseId)).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"))
 		.andExpect(model().attributeExists("userlist"))
 		.andExpect(model().attribute("feedbackMessage", expectedOutcome));
 		
 		expectedOutcome = firstName+" "+lastName+" "+"is already an instructor for the course "+courseList.get(0).getCourseId();
-		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseID",CourseId)).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseId",CourseId)).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"))
 		.andExpect(model().attributeExists("userlist"))
 		.andExpect(model().attribute("feedbackMessage", expectedOutcome));
@@ -91,7 +91,7 @@ class GrantInstructorAccessControllerTest {
 		
 		role = "Guest";
 		expectedOutcome =   firstName+" "+lastName+" "+" switched their role from "+previousRole+" to "+role;
-		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseID",CourseId)).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", role).param("CourseId",CourseId)).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("courseList"))
 		.andExpect(model().attributeExists("userlist"))
 		.andExpect(model().attribute("feedbackMessage", expectedOutcome));

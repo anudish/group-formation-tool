@@ -12,35 +12,36 @@ import org.apache.logging.log4j.Logger;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO {
-
 	Connection connection;
 	String query;
-	private static Logger logger = LogManager.getLogger(RetrieveQuestionsDAO.class);
 	PreparedStatement statement;
+	List<List<String>> instructorQuestions;
+	List<String> questionInfo;
+
+	private Logger logger = LogManager.getLogger(RetrieveQuestionsDAO.class);
 
 	@Override
 	public List<List<String>> getQuestionsByInstructorID(String instructorId, String order) {
 
-		List<List<String>> instructorQuestions = new ArrayList<List<String>> ();
-		List<String> questionInfo;
+		instructorQuestions = new ArrayList<List<String>>();
 		ResultSet result;
 		String id;
 		String title;
 		String text;
 		String type;
 		String timestamp;
-		
+
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			logger.info("Fetching questions for instructor: " + instructorId);
-			query = "select * from QUESTIONS Q " +
-				"JOIN INSTRUCTOR_QUESTION_MAPPING I " +
-				"WHERE I.INSTRUCTOR_ID = '" + instructorId + "' AND I.QUESTION_ID = Q.QUESTION_ID " +
-				order + ";";
+			query = "select * from QUESTIONS Q " + "JOIN INSTRUCTOR_QUESTION_MAPPING I " + "WHERE I.INSTRUCTOR_ID = '"
+					+ instructorId + "' AND I.QUESTION_ID = Q.QUESTION_ID " + order + ";";
 			statement = connection.prepareStatement(query);
 
 			result = statement.executeQuery();
+
 			while (result.next()) {
+
 				id = String.valueOf(result.getObject("QUESTION_ID"));
 				title = String.valueOf(result.getObject("TITLE"));
 				text = String.valueOf(result.getObject("TEXT"));
@@ -49,7 +50,7 @@ public class RetrieveQuestionsDAO implements IRetrieveQuestionsDAO {
 
 				logger.info("Question fetched: " + id);
 
-				questionInfo = new ArrayList<String> ();
+				questionInfo = new ArrayList<String>();
 				questionInfo.add(id);
 				questionInfo.add(title);
 				questionInfo.add(text);

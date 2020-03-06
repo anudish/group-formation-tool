@@ -8,18 +8,20 @@ import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 public class ServiceAbstractFactory implements IServiceAbstractFactory {
 
 	public static IServiceAbstractFactory serviceAbstractFactory;
-	public static IObtainQuestionsService obtainQuestionsService;
-	public static IDeleteQuestionService deleteQuestionService;
-	public static IObtainAllQuestionTypesService obtainAllQuestionTypesService;
-	public static ICurrentTimeStampGenerationService currentTimeStampGenerationService;
-	public static IStringValidatorService stringValidatorService;
-	public static IMakeQuestionGenerationAbstractFactory makeQuestionGenerationAbstractFactory;
-	public static IReturnControllerPathService returnControllerPathService;
-	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
-	public static IQuestionService questionText;
-	public static IQuestionService questionNumeric;
+	public IObtainQuestionsService obtainQuestionsService;
+	public IDeleteQuestionService deleteQuestionService;
+	public IObtainAllQuestionTypesService obtainAllQuestionTypesService;
+	public ICurrentTimeStampGenerationService currentTimeStampGenerationService;
+	public IStringValidatorService stringValidatorService;
+	public IMakeQuestionGenerationAbstractFactory makeQuestionGenerationAbstractFactory;
+	public IReturnControllerPathService returnControllerPathService;
+	public IQuestionService questionText;
+	public IQuestionService questionNumeric;
+	public IQuestionService questionMCQ;
+	public ISplitMCQSAnswerService splitMCQSAnswerService;
 
 	public static IServiceAbstractFactory instance() {
+
 		if (null == serviceAbstractFactory) {
 			serviceAbstractFactory = new ServiceAbstractFactory();
 		}
@@ -27,86 +29,59 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	}
 
 	@Override
-	public IObtainAllQuestionTypesService createObtainAllQuestionTypesService(IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO) {
-		if (null == obtainAllQuestionTypesService) {
-			obtainAllQuestionTypesService = new ObtainAllQuestionTypesService(retrieveQuestionTypesDAO);
-		}
-		return obtainAllQuestionTypesService;
+	public IObtainAllQuestionTypesService createObtainAllQuestionTypesService(
+			IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO) {
+		return new ObtainAllQuestionTypesService(retrieveQuestionTypesDAO);
 	}
 
 	@Override
 	public ICurrentTimeStampGenerationService createCurrentTimeStampGenerationService() {
-		if (null == currentTimeStampGenerationService) {
-			currentTimeStampGenerationService = new CurrentTimeStampGenerationService();
-		}
-		return currentTimeStampGenerationService;
-
+		return new CurrentTimeStampGenerationService();
 	}
 
 	@Override
 	public IStringValidatorService createStringValidatorService(IValidationRulesLoaderDAO validationRulesLoaderDAO) {
-		if (null == stringValidatorService) {
-			stringValidatorService = new StringValidatorService(validationRulesLoaderDAO);
-		}
-		return stringValidatorService;
+		return new StringValidatorService(validationRulesLoaderDAO);
 	}
 
 	@Override
 	public IMakeQuestionGenerationAbstractFactory createMakeQuestionGenerationAbstractFactory() {
-		if (null == makeQuestionGenerationAbstractFactory) {
-			makeQuestionGenerationAbstractFactory = new MakeQuestionGenerationAbstractFactory();
-		}
-		return makeQuestionGenerationAbstractFactory;
+		return new MakeQuestionGenerationAbstractFactory();
 	}
 
 	@Override
 	public IReturnControllerPathService createReturnControllerPathService() {
-		if (null == returnControllerPathService) {
-			returnControllerPathService = new ReturnControllerPathService();
-		}
-		return returnControllerPathService;
+		return new ReturnControllerPathService();
 	}
 
 	@Override
 	public IQuestionService createfreeTextQuestionGenerationService() {
-		if (null == questionText) {
-			questionText = new FreeTextQuestionGenerationService();
-		}
-		return questionText;
+		return new FreeTextQuestionGenerationService();
 	}
 
 	@Override
 	public IQuestionService createNumericQuestionGenerationService() {
-		if (null == questionNumeric) {
-			questionNumeric = new NumericQuestionGenerationService();
-		}
-		return questionNumeric;
+
+		return new NumericQuestionGenerationService();
+	}
+
+	@Override
+	public IQuestionService createSaveMCQAnswerstoDataBaseService() {
+		return new SaveMCQAnswerstoDataBaseService();
 	}
 
 	@Override
 	public IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO) {
-		if (obtainQuestionsService == null) {
-			obtainQuestionsService = new ObtainQuestionsService(retrieveQuestionDAO);
-		}
-		return obtainQuestionsService;
+		return new ObtainQuestionsService(retrieveQuestionDAO);
 	}
 
 	@Override
 	public IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO) {
-		if (deleteQuestionService == null) {
-			deleteQuestionService = new DeleteQuestionService(removeQuestionDAO);
-		}
-		return deleteQuestionService;
+		return new DeleteQuestionService(removeQuestionDAO);
 	}
 
-    @Override
-    public ISplitMCQSAnswerService createSplitMCQSAnswerService() {
-        return SplitMCQSAnswerService.instance();
-    }
-
-    @Override
-    public IQuestionService createSaveMCQAnswerstoDataBaseService() {
-        return new SaveMCQAnswerstoDataBaseService();
-    }
-
+	@Override
+	public ISplitMCQSAnswerService createSplitMCQSAnswerService() {
+		return new SplitMCQSAnswerService();
+	}
 }

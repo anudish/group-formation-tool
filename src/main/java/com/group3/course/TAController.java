@@ -22,7 +22,6 @@ import com.group3.course.Services.*;
 
 @Controller
 public class TAController {
-
 	IServiceAbstractFactory serviceAbstractFactory;
 	IDAOAbstractFactory daoInjector;
 	com.group3.login.DAO.IDAOAbstractFactory loginDAOInjector;
@@ -37,7 +36,6 @@ public class TAController {
 	private static Logger logger = LogManager.getLogger(TAController.class);
 
 	public TAController() {
-		
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		loginDAOInjector = com.group3.login.DAO.DAOAbstractFactory.instance();
@@ -49,7 +47,6 @@ public class TAController {
 
 	@RequestMapping("/showAllStudents")
 	public ModelAndView getAllStudents() {
-
 		courseModel.setCourseId(CourseController.courseId);
 		courseModel.setCourseName(CourseController.courseName);
 		logger.info("SHOW ALL STUDENTS");
@@ -65,7 +62,6 @@ public class TAController {
 
 	@RequestMapping("/searchStudent")
 	public ModelAndView searchStudent(@RequestParam String studentMailId) {
-
 		logger.info("SEARCH STUDENT: " + studentMailId);
 
 		ArrayList<Student> rows = taManager.getStudentByMailId(studentMailId);
@@ -79,7 +75,6 @@ public class TAController {
 
 	@RequestMapping("/addTA")
 	public ModelAndView addStudentAsTA(@RequestParam String studentMailId) {
-
 		logger.info("ADD TA: " + studentMailId);
 
 		taManager.addTA(studentMailId);
@@ -88,7 +83,7 @@ public class TAController {
 
 		String email = LoginAuthenticationSuccessHandler.email;
 		String role = loginDAO.getRoleByEmail(email);
-		ArrayList<Course> rows = new ArrayList<Course> ();
+		ArrayList<Course> rows = new ArrayList<Course>();
 
 		ModelAndView mv = new ModelAndView();
 		if (role.equals("Guest")) {
@@ -104,6 +99,7 @@ public class TAController {
 			mv.addObject("courseInfo", rows);
 			mv.setViewName("showCourses.html");
 		}
+
 		return mv;
 	}
 }

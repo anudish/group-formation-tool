@@ -3,7 +3,6 @@ package com.group3.AdminAndAuthorization.Services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.group3.AdminAndAuthorization.Services.IDeleteCourseService;
-import com.group3.Services.ServiceInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

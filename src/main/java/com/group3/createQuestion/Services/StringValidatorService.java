@@ -5,7 +5,6 @@ import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 import java.util.ArrayList;
 
 public class StringValidatorService implements IStringValidatorService {
-
 	private ArrayList<IStringValidatorService> enabledValidationServiceList;
 	private IValidationRulesLoaderDAO validationRulesLoaderDAO;
 	private ValidationRulesLoader validationRulesLoader;
@@ -20,9 +19,9 @@ public class StringValidatorService implements IStringValidatorService {
 	public boolean isValid(String inputString) {
 
 		enabledValidationServiceList = validationRulesLoader.returnValidationRules();
+		for (IStringValidatorService stringValidatorService : enabledValidationServiceList) {
 
-		for (IStringValidatorService stringValidatorService: enabledValidationServiceList) {
-			if (!stringValidatorService.isValid(inputString)) {
+			if (stringValidatorService.isValid(inputString) == false) {
 				return false;
 			}
 		}

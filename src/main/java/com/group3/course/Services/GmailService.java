@@ -23,7 +23,7 @@ public class GmailService implements IGmailService {
 
 	@Override
 	public void setSMTPClient() {
-	
+
 		properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
@@ -38,7 +38,7 @@ public class GmailService implements IGmailService {
 
 	@Override
 	public void prepareMail(String subject, String message, String to) {
-		
+
 		try {
 			msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("portalSoftwareDev@gmail.com", false));
@@ -52,7 +52,7 @@ public class GmailService implements IGmailService {
 
 	@Override
 	public void sendEmail() {
-		
+
 		try {
 			Transport.send(msg);
 		} catch (Exception e) {

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import com.group3.DBConnectivity.ObtainDataBaseConnection;
 
 public class UserPasswordDAO implements IUserPasswordDAO {
-
 	Connection connection;
 	PreparedStatement statement;
 	String query;
@@ -27,7 +26,7 @@ public class UserPasswordDAO implements IUserPasswordDAO {
 
 			result = statement.executeQuery();
 			queryResult = result.next();
-			
+
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

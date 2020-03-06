@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.group3.AdminAndAuthorization.DAO.IAddCourseDAO;
 import com.group3.AdminAndAuthorization.DAO.IDeleteCourseDAO;
-import com.group3.DAO.DAOInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

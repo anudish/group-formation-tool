@@ -19,18 +19,18 @@ public class UserService implements UserDetailsService {
 		LoginDao ld = new LoginDao();
 		LoginForm user = ld.getUserByEmail(email);
 		UserDetails userDetailsUser;
-		
+
 		if (user == null) {
 			throw new UsernameNotFoundException(email);
 		} else {
 			userDetailsUser = null;
-			
+
 			if (user.getEmail().equals("admin@dal.ca")) {
-				userDetailsUser = User.withDefaultPasswordEncoder()
-					.username(user.getEmail()).password(user.getPassword()).roles("ADMIN").build();
+				userDetailsUser = User.withDefaultPasswordEncoder().username(user.getEmail())
+						.password(user.getPassword()).roles("ADMIN").build();
 			} else {
-				userDetailsUser = User.withDefaultPasswordEncoder()
-					.username(user.getEmail()).password(user.getPassword()).roles("USER").build();
+				userDetailsUser = User.withDefaultPasswordEncoder().username(user.getEmail())
+						.password(user.getPassword()).roles("USER").build();
 			}
 			return userDetailsUser;
 		}

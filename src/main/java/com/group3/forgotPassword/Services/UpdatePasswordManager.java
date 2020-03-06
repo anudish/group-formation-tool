@@ -9,7 +9,7 @@ public class UpdatePasswordManager implements IUpdatePasswordManager {
 	IUserPasswordDAO userDataAccess;
 
 	public UpdatePasswordManager(IDAOAbstractFactory DAOInjector) {
-		
+
 		userDataAccess = DAOInjector.getUserDAOObj();
 	}
 
@@ -27,7 +27,7 @@ public class UpdatePasswordManager implements IUpdatePasswordManager {
 	}
 
 	public void updatePassword(String email, String password) {
-		
+
 		userDataAccess.updateNewPassword(email, password);
 	}
 }

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
-import com.group3.Services.ServiceInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

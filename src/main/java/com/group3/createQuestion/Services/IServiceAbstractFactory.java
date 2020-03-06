@@ -6,15 +6,26 @@ import com.group3.createQuestion.DAO.IRetrieveQuestionsDAO;
 import com.group3.createQuestion.DAO.IValidationRulesLoaderDAO;
 
 public interface IServiceAbstractFactory {
-     IObtainAllQuestionTypesService createObtainAllQuestionTypesService(IRetrieveQuestionTypesDAO iRetrieveQuestionTypesDAO);
-     ICurrentTimeStampGenerationService createCurrentTimeStampGenerationService();
-     IStringValidatorService createStringValidatorService(IValidationRulesLoaderDAO iValidationRulesLoaderDAO);
-     IMakeQuestionGenerationAbstractFactory createMakeQuestionGenerationAbstractFactory();
-     IReturnControllerPathService createReturnControllerPathService();
-     IQuestionService createfreeTextQuestionGenerationService();
-     IQuestionService createNumericQuestionGenerationService();
-     IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO);
-     IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO);
-     ISplitMCQSAnswerService createSplitMCQSAnswerService();
-     IQuestionService createSaveMCQAnswerstoDataBaseService();
+	IObtainAllQuestionTypesService createObtainAllQuestionTypesService(
+			IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO);
+
+	ICurrentTimeStampGenerationService createCurrentTimeStampGenerationService();
+
+	IStringValidatorService createStringValidatorService(IValidationRulesLoaderDAO validationRulesLoaderDAO);
+
+	IMakeQuestionGenerationAbstractFactory createMakeQuestionGenerationAbstractFactory();
+
+	IReturnControllerPathService createReturnControllerPathService();
+
+	IQuestionService createfreeTextQuestionGenerationService();
+
+	IQuestionService createNumericQuestionGenerationService();
+
+	IObtainQuestionsService createObtainQuestionsService(IRetrieveQuestionsDAO retrieveQuestionDAO);
+
+	IDeleteQuestionService createDeleteQuestionService(IRemoveQuestionDAO removeQuestionDAO);
+
+	ISplitMCQSAnswerService createSplitMCQSAnswerService();
+
+	IQuestionService createSaveMCQAnswerstoDataBaseService();
 }

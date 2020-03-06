@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 
 public class ValidationRulesLoader {
-
 	private static ValidationRulesLoader validationRulesLoader;
 	private ArrayList<String> validationRules;
 	private ArrayList<IStringValidatorService> enabledValidationServiceList;
@@ -20,13 +19,14 @@ public class ValidationRulesLoader {
 		validationRules = validationRulesLoaderDAO.getValidationRules();
 		this.getValidationRules();
 	}
-	
-	public static ValidationRulesLoader instance(IValidationRulesLoaderDAO validationRulesLoaderDAO){
-        if (null == validationRulesLoader){
-            validationRulesLoader = new ValidationRulesLoader(validationRulesLoaderDAO);
-        }
-        return validationRulesLoader;
-    }
+
+	public static ValidationRulesLoader instance(IValidationRulesLoaderDAO validationRulesLoaderDAO) {
+
+		if (null == validationRulesLoader) {
+			validationRulesLoader = new ValidationRulesLoader(validationRulesLoaderDAO);
+		}
+		return validationRulesLoader;
+	}
 
 	private ArrayList<IStringValidatorService> getValidationRules() {
 
@@ -48,7 +48,6 @@ public class ValidationRulesLoader {
 	}
 
 	public ArrayList<IStringValidatorService> returnValidationRules() {
-
 		return enabledValidationServiceList;
 	}
 }

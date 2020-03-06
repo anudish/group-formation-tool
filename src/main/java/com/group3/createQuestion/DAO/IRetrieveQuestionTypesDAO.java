@@ -4,5 +4,5 @@ import com.group3.createQuestion.BusinessModels.*;
 import java.util.ArrayList;
 
 public interface IRetrieveQuestionTypesDAO {
-    ArrayList<QuestionTypes> getQuestionTypes();
+	ArrayList<QuestionTypes> getQuestionTypes();
 }

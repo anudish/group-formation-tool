@@ -23,19 +23,19 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 	public static String email = null;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
+
 	private static Logger logger = LogManager.getLogger(LoginAuthenticationSuccessHandler.class);
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-		Authentication authentication) throws IOException, ServletException {
+			Authentication authentication) throws IOException, ServletException {
 
 		handle(request, response, authentication);
 		clearAuthenticationAttributes(request);
 	}
 
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-	throws IOException {
+			throws IOException {
 
 		String targetUrl = determineTargetUrl(authentication);
 
@@ -53,9 +53,9 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		boolean isAdmin = false;
 		String emailLoggedInUser;
 		String role;
-		
-		Collection<? extends GrantedAuthority > authorities = authentication.getAuthorities();
-		for (GrantedAuthority grantedAuthority: authorities) {
+
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
 				isUser = true;
 				break;
@@ -67,7 +67,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 		emailLoggedInUser = authentication.getName();
 		email = emailLoggedInUser;
-		
+
 		if (isUser) {
 			LoginDao ld = new LoginDao();
 			role = ld.getRoleByEmail(emailLoggedInUser);

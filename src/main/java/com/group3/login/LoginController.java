@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class LoginController {
-	
+
 //		@PostMapping(path = "/login")
 //	    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
 //	        String email = loginForm.getEmail();
@@ -17,6 +17,5 @@ public class LoginController {
 //	        model.addAttribute("invalidCredentials",true);
 //	        return "login";       
 //	    }
-
 
 }
