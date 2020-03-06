@@ -24,7 +24,7 @@ import com.group3.groupmanager.GroupmanagerApplication;
 @ContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GroupmanagerApplication.class)
 public class UsersAuthorizationTest {
-	
+
 	@Autowired
 	private WebApplicationContext context;
 
@@ -32,64 +32,49 @@ public class UsersAuthorizationTest {
 
 	@Before
 	public void setup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(context)
-				.apply(springSecurity())
-				.alwaysDo(print())
-				.build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).alwaysDo(print()).build();
 	}
-	
+
 	@Test
 	public void selectCourseNotAccessibletoGuest() throws Exception {
 
-		mockMvc.perform(get("/selectCourse")
-				.with(user("user").password("password").roles("GUEST")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/selectCourse").with(user("user").password("password").roles("GUEST")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
-	
+
 	@Test
 	public void importCSVNotAccessibletoOtherUsers() throws Exception {
 
-		mockMvc.perform(get("/importCSV")
-				.with(user("user").password("password").roles("GUEST","STUDENT")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/importCSV").with(user("user").password("password").roles("GUEST", "STUDENT")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
-	
+
 	@Test
 	public void uploadCSVFileNotAccessibletoOtherUsers() throws Exception {
 
-		mockMvc.perform(get("/upload-csv-file")
-				.with(user("user").password("password").roles("GUEST","STUDENT")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/upload-csv-file").with(user("user").password("password").roles("GUEST", "STUDENT")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
-	
+
 	@Test
 	public void showAllStudentsNotAccessibletoOtherUsers() throws Exception {
 
-		mockMvc.perform(get("/showAllStudents")
-				.with(user("user").password("password").roles("GUEST","STUDENT")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/showAllStudents").with(user("user").password("password").roles("GUEST", "STUDENT")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
-	
+
 	@Test
 	public void searchStudentNotAccessibletoOtherUsers() throws Exception {
 
-		mockMvc.perform(get("/searchStudent")
-				.with(user("user").password("password").roles("GUEST","STUDENT")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/searchStudent").with(user("user").password("password").roles("GUEST", "STUDENT")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
-	
+
 	@Test
 	public void addTaNotAccessibletoOtherUsers() throws Exception {
 
-		mockMvc.perform(get("/addTA")
-				.with(user("user").password("password").roles("GUEST","STUDENT")))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/accessdenied"));
+		mockMvc.perform(get("/addTA").with(user("user").password("password").roles("GUEST", "STUDENT")))
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/accessdenied"));
 	}
 
 }

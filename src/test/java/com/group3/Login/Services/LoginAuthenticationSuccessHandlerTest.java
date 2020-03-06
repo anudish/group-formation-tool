@@ -24,30 +24,24 @@ import org.springframework.web.context.WebApplicationContext;
 import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GroupmanagerApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GroupmanagerApplication.class)
 public class LoginAuthenticationSuccessHandlerTest {
-	
-	 @Autowired
-	  private WebApplicationContext context;
 
-	  private MockMvc mockMvc;
+	@Autowired
+	private WebApplicationContext context;
 
-	  @Before
-	  public void setup() {
-	    mockMvc = MockMvcBuilders
-	            .webAppContextSetup(context)
-	            .apply(springSecurity())
-	            .alwaysDo(print())
-	            .build();
-	  }
-	  
-	  @Test
-	  public void afterAdminLoginRedirectingToAdminDashBoard() throws Exception {
-	    mockMvc
-	            .perform(formLogin().userParameter("email").user("admin@dal.ca").password("admin"))
-	            .andExpect(status().isFound())
-	            .andExpect(redirectedUrl("adminMainPageRequest"))
-	            .andExpect(authenticated().withUsername("admin@dal.ca"));
-	  }
-	  	  
+	private MockMvc mockMvc;
+
+	@Before
+	public void setup() {
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).alwaysDo(print()).build();
+	}
+
+	@Test
+	public void afterAdminLoginRedirectingToAdminDashBoard() throws Exception {
+		mockMvc.perform(formLogin().userParameter("email").user("admin@dal.ca").password("admin"))
+				.andExpect(status().isFound()).andExpect(redirectedUrl("adminMainPageRequest"))
+				.andExpect(authenticated().withUsername("admin@dal.ca"));
+	}
+
 }

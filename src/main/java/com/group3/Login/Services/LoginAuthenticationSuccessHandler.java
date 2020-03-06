@@ -1,5 +1,4 @@
 package com.group3.Login.Services;
-
 import java.io.IOException;
 import java.util.Collection;
 
@@ -17,7 +16,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.group3.Login.DAO.LoginDao;
+import com.group3.Login.DAO.DAOAbstractFactory;
+import com.group3.Login.DAO.ILoginDAO;
 
 
 public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -65,8 +65,8 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		String emailLoggedInUser = authentication.getName();
 		email = emailLoggedInUser;
 		if (isUser) {
-			LoginDao ld = new LoginDao();
-			String role = ld.getRoleByEmail(emailLoggedInUser);
+			ILoginDAO loginDAO = DAOAbstractFactory.instance().createLoginDAO();
+			String role = loginDAO.getRoleByEmail(emailLoggedInUser);
 
 			return "courseAdmin?emailId=" + emailLoggedInUser;
 

@@ -26,13 +26,12 @@ public class LoginDaoTest {
 	private LoginForm user;
 	private String role;
 
-
 	IDAOAbstractFactory daoInjector;
 	ILoginDAO loginDao;
 
 	@Before
 	public void setUp() {
-		daoInjector = new DAOAbstractFactory();
+		daoInjector = DAOAbstractFactory.instance();
 		loginDao = daoInjector.createLoginDAO();
 	}
 
