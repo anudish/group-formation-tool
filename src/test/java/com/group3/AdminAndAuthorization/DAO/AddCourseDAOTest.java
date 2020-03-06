@@ -32,7 +32,7 @@ class AddCourseDAOTest {
   	    
   	    IDAOInjector injector = new DAOInjector();
 	   	IViewCoursesDAO iViewCoursesDAO = injector.createViewCourseDAO();
-	   
+	
 	   	IServiceInjector iServiceInjector = new ServiceInjector();
 	   	IViewCoursesService iViewCoursesService = iServiceInjector.createViewCoursesService(iViewCoursesDAO);
 	   
