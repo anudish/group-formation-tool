@@ -15,7 +15,7 @@ public class AdminLogOutController {
 	String adminLogout() {
 		PropertyConfigurator.configure("src/main/resources/log4j.properties");
 		try {
-			return "Login.html";
+			return "login.html";
 
 		} catch (NullPointerException e) {
 			logger.error(e.getMessage());
