@@ -3,10 +3,13 @@ package com.group3.Course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Student;
-import com.group3.Login.DAO.ILoginDAO;
 
 import com.group3.Course.DAO.DAOAbstractFactory;
 import com.group3.Course.DAO.IDAOAbstractFactory;
@@ -25,10 +27,8 @@ import com.group3.Course.Services.*;
 public class TAController {
 	IServiceAbstractFactory serviceAbstractFactory;
 	IDAOAbstractFactory daoInjector;
-	com.group3.Login.DAO.IDAOAbstractFactory loginDAOInjector;
 	ITAManager taManager;
 	ICourseManager courseManager;
-	ILoginDAO loginDAO;
 	Course courseModel;
 	Connection conn;
 	String sql;
@@ -39,8 +39,6 @@ public class TAController {
 	public TAController() {
 		daoInjector = DAOAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
-		loginDAOInjector = com.group3.Login.DAO.DAOAbstractFactory.instance();
-		loginDAO = loginDAOInjector.createLoginDAO();
 		taManager = serviceAbstractFactory.createTAManager(daoInjector);
 		courseManager = serviceAbstractFactory.createCourseManager(daoInjector);
 		courseModel = new Course();
@@ -84,9 +82,20 @@ public class TAController {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		String role;
 		String email = authentication.getName();
+		String formattedRole = null;
 
-		String role = loginDAO.getRoleByEmail(email);
+		@SuppressWarnings("unchecked")
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication
+				.getAuthorities();
+		for (GrantedAuthority authority : authorities) {
+			role = authority.getAuthority().replace("ROLE_", "").toLowerCase();
+			System.out.println("Role formatted: " + role.substring(0, 1).toUpperCase() + role.substring(1));
+			formattedRole = role.substring(0, 1).toUpperCase() + role.substring(1);
+		}
+
+		role = formattedRole;
 		ArrayList<Course> rows = new ArrayList<Course>();
 
 		ModelAndView mv = new ModelAndView();

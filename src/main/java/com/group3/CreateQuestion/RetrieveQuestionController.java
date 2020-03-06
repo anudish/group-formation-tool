@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.BusinessModels.Instructor;
-import com.group3.CreateQuestion.DAO.*;
-import com.group3.CreateQuestion.Services.*;
+import com.group3.CreateQuestion.DAO.DAOAbstractFactory;
+import com.group3.CreateQuestion.DAO.IDAOAbstractFactory;
+import com.group3.CreateQuestion.Services.IObtainQuestionsService;
+import com.group3.CreateQuestion.Services.IServiceAbstractFactory;
+import com.group3.CreateQuestion.Services.ServiceAbstractFactory;
+
 
 @Controller
 public class RetrieveQuestionController {

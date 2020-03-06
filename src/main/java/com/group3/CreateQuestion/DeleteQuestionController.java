@@ -1,8 +1,12 @@
 package com.group3.CreateQuestion;
 
 import com.group3.BusinessModels.Instructor;
-import com.group3.CreateQuestion.DAO.*;
-import com.group3.CreateQuestion.Services.*;
+import com.group3.CreateQuestion.DAO.DAOAbstractFactory;
+import com.group3.CreateQuestion.DAO.IDAOAbstractFactory;
+import com.group3.CreateQuestion.Services.IDeleteQuestionService;
+import com.group3.CreateQuestion.Services.IObtainQuestionsService;
+import com.group3.CreateQuestion.Services.IServiceAbstractFactory;
+import com.group3.CreateQuestion.Services.ServiceAbstractFactory;
 
 import java.util.List;
 

@@ -88,7 +88,8 @@ public class CreateQuestionController {
 
 		String id;
 		logger.log(Level.INFO, "REQUEST FORWARDED TO INVOKE FREE TEXT QUESTION GENERATION CONTROLLER! ");
-
+		saveBasicQuestionInformationDAO = daoInjector
+				.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
 		id = questionService.saveBasicQuestionInformation(title, question, type, saveBasicQuestionInformationDAO);
 		logger.log(Level.INFO, "Question id returned from database " + id);
 
@@ -100,7 +101,8 @@ public class CreateQuestionController {
 
 		String id;
 		logger.log(Level.INFO, "REQUEST FORWARDED TO INVOKE NUMERIC QUESTION GENERATION CONTROLLER! ");
-
+		saveBasicQuestionInformationDAO = daoInjector
+				.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
 		id = questionService.saveBasicQuestionInformation(title, question, type, saveBasicQuestionInformationDAO);
 		logger.log(Level.INFO, "Question id returned from database " + id);
 
