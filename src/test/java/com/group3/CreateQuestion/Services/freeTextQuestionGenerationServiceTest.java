@@ -18,19 +18,20 @@ class freeTextQuestionGenerationServiceTest {
 	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
 	Logger logger = LogManager.getLogger(QuestionServiceTest.class);
 
-	@BeforeEach
-	void setUp() {
+	public freeTextQuestionGenerationServiceTest() {
 
 		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionService = serviceAbstractFactory.createfreeTextQuestionGenerationService();
-		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(serviceAbstractFactory.createCurrentTimeStampGenerationService());
+		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(
+				serviceAbstractFactory.createCurrentTimeStampGenerationService());
 	}
 
 	@Test
 	void saveFreeTextQuestionGenerationServiceInfo() {
 
-		String id = questionService.saveBasicQuestionInformation("Design Pattern", "What is memento pattern?", "Free text", saveBasicQuestionInformationDAO);
+		String id = questionService.saveBasicQuestionInformation("Design Pattern", "What is memento pattern?",
+				"Free text", saveBasicQuestionInformationDAO);
 		logger.info("id generated from mock object" + id);
 		assertNotNull(id);
 	}

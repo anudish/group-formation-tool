@@ -53,22 +53,22 @@ public class CourseController {
 
 	@RequestMapping("/courseAdmin")
 	public ModelAndView getCoursesByEmailId() {
-		//get and show courses for TA from database
-		
+
 		logger.info("COURSE");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+
 		String email = authentication.getName();
-		
+
 		String formattedRole = null;
-		
+
 		@SuppressWarnings("unchecked")
-		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication
+				.getAuthorities();
 		for (GrantedAuthority authority : authorities) {
-		     String role = authority.getAuthority().replace("ROLE_","").toLowerCase();
-		     System.out.println("Role formatted: " + role.substring(0, 1).toUpperCase() + role.substring(1));
-		     formattedRole = role.substring(0, 1).toUpperCase() + role.substring(1);
-		 }
+			String role = authority.getAuthority().replace("ROLE_", "").toLowerCase();
+			System.out.println("Role formatted: " + role.substring(0, 1).toUpperCase() + role.substring(1));
+			formattedRole = role.substring(0, 1).toUpperCase() + role.substring(1);
+		}
 
 		role = formattedRole;
 		ArrayList<Course> rows = new ArrayList<Course>();
@@ -84,8 +84,7 @@ public class CourseController {
 			mv.addObject("courseInfo", rows);
 			mv.addObject("questionManager", "visible");
 			mv.setViewName("showCourses.html");
-		}
-		else if(role.equals("Ta") || role.equals("Student")){
+		} else if (role.equals("Ta") || role.equals("Student")) {
 			rows = courseManager.getCoursesByTAMailId(email);
 			mv.addObject("courseInfo", rows);
 			mv.addObject("questionManager", "hidden");
@@ -112,14 +111,13 @@ public class CourseController {
 			courseModel.setCourseName(this.courseName);
 			mv.addObject("courseInfo", courseModel);
 			mv.setViewName("course.html");
-			
-		}else if(role.equals("Instructor") || role.equals("Ta")) {
-	        mv.addObject("courseInfo",courseModel);
-	        mv.setViewName("courseAction.html");
-	        
+
+		} else if (role.equals("Instructor") || role.equals("Ta")) {
+			mv.addObject("courseInfo", courseModel);
+			mv.setViewName("courseAction.html");
+
 		}
 
-		
 		return mv;
 	}
 

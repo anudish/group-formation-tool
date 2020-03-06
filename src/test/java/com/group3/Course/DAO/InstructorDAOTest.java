@@ -31,7 +31,7 @@ class InstructorDAOTest {
 
 		insert.InstructorDAOTest_insertEnrollment("testinstructor@dal.ca", "TestCSCI03");
 
-		courses = new ArrayList<Course> ();
+		courses = new ArrayList<Course>();
 		courses = instructorDAO.getCoursesByInstructorMailId("testinstructor@dal.ca");
 		assertNotNull(courses);
 		assertThat(courses).isNotEmpty();

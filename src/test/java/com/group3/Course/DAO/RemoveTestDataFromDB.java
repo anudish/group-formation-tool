@@ -23,7 +23,8 @@ public class RemoveTestDataFromDB {
 	public void CourseEnrollmentsDAOTest_removeEnrollment(Student student, String courseId) throws Exception {
 
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-		sql = "delete from student_enrollments where MAIL_ID ='" + student.getEmail() + "' and COURSE_ID = '" + courseId + "'";
+		sql = "delete from student_enrollments where MAIL_ID ='" + student.getEmail() + "' and COURSE_ID = '" + courseId
+				+ "'";
 		statement = connection.prepareStatement(sql);
 		result = statement.executeUpdate();
 		System.out.println(result);

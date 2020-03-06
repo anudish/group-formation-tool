@@ -11,6 +11,9 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
 	public static IRemoveQuestionDAO removeQuestionDAO;
 
+	private DAOMockAbstractFactory() {
+	}
+
 	public static IDAOAbstractFactory instance() {
 		if (null == idaoInjector) {
 			idaoInjector = new DAOMockAbstractFactory();
@@ -20,27 +23,28 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	@Override
 	public IRetrieveQuestionTypesDAO createRetrieveQuestionTypesDAO() {
-		return  new RetrieveQuestionTypesDAOMock();
+		return new RetrieveQuestionTypesDAOMock();
 	}
 
 	@Override
-	public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
-		return  new SaveBasicQuestionInformationDAOMock(currentTimeStampGenerationService);
+	public ISaveBasicQuestionInformationDAO createSaveBasicQuestionInformationDAO(
+			ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
+		return new SaveBasicQuestionInformationDAOMock(currentTimeStampGenerationService);
 	}
 
 	@Override
 	public IValidationRulesLoaderDAO createValidationRulesLoaderDAO() {
-		return  new ValidationRulesDAOLoaderMock();
+		return new ValidationRulesDAOLoaderMock();
 	}
 
 	@Override
 	public IRetrieveQuestionsDAO createRetrieveQuestionsDAO() {
-		return  new RetrieveQuestionsDAOMock();
+		return new RetrieveQuestionsDAOMock();
 	}
 
 	@Override
 	public IRemoveQuestionDAO createRemoveQuestionDAO() {
-		return  new RemoveQuestionDAOMock();
+		return new RemoveQuestionDAOMock();
 	}
 
 	@Override

@@ -5,11 +5,14 @@ import com.group3.CreateQuestion.Services.ICurrentTimeStampGenerationService;
 public class DAOAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;
-	public static IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
-	public static ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
-	public static IValidationRulesLoaderDAO validationRulesLoaderDAO;
-	public static IRetrieveQuestionsDAO retrieveQuestionsDAO;
-	public static IRemoveQuestionDAO removeQuestionDAO;
+	public IRetrieveQuestionTypesDAO retrieveQuestionTypesDAO;
+	public ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
+	public IValidationRulesLoaderDAO validationRulesLoaderDAO;
+	public IRetrieveQuestionsDAO retrieveQuestionsDAO;
+	public IRemoveQuestionDAO removeQuestionDAO;
+
+	private DAOAbstractFactory() {
+	}
 
 	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {

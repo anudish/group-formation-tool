@@ -17,8 +17,7 @@ class DeleteQuestionServiceTest {
 	private static IRemoveQuestionDAO removeQuestionDAO;
 	public static Logger logger = LogManager.getLogger(DeleteQuestionServiceTest.class);
 
-	@BeforeEach
-	public void setUp() {
+	public DeleteQuestionServiceTest() {
 
 		daoInjector = DAOMockAbstractFactory.instance();
 		removeQuestionDAO = daoInjector.createRemoveQuestionDAO();

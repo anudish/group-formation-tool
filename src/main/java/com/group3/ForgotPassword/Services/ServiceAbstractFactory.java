@@ -10,6 +10,9 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	public IUpdatePasswordManager updatePasswordManager;
 	public IVerificationCode verificationCode;
 
+	private ServiceAbstractFactory() {
+	}
+
 	public static IServiceAbstractFactory instance() {
 		if (null == serviceInjector) {
 			serviceInjector = new ServiceAbstractFactory();

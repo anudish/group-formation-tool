@@ -17,35 +17,36 @@ import com.group3.CreateQuestion.Services.*;
 @Controller
 public class ViewQuestionController {
 	IDAOAbstractFactory daoInjector;
-    IServiceAbstractFactory serviceAbstractFactory;
-    IObtainQuestionsService obtainQuestionsService;
+	IServiceAbstractFactory serviceAbstractFactory;
+	IObtainQuestionsService obtainQuestionsService;
 
-    private Logger logger = LogManager.getLogger(ViewQuestionController.class);
-    
-    public ViewQuestionController() {
-    	
-    	daoInjector = DAOAbstractFactory.instance();
-    	serviceAbstractFactory = ServiceAbstractFactory.instance();
-        obtainQuestionsService = serviceAbstractFactory.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
-    }
-    
-    @RequestMapping("/viewQuestions")
-    public ModelAndView viewQuestions(){
-    	List<List<String>> questionList;
-    	
-    	logger.info("Fetching the available questions!");
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+	private Logger logger = LogManager.getLogger(ViewQuestionController.class);
+
+	public ViewQuestionController() {
+
+		daoInjector = DAOAbstractFactory.instance();
+		serviceAbstractFactory = ServiceAbstractFactory.instance();
+		obtainQuestionsService = serviceAbstractFactory
+				.createObtainQuestionsService(daoInjector.createRetrieveQuestionsDAO());
+	}
+
+	@RequestMapping("/viewQuestions")
+	public ModelAndView viewQuestions() {
+		List<List<String>> questionList;
+
+		logger.info("Fetching the available questions!");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		String email = authentication.getName();
-        Instructor instructor = new Instructor();
-        instructor.setEmail(email);
-        questionList = obtainQuestionsService.obtainInstructorQuestions(instructor,"");
-        logger.info("Total Questions fetched: "+questionList.size());
-        
-        ModelAndView mv = new ModelAndView();
-		mv.addObject("questionList",questionList);
-		mv.addObject("deleteQuery","hidden");
+		Instructor instructor = new Instructor();
+		instructor.setEmail(email);
+		questionList = obtainQuestionsService.obtainInstructorQuestions(instructor, "");
+		logger.info("Total Questions fetched: " + questionList.size());
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("questionList", questionList);
+		mv.addObject("deleteQuery", "hidden");
 		mv.setViewName("deleteQuestionPage.html");
 		return mv;
-    }
+	}
 }

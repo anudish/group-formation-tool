@@ -25,21 +25,16 @@ import com.group3.groupmanager.GroupmanagerApplication;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+		AdminDashBoardMainPageController.class, GroupmanagerApplication.class })
 class AdminDashBoardMainPageControllerTest {
-    
 
 	@Autowired
 	private MockMvc mockMvc;
-	
-	
+
 	@Test
 	final void testReturnAdminDashBoardPage() throws Exception {
-		mockMvc.perform(get("/adminMainPageRequest")
-				.with(user("user").password("password").roles("ADMIN")))
-		.andDo(print()).andExpect(status().isOk())
-		.andExpect(content().string(containsString("")));
-		
+		mockMvc.perform(get("/adminMainPageRequest").with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("")));
 	}
-
 }

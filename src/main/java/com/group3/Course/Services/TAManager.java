@@ -17,7 +17,7 @@ public class TAManager implements ITAManager {
 	private static Logger logger = LogManager.getLogger(TAManager.class);
 
 	public TAManager(IDAOAbstractFactory daoInjector) {
-		
+
 		studentDAO = daoInjector.createStudentDAO();
 	}
 

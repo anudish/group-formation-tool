@@ -8,40 +8,39 @@ import org.junit.jupiter.api.Test;
 
 import com.group3.BusinessModels.Course;
 
-import com.group3.AdminAndAuthorization.DAO.DAOMockInjector;
-import com.group3.AdminAndAuthorization.DAO.IDAOInjector;
+import com.group3.AdminAndAuthorization.DAO.DAOMockAbstractFactory;
+import com.group3.AdminAndAuthorization.DAO.IDAOAbstractFactory;
 import com.group3.AdminAndAuthorization.DAO.IDeleteCourseDAO;
 
 class DeleteCourseServiceTest {
-    private Course course;
-    private IDeleteCourseService iDeleteCourseService;
-    private IDeleteCourseDAO iDeleteCourseDAO;
+	private Course course;
+	private IDeleteCourseService deleteCourseService;
+	private IDeleteCourseDAO deleteCourseDAO;
 
 	public DeleteCourseServiceTest() {
-		iDeleteCourseDAO = DAOMockInjector.instance().createDeleteCourseDAO();
-		
+		deleteCourseDAO = DAOMockAbstractFactory.instance().createDeleteCourseDAO();
 	}
 
-	
 	@Test
 	final void testDeleteCourse() {
+
+		String feedbackString;
+		String expectedResponse;
 
 		course = new Course();
 		course.setCourseId("CSCI7000");
 		course.setCourseName("Software Architecture");
-		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
-	    String feedBackString = iDeleteCourseService.deleteCourse();
-	    String expectedResponse = "Error occured while deleting the course";
-	    assertTrue(feedBackString.equals(expectedResponse)==true);
-	    
-	    
+		deleteCourseService = ServiceAbstractFactory.instance().createDeleteCourseService(deleteCourseDAO, course);
 
-	    course.setCourseId("CSCI7800");
-		course.setCourseName("Advanced Algorithms"); 
-		iDeleteCourseService = new ServiceInjector().createDeleteCourseService(iDeleteCourseDAO, course);
-		feedBackString = iDeleteCourseService.deleteCourse();
-	    expectedResponse = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
-	    assertTrue(expectedResponse.equals(feedBackString)==true);
+		feedbackString = deleteCourseService.deleteCourse();
+		expectedResponse = "Error occured while deleting the course";
+		assertTrue(feedbackString.equals(expectedResponse) == true);
+
+		course.setCourseId("CSCI7800");
+		course.setCourseName("Advanced Algorithms");
+		deleteCourseService = ServiceAbstractFactory.instance().createDeleteCourseService(deleteCourseDAO, course);
+		feedbackString = deleteCourseService.deleteCourse();
+		expectedResponse = course.getCourseName() + " (" + course.getCourseId() + ") " + " is deleted sucessfully ";
+		assertTrue(expectedResponse.equals(feedbackString) == true);
 	}
-
 }

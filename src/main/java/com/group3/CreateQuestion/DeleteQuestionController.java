@@ -40,8 +40,9 @@ public class DeleteQuestionController {
 		List<List<String>> questionList;
 
 		logger.info("Question to be deleted: " + questionId);
-		deleteQuestionService.deleteQuestionByQuestionId(questionId);Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+		deleteQuestionService.deleteQuestionByQuestionId(questionId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		String email = authentication.getName();
 		Instructor instructor = new Instructor();
 		instructor.setEmail(email);

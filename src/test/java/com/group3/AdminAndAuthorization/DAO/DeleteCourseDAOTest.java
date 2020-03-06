@@ -10,31 +10,30 @@ import org.junit.jupiter.api.Test;
 import com.group3.BusinessModels.Course;
 
 class DeleteCourseDAOTest {
+
 	private IAddCourseDAO iaddCourseDAO;
 	private IDeleteCourseDAO iDeleteCourseDAO;
 	private Course course;
-	private String CourseName,CourseId;
+	private String courseName, courseId;
 
 	public DeleteCourseDAOTest() {
+	
 		course = new Course();
-		 CourseName = "Penentration Testing(Cyber)";
-	     CourseId = "CSCT6786";
-		course.setCourseId(CourseId);
-		course.setCourseName(CourseName);
- 	    DAOInjector daoinjector = new DAOInjector();
- 	    iaddCourseDAO  = daoinjector.createAddCourseDAO();
- 	   iDeleteCourseDAO = daoinjector.createDeleteCourseDAO();
+		courseName = "Penentration Testing(Cyber)";
+		courseId = "CSCT6786";
+		course.setCourseId(courseId);
+		course.setCourseName(courseName);
+		IDAOAbstractFactory daoinjector = DAOAbstractFactory.instance();
+		iaddCourseDAO = daoinjector.createAddCourseDAO();
+		iDeleteCourseDAO = daoinjector.createDeleteCourseDAO();
 	}
 
 	@Test
 	final void testDeleteCourse() {
-		String expectedOutCome = course.getCourseName()+" ("+course.getCourseId()+") "+" is deleted sucessfully ";
+		String expectedOutCome = course.getCourseName() + " (" + course.getCourseId() + ") "
+				+ " is deleted sucessfully ";
 		assertFalse(this.iDeleteCourseDAO.deleteCourse(course).equals(expectedOutCome));
-		
 		this.iaddCourseDAO.addCourse(course);
-		
 		assertTrue(this.iDeleteCourseDAO.deleteCourse(course).equals(expectedOutCome));
-		
 	}
-
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class UserDAOMock implements IUserDAO {
 
-	public static ArrayList<Guest> userList = new ArrayList<Guest> ();
+	public static ArrayList<Guest> userList = new ArrayList<Guest>();
 
 	public UserDAOMock() {
 
@@ -23,7 +23,7 @@ public class UserDAOMock implements IUserDAO {
 	public boolean getSignUpDetailsofUser(Guest guest) {
 
 		boolean checkUniqueUser = true;
-		for (Guest model: userList) {
+		for (Guest model : userList) {
 			if (model.getEmail().equals(guest.getEmail())) {
 				checkUniqueUser = false;
 				break;

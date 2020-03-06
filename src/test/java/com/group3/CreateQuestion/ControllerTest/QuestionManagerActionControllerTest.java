@@ -17,8 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
-	QuestionManagerActionController.class, GroupmanagerApplication.class
-})
+		QuestionManagerActionController.class, GroupmanagerApplication.class })
 class QuestionManagerActionControllerTest {
 
 	@Autowired

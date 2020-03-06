@@ -3,10 +3,13 @@ package com.group3.Course.DAO;
 public class DAOAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;
-	public static ICourseDAO courseDAO;
-	public static IStudentDAO studentDAO;
-	public static ITADAO taDAO;
-	public static IInstructorDAO instructorDAO;
+	public ICourseDAO courseDAO;
+	public IStudentDAO studentDAO;
+	public ITADAO taDAO;
+	public IInstructorDAO instructorDAO;
+
+	private DAOAbstractFactory() {
+	}
 
 	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {

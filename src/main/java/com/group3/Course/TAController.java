@@ -81,9 +81,9 @@ public class TAController {
 		taManager.addTA(studentMailId);
 
 		logger.info("TAship assigned");
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+
 		String email = authentication.getName();
 
 		String role = loginDAO.getRoleByEmail(email);

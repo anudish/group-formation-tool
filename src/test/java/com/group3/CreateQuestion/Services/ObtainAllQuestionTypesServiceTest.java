@@ -23,15 +23,15 @@ class ObtainAllQuestionTypesServiceTest {
 	ArrayList<QuestionTypes> questionTypes;
 	public static Logger logger = LogManager.getLogger(ObtainAllQuestionTypesServiceTest.class);
 
-	@BeforeEach
-	void setUp() {
+	public ObtainAllQuestionTypesServiceTest() {
 
 		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionTypes = new ArrayList<>();
 		retrieveQuestionTypesDAO = daoInjector.createRetrieveQuestionTypesDAO();
 		logger.info(retrieveQuestionTypesDAO.getQuestionTypes().size());
-		obtainAllQuestionTypesService = serviceAbstractFactory.createObtainAllQuestionTypesService(retrieveQuestionTypesDAO);
+		obtainAllQuestionTypesService = serviceAbstractFactory
+				.createObtainAllQuestionTypesService(retrieveQuestionTypesDAO);
 		questionTypes = obtainAllQuestionTypesService.getAllQuestionTypes();
 	}
 

@@ -16,7 +16,7 @@ class NumericQuestionTest {
 
 	@Test
 	void addQuestionTest() {
-		
+
 		num.addQuestion("Test Title", "Test Text", "Test Type");
 		assertTrue(num.getQuestionTitle().equals("Test Title"));
 		assertTrue(num.getQuestionText().equals("Test Text"));

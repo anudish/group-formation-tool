@@ -44,7 +44,8 @@ public class InsertTestDataIntoDB {
 		result = statement.executeUpdate();
 		System.out.println("Test Course ID Inserted!");
 
-		query = "insert into student_enrollments values ('" + student.getBannerId() + "','" + student.getEmail() + "','" + courseId + "')";
+		query = "insert into student_enrollments values ('" + student.getBannerId() + "','" + student.getEmail() + "','"
+				+ courseId + "')";
 		statement = connection.prepareStatement(query);
 		result = statement.executeUpdate();
 		System.out.println("Test Course ID Inserted!");
@@ -54,7 +55,8 @@ public class InsertTestDataIntoDB {
 	public void StudentDAOTest_insertStudent(Student student) throws Exception {
 
 		connection = ObtainDataBaseConnection.obtainDatabaseConnection();
-		query = "insert into USER_DATABASE values ('" + student.getLastName() + "','" + student.getFirstName() + "','Student','" + student.getEmail() + "');";
+		query = "insert into USER_DATABASE values ('" + student.getLastName() + "','" + student.getFirstName()
+				+ "','Student','" + student.getEmail() + "');";
 		statement = connection.prepareStatement(query);
 		result = statement.executeUpdate();
 		System.out.println("Test User Inserted!");

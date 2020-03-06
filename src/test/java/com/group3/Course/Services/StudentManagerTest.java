@@ -19,8 +19,8 @@ class StudentManagerTest {
 	ArrayList<String> current_students;
 
 	public StudentManagerTest() {
-		
-		daoInjector = new DAOMockAbstractFactory();
+
+		daoInjector = DAOMockAbstractFactory.instance();
 		courseDAO = daoInjector.createCourseDAO();
 	}
 

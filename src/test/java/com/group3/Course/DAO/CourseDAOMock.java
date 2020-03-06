@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 public class CourseDAOMock implements ICourseDAO {
 
-	ArrayList<Student> list = new ArrayList<Student> ();
-	ArrayList<Course> courses = new ArrayList<Course> ();
+	ArrayList<Student> list = new ArrayList<Student>();
+	ArrayList<Course> courses = new ArrayList<Course>();
 
-	HashMap<String, ArrayList<Course>> courseList = new HashMap<String, ArrayList<Course>> ();
+	HashMap<String, ArrayList<Course>> courseList = new HashMap<String, ArrayList<Course>>();
 	Course course;
 
 	public CourseDAOMock() {
@@ -55,15 +55,15 @@ public class CourseDAOMock implements ICourseDAO {
 
 	@Override
 	public ArrayList<String> getEnrolledStudentsByCourseId(String courseId) {
-		ArrayList<String> mailId = new ArrayList<String> ();
-		ArrayList<String> keysHashMap = new ArrayList<String> (courseList.keySet());
+		ArrayList<String> mailId = new ArrayList<String>();
+		ArrayList<String> keysHashMap = new ArrayList<String>(courseList.keySet());
 		ArrayList<Course> courseTaken;
 
-		for (String studentMailId: keysHashMap) {
-			courseTaken = new ArrayList<Course> (courseList.get(studentMailId));
-			for (int i = 0; i<list.size(); i++) {
+		for (String studentMailId : keysHashMap) {
+			courseTaken = new ArrayList<Course>(courseList.get(studentMailId));
+			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getEmail().equals(studentMailId) && list.get(i).getUserRole().equals("Student")) {
-					for (int j = 0; j<courseTaken.size(); j++) {
+					for (int j = 0; j < courseTaken.size(); j++) {
 						if (courseTaken.get(j).getCourseId().equals(courseId)) {
 							mailId.add(studentMailId);
 							break;
@@ -85,9 +85,9 @@ public class CourseDAOMock implements ICourseDAO {
 		Course courseTwo = new Course();
 		courseTwo.setCourseId(courseId);
 		courseTwo.setCourseName("CSCI 2: Learn to use the shield");
-		keysHashMap = new ArrayList<String> (courseList.keySet());
+		keysHashMap = new ArrayList<String>(courseList.keySet());
 
-		courseTaken = new ArrayList<Course> (courseList.get(studentDetails.getEmail()));
+		courseTaken = new ArrayList<Course>(courseList.get(studentDetails.getEmail()));
 		courseTaken.add(courseTwo);
 		courseList.put(studentDetails.getEmail(), courseTaken);
 	}
@@ -95,7 +95,7 @@ public class CourseDAOMock implements ICourseDAO {
 	@Override
 	public ArrayList<Course> getCoursesForGuest() {
 
-		ArrayList<Course> courseTaken = new ArrayList<Course> ();
+		ArrayList<Course> courseTaken = new ArrayList<Course>();
 		courseTaken.add(course);
 		return courseTaken;
 	}

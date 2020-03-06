@@ -9,10 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObtainDataBaseConnectionTest {
-    Connection dataBaseconnection;
+	Connection dataBaseconnection;
+
 	@BeforeEach
 	void setUp() throws Exception {
-		
+
 		dataBaseconnection = ObtainDataBaseConnection.obtainDatabaseConnection();
 	}
 

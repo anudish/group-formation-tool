@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class CreateQuestionController {
 	private String title, question, type;
 	private ArrayList<QuestionTypes> questionTypesList;
-	
+
 	IDAOAbstractFactory daoInjector;
 	IServiceAbstractFactory serviceAbstractFactory;
 	ISaveBasicQuestionInformationDAO saveBasicQuestionInformationDAO;
@@ -30,7 +30,7 @@ public class CreateQuestionController {
 	IQuestionService questionService;
 
 	Logger logger = LogManager.getLogger(CreateQuestionController.class);
-	
+
 	public CreateQuestionController() {
 
 		daoInjector = DAOAbstractFactory.instance();

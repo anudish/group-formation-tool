@@ -14,12 +14,12 @@ public class InsertDataForTest_forgorPassword {
 	Connection connection;
 	PreparedStatement statement;
 	String query;
-	
+
 	private static Logger logger = LogManager.getLogger(InsertDataForTest_forgorPassword.class);
 
 	public void insertDataIntoDbForTest(String MAIL_ID, String PASSWORD) {
-		
-		int count;
+
+		int queryResult;
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			query = "insert into AUTHENTICATION_DATABASE values(?,?)";
@@ -27,7 +27,7 @@ public class InsertDataForTest_forgorPassword {
 			statement = connection.prepareStatement(query);
 			statement.setString(1, MAIL_ID);
 			statement.setString(2, PASSWORD);
-			count = statement.executeUpdate();
+			queryResult = statement.executeUpdate();
 
 			connection.close();
 		} catch (SQLException e) {

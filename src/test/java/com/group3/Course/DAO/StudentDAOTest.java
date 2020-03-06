@@ -27,7 +27,7 @@ class StudentDAOTest {
 	@Test
 	void getAllStudentsTest() {
 
-		ArrayList<Student> studentList = new ArrayList<Student> ();
+		ArrayList<Student> studentList = new ArrayList<Student>();
 		studentList = studentDAO.getAllStudents();
 		assertNotNull(studentList);
 		assertThat(studentList).isNotEmpty();
@@ -63,7 +63,7 @@ class StudentDAOTest {
 		insert.StudentDAOTest_insertStudent(student);
 		insert.StudentDAOTest_updateTA(student);
 
-		studentList = new ArrayList<Student> ();
+		studentList = new ArrayList<Student>();
 		studentDAO.assignTA("test2@dal.ca");
 		studentList = studentDAO.getStudentByMailId("test2@dal.ca");
 		assertNotNull(studentList);

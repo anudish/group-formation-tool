@@ -10,8 +10,7 @@ class EmptyStringValidationServiceTest {
 
 	EmptyStringValidationService emptyStringValidationService;
 
-	@BeforeEach
-	void setUp() {
+	public EmptyStringValidationServiceTest() {
 
 		emptyStringValidationService = new EmptyStringValidationService();
 	}

@@ -1,6 +1,5 @@
 package com.group3.AdminAndAuthorization;
 
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,75 +23,86 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.group3.BusinessModels.Course;
 import com.group3.BusinessModels.Guest;
 
-import com.group3.AdminAndAuthorization.Services.IServiceInjector;
+import com.group3.AdminAndAuthorization.Services.IServiceAbstractFactory;
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
-import com.group3.AdminAndAuthorization.Services.ServiceInjector;
+import com.group3.AdminAndAuthorization.Services.ServiceAbstractFactory;
 import com.group3.groupmanager.GroupmanagerApplication;
+
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+		AdminDashBoardMainPageController.class, GroupmanagerApplication.class })
+
 class GrantInstructorAccessControllerTest {
 	ArrayList<Course> courseList;
 	ArrayList<Guest> userlist;
-	IUserDAO iUserDAO;
-	IDeleteUserDAO iDeleteUserDAO;
-	IAddCourseDAO iAddCourseDAO;
-	IDeleteCourseDAO iDeleteCourseDAO;
+	IUserDAO userDAO;
+	IDeleteUserDAO deleteUserDAO;
+	IAddCourseDAO addCourseDAO;
+	IDeleteCourseDAO deleteCourseDAO;
 	@Autowired
 	private MockMvc mockMvc;
 
-	public  GrantInstructorAccessControllerTest() {
-		IDAOInjector injector = DAOInjector.instance();
-	   	IViewCoursesDAO iViewCoursesDAO = injector.createViewCourseDAO();
-	   	IGrantInstructorAccessDAO iGrantInstructorAccessDAO = injector.createGrantInstructorAccessDAO();
-	   	IServiceInjector iServiceInjector = ServiceInjector.instance();
-	   	IViewCoursesService iViewCoursesService = iServiceInjector.createViewCoursesService(iViewCoursesDAO);
-	    IGrantInstructorAccessService iGrantInsructorAccessService = iServiceInjector.createGrantInstructorAccessService(iGrantInstructorAccessDAO);
-	   	 courseList = iViewCoursesService.getAllCourses();   
-	   	 userlist = iGrantInsructorAccessService.returnUserList();
-	   	 iUserDAO = DAOAbstractFactory.instance().createUserDAO();
-	   	 iDeleteUserDAO = DAOInjector.instance().createDeleteUserDAO();
-	   	 iAddCourseDAO  = DAOInjector.instance().createAddCourseDAO();
-	   	 iDeleteUserDAO = DAOInjector.instance().createDeleteUserDAO();
+	public GrantInstructorAccessControllerTest() {
+		IDAOAbstractFactory injector = DAOMockAbstractFactory.instance();
+		IViewCoursesDAO iViewCoursesDAO = injector.createViewCourseDAO();
+		IGrantInstructorAccessDAO iGrantInstructorAccessDAO = injector.createGrantInstructorAccessDAO();
+		IServiceAbstractFactory iServiceInjector = ServiceAbstractFactory.instance();
+		IViewCoursesService iViewCoursesService = iServiceInjector.createViewCoursesService(iViewCoursesDAO);
+		IGrantInstructorAccessService iGrantInsructorAccessService = iServiceInjector
+				.createGrantInstructorAccessService(iGrantInstructorAccessDAO);
+
+		courseList = iViewCoursesService.getAllCourses();
+		userlist = iGrantInsructorAccessService.returnUserList();
+		userDAO = DAOAbstractFactory.instance().createUserDAO();
+		deleteUserDAO = DAOMockAbstractFactory.instance().createDeleteUserDAO();
+		addCourseDAO = DAOMockAbstractFactory.instance().createAddCourseDAO();
+		deleteUserDAO = DAOMockAbstractFactory.instance().createDeleteUserDAO();
 	}
 
 	@Test
 	final void testGrantInstructorPage() throws Exception {
-		this.mockMvc.perform(get("/grantInstructorPage")
-				.with(user("user").password("password").roles("ADMIN"))).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attributeExists("courseList"))
-		.andExpect(model().attributeExists("userlist"));
+		this.mockMvc.perform(get("/grantInstructorPage").with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("courseList"))
+				.andExpect(model().attributeExists("userlist"));
 	}
 
-
 	@Test
-	final void testGrantInstructorsRoleSwitching() throws Exception{
+	final void testGrantInstructorsRoleSwitching() throws Exception {
 		String email = "justin@dal.ca";
 		String firstName = "Justin";
 		String lastName = "Treadue";
 		String previousRole = "Guest";
-		String expectedRole ="Instructor";
-		String pass ="Hello@123";
-		Guest guest = new Guest();
+		String expectedRole = "Instructor";
+		String pass = "Hello@123";
+		String courseId;
+		String expectedOutcome;
+
+		Course course;
+		Guest guest;
+
+		guest = new Guest();
 		guest.setEmail(email);
 		guest.setFirstName(firstName);
 		guest.setLastName(lastName);
 		guest.setUserRole(previousRole);
 		guest.setEncryptedPassword(pass);
-		Course course = new Course();
+
+		course = new Course();
 		course.setCourseName("Data Technology");
 		course.setCourseId("CSCT5111");
 
-		iUserDAO.getSignUpDetailsofUser(guest);
-		String courseId = course.getCourseId()+"-"+course.getCourseName();
-		String expectedOutcome =   firstName+" "+lastName+" "+" switched their role from "+previousRole+" to "+expectedRole;
-		this.mockMvc.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName).param("email", email).param("role", expectedRole).param("CourseId",courseId)
-				.with(user("user").password("password").roles("ADMIN")))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(model().attributeExists("courseList"))
-				.andExpect(model().attributeExists("userlist"))
-				.andExpect(model().attributeExists("feedbackMessage"));
-		iDeleteUserDAO.deleteUser(email);
+		userDAO.getSignUpDetailsofUser(guest);
+		courseId = course.getCourseId() + "-" + course.getCourseName();
+		expectedOutcome = firstName + " " + lastName + " " + " switched their role from " + previousRole + " to "
+				+ expectedRole;
 
+		this.mockMvc
+				.perform(post("/GrantRoleRequest").param("lastName", lastName).param("firstName", firstName)
+						.param("email", email).param("role", expectedRole).param("CourseId", courseId)
+						.with(user("user").password("password").roles("ADMIN")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("courseList"))
+				.andExpect(model().attributeExists("userlist")).andExpect(model().attributeExists("feedbackMessage"));
+		deleteUserDAO.deleteUser(email);
 	}
 }

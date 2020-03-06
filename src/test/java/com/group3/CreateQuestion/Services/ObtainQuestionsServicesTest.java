@@ -20,8 +20,7 @@ public class ObtainQuestionsServicesTest {
 	public static Logger logger = LogManager.getLogger(ObtainQuestionsServicesTest.class);
 	List<List<String>> questionList;
 
-	@BeforeEach
-	void setUp() {
+	public ObtainQuestionsServicesTest() {
 
 		daoInjector = DAOMockAbstractFactory.instance();
 		retrieveQuestionsDAO = daoInjector.createRetrieveQuestionsDAO();

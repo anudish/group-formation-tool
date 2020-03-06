@@ -8,34 +8,34 @@ import org.junit.jupiter.api.Test;
 
 class GrantAccessFieldsValidationTest {
 	
-	private IGrantAccessFieldsValidation iGrantAccessFieldsValidation;
-	IServiceInjector serviceInjector;
+	private IGrantAccessFieldsValidation grantAccessFieldsValidation;
+	IServiceAbstractFactory serviceInjector;
 
 	public GrantAccessFieldsValidationTest(){
-		 serviceInjector = ServiceInjector.instance();
+		 serviceInjector = ServiceAbstractFactory.instance();
 	}
 
 	@Test
 	final void testValidateFields() {
-		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Instructor");
-	    assertFalse(iGrantAccessFieldsValidation.validateFields().length() > 0);
+		grantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Instructor");
+	    assertFalse(grantAccessFieldsValidation.validateFields().length() > 0);
 
 	}
 	@Test
 	final void testValidateFieldsCaseInstructor(){
-		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Instructor");
-		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
+		grantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Instructor");
+		assertTrue(grantAccessFieldsValidation.validateFields().length() > 0);
 	}
 
 	@Test
 	final void testValidateFieldsCaseSelectRole(){
-		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Select Role");
-		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
+		grantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("CSCI6770-Graphics", "Select Role");
+		assertTrue(grantAccessFieldsValidation.validateFields().length() > 0);
 	}
 
 	@Test
 	final void testValidateFieldsCaseSelectRoleAndCourse(){
-		iGrantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Select Role");
-		assertTrue(iGrantAccessFieldsValidation.validateFields().length() > 0);
+		grantAccessFieldsValidation =serviceInjector.createGrantAccessFieldsValidation("Select courses", "Select Role");
+		assertTrue(grantAccessFieldsValidation.validateFields().length() > 0);
 	}
 }

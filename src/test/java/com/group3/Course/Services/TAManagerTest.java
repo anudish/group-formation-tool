@@ -20,7 +20,7 @@ class TAManagerTest {
 
 	public TAManagerTest() {
 
-		daoInjector = new DAOMockAbstractFactory();
+		daoInjector = DAOMockAbstractFactory.instance();
 		studentDAO = daoInjector.createStudentDAO();
 	}
 
@@ -41,5 +41,4 @@ class TAManagerTest {
 		assertThat(studentList).isNotEmpty();
 		assertEquals(studentList.size(), 1);
 	}
-
 }

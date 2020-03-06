@@ -20,6 +20,9 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	public IQuestionService questionMCQ;
 	public ISplitMCQSAnswerService splitMCQSAnswerService;
 
+	private ServiceAbstractFactory() {
+	}
+	
 	public static IServiceAbstractFactory instance() {
 
 		if (null == serviceAbstractFactory) {

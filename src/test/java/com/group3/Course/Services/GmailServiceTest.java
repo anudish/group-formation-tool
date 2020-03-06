@@ -9,8 +9,7 @@ class GmailServiceTest {
 
 	public static GmailServiceMock gmailServiceMock;
 
-	@BeforeAll
-	public static void init() {
+	public GmailServiceTest() {
 		gmailServiceMock = new GmailServiceMock();
 	}
 
@@ -32,7 +31,7 @@ class GmailServiceTest {
 
 	@Test
 	void propertiesTest() {
-		
+
 		gmailServiceMock.setSMTPClient();
 		assertThat(gmailServiceMock.properties).isNotNull();
 		assertThat(gmailServiceMock.properties).isNotEmpty();

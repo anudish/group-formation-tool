@@ -11,8 +11,7 @@ class MakeQuestionGenerationAbstractFactoryTest {
 	IMakeQuestionGenerationAbstractFactory makeQuestionGenerationAbstractFactory;
 	IQuestionService questionService;
 
-	@BeforeEach
-	void setUp() {
+	public MakeQuestionGenerationAbstractFactoryTest() {
 
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		makeQuestionGenerationAbstractFactory = serviceAbstractFactory.createMakeQuestionGenerationAbstractFactory();

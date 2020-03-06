@@ -8,36 +8,28 @@ import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.group3.AdminAndAuthorization.DAO.DAOMockInjector;
-import com.group3.AdminAndAuthorization.DAO.IDAOInjector;
+import com.group3.AdminAndAuthorization.DAO.DAOMockAbstractFactory;
+import com.group3.AdminAndAuthorization.DAO.IDAOAbstractFactory;
 import com.group3.AdminAndAuthorization.DAO.IViewCoursesDAO;
 import com.group3.BusinessModels.Course;;
+
 class ViewCoursesServiceTest {
-	IDAOInjector injector;
-	IViewCoursesDAO iViewCoursesDAO;
-	IViewCoursesService iViewCoursesService;
+	IDAOAbstractFactory daoInjector;
+	IViewCoursesDAO viewCoursesDAO;
+	IViewCoursesService viewCoursesService;
 	ArrayList<Course> courseList;
 
 	public ViewCoursesServiceTest() {
-		injector = DAOMockInjector.instance();
-		 iViewCoursesDAO = injector.createViewCourseDAO();
+		daoInjector = DAOMockAbstractFactory.instance();
+		viewCoursesDAO = daoInjector.createViewCourseDAO();
 	}
-
-	
 
 	@Test
 	final void testGetAllCourses() {
 
-		iViewCoursesService = new ServiceInjector().createViewCoursesService(iViewCoursesDAO);
-		courseList = iViewCoursesService.getAllCourses();
+		viewCoursesService = ServiceAbstractFactory.instance().createViewCoursesService(viewCoursesDAO);
+		courseList = viewCoursesService.getAllCourses();
 		assertFalse(courseList.isEmpty());
-		
-		//Enabling dataset
-		assertTrue(courseList.size()==3);
-		
-		
-		
-		
+		assertTrue(courseList.size() == 3);
 	}
-
 }

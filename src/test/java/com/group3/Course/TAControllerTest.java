@@ -43,12 +43,4 @@ class TAControllerTest {
 				.with(user("user").password("password").roles("INSTRUCTOR","TA"))).andDo(print()).andExpect(status().isOk())
 		.andExpect(model().attributeExists("studentList")).andExpect(model().attributeExists("courseInfo"));
 	}
-
-	@Test
-	public void addStudentAsTA() throws Exception {
-		//		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
-		//		.andExpect(model().attributeExists("courseInfo"));
-		//		this.mockMvc.perform(post("/addTA").param("studentMailId","a@dal.ca")).andDo(print()).andExpect(status().isOk())
-		//		.andExpect(model().attributeExists("courseInfo"));
-	}
 }

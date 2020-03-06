@@ -8,6 +8,9 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 	public static ITADAO taDAO;
 	public static IInstructorDAO instructorDAO;
 
+	private DAOMockAbstractFactory() {
+	}
+
 	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {
 			daoInjector = new DAOMockAbstractFactory();
@@ -22,16 +25,16 @@ public class DAOMockAbstractFactory implements IDAOAbstractFactory {
 
 	@Override
 	public IStudentDAO createStudentDAO() {
-		return  new StudentDAOMock();
+		return new StudentDAOMock();
 	}
 
 	@Override
 	public ITADAO createTADAO() {
-		return  new TADAOMock();
+		return new TADAOMock();
 	}
 
 	@Override
 	public IInstructorDAO createInstructorDAO() {
-		return  new InstructorDAOMock();
+		return new InstructorDAOMock();
 	}
 }

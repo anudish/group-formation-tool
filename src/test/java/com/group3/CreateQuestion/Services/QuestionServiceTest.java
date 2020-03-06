@@ -24,13 +24,15 @@ class QuestionServiceTest {
 		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		questionService = serviceAbstractFactory.createfreeTextQuestionGenerationService();
-		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(serviceAbstractFactory.createCurrentTimeStampGenerationService());
+		saveBasicQuestionInformationDAO = daoInjector.createSaveBasicQuestionInformationDAO(
+				serviceAbstractFactory.createCurrentTimeStampGenerationService());
 	}
 
 	@Test
 	void saveBasicQuestionInformation() {
 
-		String id = questionService.saveBasicQuestionInformation("Design Pattern", "What is memento pattern?", "Free text", saveBasicQuestionInformationDAO);
+		String id = questionService.saveBasicQuestionInformation("Design Pattern", "What is memento pattern?",
+				"Free text", saveBasicQuestionInformationDAO);
 		logger.info("id generated from mock" + id);
 		assertNotNull(id);
 	}

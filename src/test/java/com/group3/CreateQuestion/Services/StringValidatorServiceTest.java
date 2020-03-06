@@ -19,8 +19,7 @@ class StringValidatorServiceTest {
 	IValidationRulesLoaderDAO validationRulesLoaderDAO;
 	static Logger logger = LogManager.getLogger(EmptyStringValidationService.class);
 
-	@BeforeEach
-	void setUp() {
+	public StringValidatorServiceTest() {
 		daoInjector = DAOMockAbstractFactory.instance();
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		validationRulesLoaderDAO = daoInjector.createValidationRulesLoaderDAO();

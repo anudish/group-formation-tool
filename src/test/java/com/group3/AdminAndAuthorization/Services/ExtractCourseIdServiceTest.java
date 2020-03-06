@@ -6,28 +6,18 @@ import com.group3.AdminAndAuthorization.Services.IExtractCourseIdService;
 import org.junit.jupiter.api.Test;
 
 class ExtractCourseIdServiceTest {
-	IExtractCourseIdService iExtractCourseIdService;
-
-
-	
+	IExtractCourseIdService extractCourseIdService;
 
 	@Test
 	final void testExtractCourseId() {
-		
-		
-		//failing case 
-		final String inputString="csci6000-Artificial Intelligence";
-		String expectedOutcome = "csci6000-"; //Not desired outcome
-		iExtractCourseIdService = new ServiceInjector().createExtractCourseIdService(inputString);
-		
-		System.out.println("preString "+inputString);
-		assertFalse(iExtractCourseIdService.extractCourseId().equals(expectedOutcome));
-		
-		//passing test
-		 expectedOutcome = "csci6000"; //desired outcome
-		 iExtractCourseIdService = new ServiceInjector().createExtractCourseIdService(inputString);
-		 
-		 assertTrue(iExtractCourseIdService.extractCourseId().equals(expectedOutcome));
-	}
 
+		final String inputString = "csci6000-Artificial Intelligence";
+		String expectedOutcome = "csci6000-";
+		extractCourseIdService = ServiceAbstractFactory.instance().createExtractCourseIdService(inputString);
+		System.out.println("preString " + inputString);
+		assertFalse(extractCourseIdService.extractCourseId().equals(expectedOutcome));
+		expectedOutcome = "csci6000";
+		extractCourseIdService = ServiceAbstractFactory.instance().createExtractCourseIdService(inputString);
+		assertTrue(extractCourseIdService.extractCourseId().equals(expectedOutcome));
+	}
 }

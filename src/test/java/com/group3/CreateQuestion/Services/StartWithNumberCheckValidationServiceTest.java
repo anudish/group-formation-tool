@@ -10,8 +10,7 @@ class StartWithNumberCheckValidationServiceTest {
 
 	StartWithNumberCheckValidationService startWithNumberCheckValidationService;
 
-	@BeforeEach
-	void setUp() {
+	public StartWithNumberCheckValidationServiceTest() {
 
 		startWithNumberCheckValidationService = new StartWithNumberCheckValidationService();
 	}

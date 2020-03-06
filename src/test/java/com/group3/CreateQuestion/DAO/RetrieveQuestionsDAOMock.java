@@ -10,15 +10,15 @@ public class RetrieveQuestionsDAOMock implements IRetrieveQuestionsDAO {
 
 	public RetrieveQuestionsDAOMock() {
 
-		questionList = new ArrayList<List<String>> ();
-		questionInfo = new ArrayList<String> ();
+		questionList = new ArrayList<List<String>>();
+		questionInfo = new ArrayList<String>();
 
 		questionInfo.add("1");
 		questionInfo.add("Test Title 1");
 		questionInfo.add("Test Text 1");
 		questionList.add(questionInfo);
 
-		questionInfo = new ArrayList<String> ();
+		questionInfo = new ArrayList<String>();
 		questionInfo.add("2");
 		questionInfo.add("Test Title 2");
 		questionInfo.add("Test Text 2");

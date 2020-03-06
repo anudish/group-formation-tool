@@ -35,7 +35,7 @@ class TADAOTest {
 
 		insert.TADAOTest_insertEnrollment(student, "CSCI04");
 
-		courses = new ArrayList<Course> ();
+		courses = new ArrayList<Course>();
 		courses = taDAO.getCoursesByTAMailId("test1234@dal.ca");
 		assertNotNull(courses);
 		assertThat(courses).isNotEmpty();

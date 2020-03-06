@@ -16,9 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
-	DeleteQuestionController.class, GroupmanagerApplication.class
-})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { DeleteQuestionController.class,
+		GroupmanagerApplication.class })
 class DeleteQuestionControllerTest {
 
 	@Autowired
@@ -27,7 +26,6 @@ class DeleteQuestionControllerTest {
 	@Test
 	public void deleteQuestionTest() throws Exception {
 
-		this.mockMvc.perform(get("/deleteQuestion").param("questionId", "0"))
-			.andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/deleteQuestion").param("questionId", "0")).andDo(print()).andExpect(status().isOk());
 	}
 }

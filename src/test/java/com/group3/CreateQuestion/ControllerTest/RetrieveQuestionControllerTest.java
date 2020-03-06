@@ -16,8 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
-	RetrieveQuestionController.class, GroupmanagerApplication.class
-})
+		RetrieveQuestionController.class, GroupmanagerApplication.class })
 class RetrieveQuestionControllerTest {
 
 	@Autowired
@@ -27,14 +26,13 @@ class RetrieveQuestionControllerTest {
 	public void deleteQuestionTest() throws Exception {
 
 		this.mockMvc.perform(get("/showAvailableQuestionsToDelete").param("questionId", "0"))
-			.andExpect(model().attributeExists("questionList"));
+				.andExpect(model().attributeExists("questionList"));
 	}
 
 	@Test
 	public void showQuestionSortedTest() throws Exception {
 
 		this.mockMvc.perform(get("/showAvailableQuestionsSorted").param("order", "TITLE ASC").param("mode", "visible"))
-			.andExpect(model().attributeExists("questionList"))
-			.andExpect(model().attributeExists("deleteQuery"));
+				.andExpect(model().attributeExists("questionList")).andExpect(model().attributeExists("deleteQuery"));
 	}
 }

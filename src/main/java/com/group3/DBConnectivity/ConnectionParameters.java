@@ -6,5 +6,5 @@ public class ConnectionParameters {
 	protected static String DEV_SERVER_DATABASE_NAME = "CSCI5308_3_DEVINT";
 	protected static String DEV_SERVER_DATABSE_USER_NAME = "CSCI5308_3_DEVINT_USER";
 	protected static String DEV_SERVER_DATABSE_PASSWORD = "CSCI5308_3_DEVINT_3292";
-	
+
 }

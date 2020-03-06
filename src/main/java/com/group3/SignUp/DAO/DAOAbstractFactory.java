@@ -3,7 +3,10 @@ package com.group3.SignUp.DAO;
 public class DAOAbstractFactory implements IDAOAbstractFactory {
 
 	public static IDAOAbstractFactory daoInjector;
-	static IUserDAO userPasswordDAO;
+	public IUserDAO userPasswordDAO;
+
+	private DAOAbstractFactory() {
+	}
 
 	public static IDAOAbstractFactory instance() {
 		if (null == daoInjector) {

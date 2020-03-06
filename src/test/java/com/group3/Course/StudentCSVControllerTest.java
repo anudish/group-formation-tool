@@ -27,37 +27,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
-	StudentCSVController.class, GroupmanagerApplication.class
-})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { StudentCSVController.class,
+		GroupmanagerApplication.class })
 class StudentCSVControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
-//	@Test
-//	public void showImportXMLPageTest() throws Exception {
-//
-//		this.mockMvc.perform(post("/importCSV")).andDo(print()).andExpect(status().isOk())
-//			.andExpect(model().attributeExists("courseInfo"));
-//	}
-
 	@Test
 	public void uploadCSVFileTest() throws Exception {
 
 		String fileName = "test.txt";
-	      File file = new File(fileName);
-	      //delete if exits
-	      file.delete();
-	      MockMultipartFile mockMultipartFile = new MockMultipartFile("file",fileName,
-	              "text/plain", "hello world".getBytes());
-	      MockHttpServletRequestBuilder builder =
-	              MockMvcRequestBuilders.fileUpload("/upload-csv-file")
-	                                    .file(mockMultipartFile)
-	                                    .with(user("user").password("password").roles("INSTRUCTOR","TA"));
-	      
+		File file = new File(fileName);
+		file.delete();
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("file", fileName, "text/plain",
+				"hello world".getBytes());
+		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.fileUpload("/upload-csv-file")
+				.file(mockMultipartFile).with(user("user").password("password").roles("INSTRUCTOR", "TA"));
+
 		this.mockMvc.perform(builder).andDo(print()).andExpect(status().isOk())
-			.andExpect(model().attributeExists("studentList"));
+				.andExpect(model().attributeExists("studentList"));
 	}
 
 }

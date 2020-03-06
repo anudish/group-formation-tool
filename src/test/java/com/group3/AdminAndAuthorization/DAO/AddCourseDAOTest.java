@@ -8,57 +8,56 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.group3.BusinessModels.Course;
-import com.group3.AdminAndAuthorization.Services.IServiceInjector;
+import com.group3.AdminAndAuthorization.Services.IServiceAbstractFactory;
 import com.group3.AdminAndAuthorization.Services.IViewCoursesService;
-import com.group3.AdminAndAuthorization.Services.ServiceInjector;
+import com.group3.AdminAndAuthorization.Services.ServiceAbstractFactory;
 
 class AddCourseDAOTest {
-
-
-	private IAddCourseDAO iaddCourseDAO;
-    private IDeleteCourseDAO iDeleteCourseDAO;
-	private Course course;
-	private String CourseName,CourseId;
-	private ArrayList<Course> courseList;
-	
+	IDAOAbstractFactory daoInjector;
+	IServiceAbstractFactory serviceInjector;
+	IAddCourseDAO addCourseDAO;
+	IDeleteCourseDAO deleteCourseDAO;
+	IViewCoursesDAO viewCoursesDAO;
+	IViewCoursesService viewCoursesService;
+	Course course;
+	String courseName, courseId;
+	ArrayList<Course> courseList;
 
 	public AddCourseDAOTest() {
-		course = new Course();
-		 CourseName = "Computational Biology";
-	     CourseId = "CSCT6748";
-		course.setCourseId(CourseId);
-		course.setCourseName(CourseName);
-  	    DAOInjector daoinjector = new DAOInjector();
-  	    iaddCourseDAO  = daoinjector.createAddCourseDAO();
-  	    
-  	    IDAOInjector injector = new DAOInjector();
-	   	IViewCoursesDAO iViewCoursesDAO = injector.createViewCourseDAO();
-	
-	   	IServiceInjector iServiceInjector = new ServiceInjector();
-	   	IViewCoursesService iViewCoursesService = iServiceInjector.createViewCoursesService(iViewCoursesDAO);
-	   
-	   	 courseList = iViewCoursesService.getAllCourses();   
-	   	 iDeleteCourseDAO = daoinjector.createDeleteCourseDAO();
-	}
 
+		course = new Course();
+		courseName = "Computational Biology";
+		courseId = "CSCT6748";
+		course.setCourseId(courseId);
+		course.setCourseName(courseName);
+
+		daoInjector = DAOAbstractFactory.instance();
+		addCourseDAO = daoInjector.createAddCourseDAO();
+		viewCoursesDAO = daoInjector.createViewCourseDAO();
+		serviceInjector = ServiceAbstractFactory.instance();
+		viewCoursesService = serviceInjector.createViewCoursesService(viewCoursesDAO);
+
+		courseList = viewCoursesService.getAllCourses();
+		deleteCourseDAO = daoInjector.createDeleteCourseDAO();
+	}
 
 	@Test
-	final void testAddCourseCreatedSuccessCase(){
-		String expectedOutcome =  CourseName + " with "+CourseId+" created successfully";
-		String outcome = this.iaddCourseDAO.addCourse(course);
+	final void testAddCourseCreatedSuccessCase() {
 
-		assertEquals(expectedOutcome,outcome);
-		iDeleteCourseDAO.deleteCourse(course);
+		String expectedOutcome = courseName + " with " + courseId + " created successfully";
+		String outcome = this.addCourseDAO.addCourse(course);
+		assertEquals(expectedOutcome, outcome);
+		deleteCourseDAO.deleteCourse(course);
 	}
-
 
 	@Test
 	final void testIsCourseExist() {
-		if (courseList.size() > 0){
-			String expectedOutcome = "Course Name  "+courseList.get(0).getCourseName()+" with "+"Course ID "+courseList.get(0).getCourseId()+" already exists !! ";
-			assertTrue(this.iaddCourseDAO.isCourseExist(courseList.get(0).getCourseId()).equals(expectedOutcome));
+		
+		String expectedOutcome;
+		if (courseList.size() > 0) {
+			expectedOutcome = "Course Name  " + courseList.get(0).getCourseName() + " with " + "Course ID "
+					+ courseList.get(0).getCourseId() + " already exists !! ";
+			assertTrue(this.addCourseDAO.isCourseExist(courseList.get(0).getCourseId()).equals(expectedOutcome));
 		}
-
 	}
-
 }

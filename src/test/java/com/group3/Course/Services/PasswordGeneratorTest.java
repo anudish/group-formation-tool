@@ -10,15 +10,13 @@ public class PasswordGeneratorTest {
 
 	public static PasswordGenerator passwordGenerator;
 
-	@BeforeAll
-	public static void init() {
-		
+	public PasswordGeneratorTest() {
 		passwordGenerator = new PasswordGenerator();
 	}
 
 	@Test
 	public void getNewPasswordTest() {
-	
+
 		assertThat(passwordGenerator.getNewPassword(10)).isNotEmpty();
 		assertThat(passwordGenerator.getNewPassword(10)).isNotNull();
 		assertEquals(passwordGenerator.getNewPassword(10).toString().length(), 10);

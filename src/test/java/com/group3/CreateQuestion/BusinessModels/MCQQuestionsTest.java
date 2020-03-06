@@ -19,7 +19,7 @@ class MCQQuestionsTest {
 	public void init() {
 
 		mcq = new MCQQuestion();
-		options = new ArrayList<String> ();
+		options = new ArrayList<String>();
 	}
 
 	@Test

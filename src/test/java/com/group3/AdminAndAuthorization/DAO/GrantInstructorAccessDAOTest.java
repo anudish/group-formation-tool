@@ -2,7 +2,6 @@ package com.group3.AdminAndAuthorization.DAO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import java.util.ArrayList;
 
 import com.group3.SignUp.DAO.IUserDAO;
@@ -11,17 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import com.group3.BusinessModels.Guest;
 
-
 class GrantInstructorAccessDAOTest {
-	 ArrayList<Guest> accessUserlist;
-	 IGrantInstructorAccessDAO iGrantInstructorAccessDAO;
-	 IUserDAO iUserDAO;
-	 Guest falseUser,trueUser;
-	@BeforeEach
-	void setUp() throws Exception {
-	   
+	IGrantInstructorAccessDAO grantInstructorAccessDAO;
+	IUserDAO userDAO;
+	Guest falseUser, trueUser;
+	ArrayList<Guest> accessUserlist;
+
+	public GrantInstructorAccessDAOTest() {
+
 		accessUserlist = new ArrayList<>();
-		iGrantInstructorAccessDAO = new DAOInjector().createGrantInstructorAccessDAO();
+		grantInstructorAccessDAO = DAOAbstractFactory.instance().createGrantInstructorAccessDAO();
 		falseUser = new Guest();
 		falseUser.setEmail("AtalVajpayee@dal.ca");
 		falseUser.setFirstName("Atal");
@@ -34,21 +32,15 @@ class GrantInstructorAccessDAOTest {
 		trueUser.setEmail("joe.root@dal.ca");
 	}
 
-	
-
 	@Test
 	final void testReturnEligibleUsersList() {
-		 accessUserlist = this.iGrantInstructorAccessDAO.returnEligibleUsersList();
-	     for(Guest user:accessUserlist) {
-	    	 
-	    	 assertFalse(falseUser.getEmail().equals(user.getEmail()));
-	    	 
-	    	 if(trueUser.getEmail().equals(user.getEmail())) {
-	    		 
-	    		 assertTrue(trueUser.getFirstName().equals(user.getFirstName()));
-	    	 }
-	    	 
-	     }
-	}
+		accessUserlist = this.grantInstructorAccessDAO.returnEligibleUsersList();
 
+		for (Guest user : accessUserlist) {
+			assertFalse(falseUser.getEmail().equals(user.getEmail()));
+			if (trueUser.getEmail().equals(user.getEmail())) {
+				assertTrue(trueUser.getFirstName().equals(user.getFirstName()));
+			}
+		}
+	}
 }

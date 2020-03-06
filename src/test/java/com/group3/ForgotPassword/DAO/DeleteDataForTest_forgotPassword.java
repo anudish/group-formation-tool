@@ -18,13 +18,13 @@ public class DeleteDataForTest_forgotPassword {
 
 	public void deleteDataFromDbForTest(String MAIL_ID) {
 
-		int count;
+		int queryResult;
 		try {
 			connection = ObtainDataBaseConnection.obtainDatabaseConnection();
 			query = "delete from AUTHENTICATION_DATABASE where MAIL_ID = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, MAIL_ID);
-			count = statement.executeUpdate();
+			queryResult = statement.executeUpdate();
 
 			connection.close();
 		} catch (SQLException e) {

@@ -10,8 +10,7 @@ class StartWithSpecialSymbolValidationServiceTest {
 
 	StartWithSpecialSymbolValidationService startWithSpecialSymbolValidationService;
 
-	@BeforeEach
-	void setUp() {
+	public StartWithSpecialSymbolValidationServiceTest() {
 
 		startWithSpecialSymbolValidationService = new StartWithSpecialSymbolValidationService();
 	}

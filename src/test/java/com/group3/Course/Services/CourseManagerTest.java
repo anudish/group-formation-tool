@@ -20,7 +20,7 @@ class CourseManagerTest {
 	ArrayList<Course> courseInfo;
 
 	public CourseManagerTest() {
-		daoInjector = new DAOMockAbstractFactory();
+		daoInjector = DAOMockAbstractFactory.instance();
 		taDAO = daoInjector.createTADAO();
 		instructorDAO = daoInjector.createInstructorDAO();
 		courseDAO = daoInjector.createCourseDAO();
@@ -28,7 +28,7 @@ class CourseManagerTest {
 
 	@BeforeEach
 	public void init() {
-		courseInfo = new ArrayList<Course> ();
+		courseInfo = new ArrayList<Course>();
 	}
 
 	@Test
@@ -54,5 +54,4 @@ class CourseManagerTest {
 		assertThat(courseInfo).isNotEmpty();
 		assertEquals(courseInfo.size(), 1);
 	}
-
 }

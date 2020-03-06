@@ -16,8 +16,7 @@ class CurrentTimeStampGenerationServiceTest {
 	private ICurrentTimeStampGenerationService currentTimeStampGenerationService;
 	public static Logger logger = LogManager.getLogger(CurrentTimeStampGenerationServiceTest.class);
 
-	@BeforeEach
-	void setUp() {
+	public CurrentTimeStampGenerationServiceTest() {
 
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();

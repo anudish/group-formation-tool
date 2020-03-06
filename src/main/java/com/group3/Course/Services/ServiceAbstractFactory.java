@@ -10,6 +10,9 @@ public class ServiceAbstractFactory implements IServiceAbstractFactory {
 	public IGmailService gmailService;
 	public IPassword passwordGenerator;
 
+	private ServiceAbstractFactory() {
+	}
+
 	public static IServiceAbstractFactory instance() {
 		if (null == serviceInjector) {
 			serviceInjector = new ServiceAbstractFactory();

@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 public class TADAOMock implements ITADAO {
 
-	ArrayList<Student> list = new ArrayList<Student> ();
-	ArrayList<Course> courses = new ArrayList<Course> ();
+	ArrayList<Student> list = new ArrayList<Student>();
+	ArrayList<Course> courses = new ArrayList<Course>();
 
-	HashMap<String, ArrayList<Course>> courseList = new HashMap<String, ArrayList<Course>> ();
+	HashMap<String, ArrayList<Course>> courseList = new HashMap<String, ArrayList<Course>>();
 
 	public TADAOMock() {
 
@@ -54,7 +54,7 @@ public class TADAOMock implements ITADAO {
 	@Override
 	public ArrayList<Course> getCoursesByTAMailId(String studentMailId) {
 
-		ArrayList<Course> courseTaken = new ArrayList<Course> ();
+		ArrayList<Course> courseTaken = new ArrayList<Course>();
 		courseTaken = courseList.get(studentMailId);
 		return courseTaken;
 	}

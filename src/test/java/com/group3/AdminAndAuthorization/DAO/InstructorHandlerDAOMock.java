@@ -8,61 +8,59 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class InstructorHandlerDAOMock implements IInstructorHandlerDAO {
-	 private HashMap<String,String> instructorDataSet;
-	 public InstructorHandlerDAOMock() {
-		 instructorDataSet = new HashMap<String,String>();
-		 instructorDataSet.put("john@dal.ca", "CSCI7606");
-		 instructorDataSet.put("vlado@dal.ca", "CSCI8000");
-		 instructorDataSet.put("robert@dal.ca", "CSCI5308");
-		 instructorDataSet.put("robert@dal.ca", "CSCI7308");
-	 }
-	 
+	private HashMap<String, String> instructorDataSet;
+
+	public InstructorHandlerDAOMock() {
+
+		instructorDataSet = new HashMap<String, String>();
+		instructorDataSet.put("john@dal.ca", "CSCI7606");
+		instructorDataSet.put("vlado@dal.ca", "CSCI8000");
+		instructorDataSet.put("robert@dal.ca", "CSCI5308");
+		instructorDataSet.put("robert@dal.ca", "CSCI7308");
+	}
+
 	@Override
 	public String createNewInstructor(String MailId, String CourseId) {
-		// TODO Auto-generated method stub
+
 		instructorDataSet.put(MailId, CourseId);
-		String feedbackMessage = "Instructor Assigned for "+ CourseId;
+		String feedbackMessage = "Instructor Assigned for " + CourseId;
 		return feedbackMessage;
 	}
 
 	@Override
 	public boolean isInstructorExists(String MailId) {
-		// TODO Auto-generated method stub
-		Iterator datasetIterator = instructorDataSet.entrySet().iterator(); 
-		while (datasetIterator.hasNext()) { 
-            Map.Entry mapElement = (Map.Entry)datasetIterator.next(); 
-           
-            if(mapElement.getKey().equals(MailId)) {
-            	return true;
-            	
-            }
-        } 
+
+		Iterator datasetIterator = instructorDataSet.entrySet().iterator();
+		while (datasetIterator.hasNext()) {
+			Map.Entry mapElement = (Map.Entry) datasetIterator.next();
+			if (mapElement.getKey().equals(MailId)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public String deleteinstructor(String MailId) {
-		// TODO Auto-generated method stub
+
+		String feedbackMessage;
 		instructorDataSet.remove(MailId);
-		String feedBackMessage = "Instructor deleted";
-		return feedBackMessage;
+		feedbackMessage = "Instructor deleted";
+		return feedbackMessage;
 	}
 
 	@Override
 	public ArrayList<String> getInstructorCourses(String MaildId) {
-		// TODO Auto-generated method stub
+
 		ArrayList<String> courseList = new ArrayList<>();
-		Iterator datasetIterator = instructorDataSet.entrySet().iterator(); 
-		
-		while (datasetIterator.hasNext()) { 
-            Map.Entry mapElement = (Map.Entry)datasetIterator.next(); 
-            if(mapElement.getKey().equals(MaildId)) {
-            	
-            	courseList.add(mapElement.getValue().toString());
-            	
-            }
-        } 
+		Iterator datasetIterator = instructorDataSet.entrySet().iterator();
+
+		while (datasetIterator.hasNext()) {
+			Map.Entry mapElement = (Map.Entry) datasetIterator.next();
+			if (mapElement.getKey().equals(MaildId)) {
+				courseList.add(mapElement.getValue().toString());
+			}
+		}
 		return courseList;
 	}
-
 }

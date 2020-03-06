@@ -34,7 +34,8 @@ class SaveBasicQuestionInformationDAOTest {
 		returnMessageFromDataBase = null;
 		serviceAbstractFactory = ServiceAbstractFactory.instance();
 		currentTimeStampGenerationService = serviceAbstractFactory.createCurrentTimeStampGenerationService();
-		saveBasicQuestionInformationDAO = idaoInjector.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
+		saveBasicQuestionInformationDAO = idaoInjector
+				.createSaveBasicQuestionInformationDAO(currentTimeStampGenerationService);
 
 	}
 
@@ -57,7 +58,8 @@ class SaveBasicQuestionInformationDAOTest {
 	@Test
 	void saveDetails() {
 
-		returnMessageFromDataBase = saveBasicQuestionInformationDAO.saveDetailsAndReturnId("Programming Capacity", "How many hours you can spent on programming per week ?", "Free text");
+		returnMessageFromDataBase = saveBasicQuestionInformationDAO.saveDetailsAndReturnId("Programming Capacity",
+				"How many hours you can spent on programming per week ?", "Free text");
 		assertNotNull(returnMessageFromDataBase);
 	}
 }

@@ -40,10 +40,10 @@ public class GmailServiceMock implements IGmailService {
 		try {
 			msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("joeytribbianinakli@gmail.com", false));
-			//msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			// msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("krutarth.kanan@gmail.com"));
 			msg.setSubject(subject);
-			//msg.setContent("Tutorials point email", "text/html");
+			// msg.setContent("Tutorials point email", "text/html");
 			msg.setText(message);
 		} catch (Exception e) {
 			logger.info(e);

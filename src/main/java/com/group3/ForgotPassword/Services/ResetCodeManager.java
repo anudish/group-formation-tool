@@ -16,7 +16,8 @@ public class ResetCodeManager implements IResetCodeManager {
 
 	private static Logger logger = LogManager.getLogger(ResetCodeManager.class);
 
-	public ResetCodeManager(IDAOAbstractFactory userDAOFactory, IEmailInjector emailInjector, IVerificationCode verificationCodeGenerator) {
+	public ResetCodeManager(IDAOAbstractFactory userDAOFactory, IEmailInjector emailInjector,
+			IVerificationCode verificationCodeGenerator) {
 
 		gmailService = emailInjector.getGmailService();
 		userDataAccess = userDAOFactory.getUserDAOObj();
@@ -41,7 +42,10 @@ public class ResetCodeManager implements IResetCodeManager {
 	public void sendCodeEmail(String email) {
 
 		gmailService.setSMTPClient();
-		gmailService.prepareMail("[University Portal] Please reset your password", "You have requested a password reset for your account.\nBelow is the code that you have to use to enter new password \n\n\n" + generated_code + "\n\n\n If you don't wish to reset your password, disregard this email.", email);
+		gmailService.prepareMail("[University Portal] Please reset your password",
+				"You have requested a password reset for your account.\nBelow is the code that you have to use to enter new password \n\n\n"
+						+ generated_code + "\n\n\n If you don't wish to reset your password, disregard this email.",
+				email);
 		gmailService.sendEmail();
 		logger.info("Code sent via email!");
 	}

@@ -18,29 +18,27 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.group3.AdminAndAuthorization.AdminDashBoardMainPageController;
 import com.group3.groupmanager.GroupmanagerApplication;
 
-
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {AdminDashBoardMainPageController.class,GroupmanagerApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+		AdminDashBoardMainPageController.class, GroupmanagerApplication.class })
 class CourseControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-		
+
 	@Test
 	public void getCoursesByEmailId() throws Exception {
-		this.mockMvc.perform(get("/courseAdmin")
-				.with(user("user").password("password").roles("INSTRUCTOR"))).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attributeExists("courseInfo"));
+		this.mockMvc.perform(get("/courseAdmin").with(user("user").password("password").roles("INSTRUCTOR")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("courseInfo"));
 	}
-	
+
 	@Test
 	public void getSelectedCourse() throws Exception {
-		this.mockMvc.perform(get("/selectCourse").param("courseId", "CSCI6406").param("courseName", "Visualisation")
-				.with(user("user").password("password").roles("INSTRUCTOR"))).andDo(print()).andExpect(status().isOk())
-		.andExpect(model().attributeExists("courseInfo"));
+		this.mockMvc
+				.perform(get("/selectCourse").param("courseId", "CSCI6406").param("courseName", "Visualisation")
+						.with(user("user").password("password").roles("INSTRUCTOR")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("courseInfo"));
 	}
-
-
 
 }

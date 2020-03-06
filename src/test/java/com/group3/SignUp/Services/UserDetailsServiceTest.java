@@ -14,8 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDetailsServiceTest {
 	@InjectMocks
-    UserDetailsService useService;
-
+	UserDetailsService useService;
 	@Mock
 	Guest mockUserModel;
 	@Mock
@@ -43,11 +42,11 @@ class UserDetailsServiceTest {
 
 		userDetails = new UserDetailsService(userDAO);
 		message = userDetails.saveUser(mockUserModel.getLastName(), mockUserModel.getFirstName(),
-			mockUserModel.getEmail(), mockUserModel.getEncryptedPassword(), mockUserModel.getEncryptedPassword());
+				mockUserModel.getEmail(), mockUserModel.getEncryptedPassword(), mockUserModel.getEncryptedPassword());
 		assertEquals(UserVerificationParameters.SIGNUP_SUCCESS, message);
 
 		message = userDetails.saveUser(mockUserModel.getLastName(), mockUserModel.getFirstName(),
-			mockUserModel.getEmail(), mockUserModel.getEncryptedPassword(), mockUserModel.getEncryptedPassword());
+				mockUserModel.getEmail(), mockUserModel.getEncryptedPassword(), mockUserModel.getEncryptedPassword());
 		assertEquals(UserVerificationParameters.USER_EXISTS, message);
 	}
 
@@ -58,8 +57,8 @@ class UserDetailsServiceTest {
 
 		userDetails = new UserDetailsService(userDAO);
 		message = userDetails.saveUser(mockUserBadEmailModel.getLastName(), mockUserBadEmailModel.getFirstName(),
-			mockUserBadEmailModel.getEmail(), mockUserBadEmailModel.getEncryptedPassword(),
-			mockUserModel.getEncryptedPassword());
+				mockUserBadEmailModel.getEmail(), mockUserBadEmailModel.getEncryptedPassword(),
+				mockUserModel.getEncryptedPassword());
 		assertEquals(UserVerificationParameters.INVALID_EMAIL, message);
 	}
 
@@ -70,11 +69,11 @@ class UserDetailsServiceTest {
 
 		userDetails = new UserDetailsService(userDAO);
 		message = userDetails.saveUser(mockUserBadEmailModel.getLastName(), mockUserBadEmailModel.getFirstName(),
-			mockUserBadEmailModel.getEmail(), mockUserBadEmailModel.getEncryptedPassword(), "Aspirant@0909121");
+				mockUserBadEmailModel.getEmail(), mockUserBadEmailModel.getEncryptedPassword(), "Aspirant@0909121");
 		assertEquals(UserVerificationParameters.INVALID_PASSWORD_EMAIL, message);
 
 		message = userDetails.saveUser(mockUserModel.getLastName(), mockUserModel.getFirstName(), "get123@dal.ca",
-			mockUserModel.getEncryptedPassword(), "Aspirant@0909121");
+				mockUserModel.getEncryptedPassword(), "Aspirant@0909121");
 		assertEquals(UserVerificationParameters.INVALID_PASSWORD, message);
 	}
 }

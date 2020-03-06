@@ -14,10 +14,10 @@ import com.group3.BusinessModels.Guest;
 
 @Controller
 public class GrantInstructorAccessController {
-	IDAOInjector daoInjector;
+	IDAOAbstractFactory daoInjector;
 	IViewCoursesDAO viewCoursesDAO;
 	IGrantInstructorAccessDAO grantInstructorAccessDAO;
-	IServiceInjector serviceInjector;
+	IServiceAbstractFactory serviceInjector;
 	IViewCoursesService viewCoursesService;
 	IGrantInstructorAccessService grantInsructorAccessService;
 	IGrantAccessFieldsValidation grantAccessFieldsValidation;
@@ -29,10 +29,10 @@ public class GrantInstructorAccessController {
 	ArrayList<Guest> userlist;
 
 	public GrantInstructorAccessController() {
-		daoInjector = DAOInjector.instance();
+		daoInjector = DAOAbstractFactory.instance();
 		viewCoursesDAO = daoInjector.createViewCourseDAO();
 		grantInstructorAccessDAO = daoInjector.createGrantInstructorAccessDAO();
-		serviceInjector = ServiceInjector.instance();
+		serviceInjector = ServiceAbstractFactory.instance();
 		viewCoursesService = serviceInjector.createViewCoursesService(viewCoursesDAO);
 		grantInsructorAccessService = serviceInjector.createGrantInstructorAccessService(grantInstructorAccessDAO);
 		courseList = viewCoursesService.getAllCourses();
@@ -49,7 +49,7 @@ public class GrantInstructorAccessController {
 
 	@RequestMapping("/GrantRoleRequest")
 	public String grantInstructorRole(Guest guestmodel, @RequestParam("CourseId") String courseId, String role,
-									  Model model) {
+			Model model) {
 		String feebackMessage;
 		guestmodel.setUserRole(role);
 		System.out.println(guestmodel.getUserRole());

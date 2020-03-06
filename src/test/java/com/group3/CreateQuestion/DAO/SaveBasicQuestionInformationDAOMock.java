@@ -8,8 +8,8 @@ public class SaveBasicQuestionInformationDAOMock implements ISaveBasicQuestionIn
 
 	ICurrentTimeStampGenerationService currentTimeStampGenerationService;
 
-	public SaveBasicQuestionInformationDAOMock(ICurrentTimeStampGenerationService iCurrentTimeStampGenerationService) {
-		this.currentTimeStampGenerationService = iCurrentTimeStampGenerationService;
+	public SaveBasicQuestionInformationDAOMock(ICurrentTimeStampGenerationService currentTimeStampGenerationService) {
+		this.currentTimeStampGenerationService = currentTimeStampGenerationService;
 	}
 
 	@Override

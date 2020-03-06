@@ -3,7 +3,7 @@ package com.group3.CreateQuestion.Services;
 import com.group3.CreateQuestion.DAO.ISaveBasicQuestionInformationDAO;
 
 public class NumericQuestionGenerationService extends QuestionService {
-	
+
 	public NumericQuestionGenerationService() {
 
 		super(QuestionGenerationServicesEnum.NUMERIC);

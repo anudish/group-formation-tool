@@ -64,7 +64,7 @@ class CourseDAOTest {
 	@Test
 	public void getCoursesForGuest() throws Exception {
 
-		ArrayList<Course> enrolledStudentMailIds = new ArrayList<Course> ();
+		ArrayList<Course> enrolledStudentMailIds = new ArrayList<Course>();
 		enrolledStudentMailIds = courseDAO.getCoursesForGuest();
 		assertNotNull(enrolledStudentMailIds);
 		assertThat(enrolledStudentMailIds).isNotEmpty();

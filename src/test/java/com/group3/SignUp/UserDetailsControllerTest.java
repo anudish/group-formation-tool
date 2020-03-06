@@ -17,9 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
-	UserDetailsController.class, GroupmanagerApplication.class
-})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { UserDetailsController.class,
+		GroupmanagerApplication.class })
 class UserDetailsControllerTest {
 
 	@Autowired
@@ -28,9 +27,9 @@ class UserDetailsControllerTest {
 	@Test
 	void test() throws Exception {
 		this.mockMvc
-			.perform(post("/formSubmit").param("lastName", "MyLastName").param("firstName", "MyFirstName")
-				.param("email", "TestControl@outlook.com").param("psw", "MyPassword@1234")
-				.param("psw-repeat", "MyPassword@1234"))
-			.andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("")));
+				.perform(post("/formSubmit").param("lastName", "MyLastName").param("firstName", "MyFirstName")
+						.param("email", "TestControl@outlook.com").param("psw", "MyPassword@1234")
+						.param("psw-repeat", "MyPassword@1234"))
+				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("")));
 	}
 }

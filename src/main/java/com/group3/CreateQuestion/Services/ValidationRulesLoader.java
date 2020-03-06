@@ -30,7 +30,7 @@ public class ValidationRulesLoader {
 
 	private ArrayList<IStringValidatorService> getValidationRules() {
 
-		for (String rule: validationRules) {
+		for (String rule : validationRules) {
 			logger.info(rule);
 
 			if (rule.equals(ValidationRulesEnumerator.CHECK_EMPTY_STRING.toString())) {
